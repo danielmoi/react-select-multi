@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import classNames from 'classnames';
+import wrapWithClickout from 'react-clickout';
 
 const propTypes = {
   options: PropTypes.array.isRequired,
@@ -41,6 +42,12 @@ class SelectMulti extends Component {
   toggleOpen = () => {
     this.setState({
       isOpen: !this.state.isOpen,
+    });
+  }
+
+  handleClickout = () => {
+    this.setState({
+      isOpen: false,
     });
   }
 
@@ -105,4 +112,4 @@ SelectMulti.propTypes = propTypes;
 
 SelectMulti.defaultProps = defaultProps;
 
-export default SelectMulti;
+export default wrapWithClickout(SelectMulti);
