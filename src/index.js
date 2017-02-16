@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react';
+import classNames from 'classnames';
 
 const propTypes = {
   options: PropTypes.array.isRequired,
@@ -49,6 +50,11 @@ class SelectMulti extends Component {
   render() {
     const { namespace, identifier, saveValue, label } = this.props;
 
+    const arrowStyles = {
+      'om-icon-descending': !this.state.isOpen,
+      'om-icon-ascending': this.state.isOpen,
+    };
+
     return (
       <div className={`${namespace}-select-multi__wrapper`}>
         <div className={`${namespace}-select-multi__label`}>
@@ -60,6 +66,7 @@ class SelectMulti extends Component {
           onClick={this.toggleOpen}
         >
           {this.state.options.filter(o => o.selected).map(o => o.display).join(', ')}
+          <span className={classNames(arrowStyles)} />
         </div>
 
         {this.state.isOpen
