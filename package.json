@@ -1,20 +1,22 @@
 {
   "name": "react-select-multi",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "React Multiple-Select Component",
   "main": "lib/index.js",
   "scripts": {
     "test": "./node_modules/.bin/_mocha -R spec ./test/test_helper.js --recursive test/**/*",
-    "build": "babel src --out-dir lib",
-    "prepublish": "npm run build"
+    "build": "./node_modules/.bin/babel src --out-dir lib && cp src/styles.css lib/styles.css",
+    "prepublish": "npm run build",
   },
   "author": "Daniel Moi",
   "license": "Apache-2.0",
   "dependencies": {
+    "babel-preset-react": "^6.23.0",
     "classnames": "^2.2.5",
     "react": "^15.4.2",
     "react-clickout": "^2.1.2",
-    "react-dom": "^15.4.2"
+    "react-css-modules": "^4.2.0",
+    "react-dom": "^15.4.2",
   },
   "devDependencies": {
     "babel": "^6.23.0",
