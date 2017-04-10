@@ -6,7 +6,7 @@
   "scripts": {
     "test": "./node_modules/.bin/_mocha -R spec ./test/test_helper.js --recursive test/**/*",
     "build": "./node_modules/.bin/babel src --out-dir lib && cp src/styles.css lib/styles.css",
-    "prepublish": "npm run build",
+    "prepublish": "npm run build"
   },
   "author": "Daniel Moi",
   "license": "Apache-2.0",
@@ -40,5 +40,12 @@
     "react-addons-test-utils": "^15.4.2",
     "sinon": "^1.17.7",
     "webpack": "^2.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielmoi/react-select-multi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/danielmoi/react-select-multi/issues"
   }
 }
