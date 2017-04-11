@@ -3,6 +3,7 @@ import classNames from 'classnames';
 
 export const propTypes = {
   options: PropTypes.array.isRequired,
+  selected: PropTypes.object.isRequired,
   identifier: PropTypes.string.isRequired,
   label: PropTypes.string,
   searchTerm: PropTypes.string,
@@ -35,7 +36,7 @@ export const defaultProps = {
 };
 
 const Select = ({
-  identifier, label, options, searchTerm,
+  identifier, label, options, selected, searchTerm,
   isSearchable, isOpen,
   toggleOpen, onChange, onSearch,
   styles, // if you pass in styles it will overrwrite the classnames
@@ -55,7 +56,7 @@ const Select = ({
         className={styles.control}
         onClick={toggleOpen}
       >
-        {options.filter(o => o.selected).map(o => o.display).join(', ')}
+        {options.filter(o => selected.includes(o.tag)).map(o => o.display).join(', ')}
         <span className={classNames(arrowStyles)} />
       </div>
       {isOpen
