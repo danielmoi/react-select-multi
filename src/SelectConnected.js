@@ -4,8 +4,8 @@ import wrapWithClickout from 'react-clickout';
 import {
   addSet,
   toggleOpen,
-  selectValue,
-  searchValues,
+  takeValue,
+  searchOptions,
 } from './redux/actions';
 import SelectComponent, { propTypes, defaultProps } from './SelectComponent';
 
@@ -29,12 +29,12 @@ export class Select extends Component {
   onSearch = text => () => {}
 
   onToggleOpen = () => {
-    this.props.toggleOpen({ name: this.props.name, open: !this.props.isOpen });
+    this.props.toggleOpen({ name: this.props.name, isOpen: !this.props.isOpen });
   }
 
   handleClickout = () => {
     if (!this.props.isOpen) return;
-    this.props.toggleOpen({ name: this.props.name, open: false });
+    this.props.toggleOpen({ name: this.props.name, isOpen: false });
   }
 
   componentWillUnMount() {
@@ -68,8 +68,8 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = {
   addSet,
   toggleOpen,
-  selectValue,
-  searchValues,
+  takeValue,
+  searchOptions,
 };
 
 Select.proptypes = {
@@ -79,8 +79,8 @@ Select.proptypes = {
   name: PropTypes.string.isRequired,
   identifier: propTypes.identifier,
   toggleOpen: PropTypes.func.isRequired,
-  searchValues: PropTypes.func.isRequired,
-  selectValue: PropTypes.func.isRequired,
+  searchOptions: PropTypes.func.isRequired,
+  takeValue: PropTypes.func.isRequired,
   isOpen: propTypes.isOpen,
   isMultipleSelect: propTypes.isMultipleSelect,
   isSearchable: propTypes.isSearchable,

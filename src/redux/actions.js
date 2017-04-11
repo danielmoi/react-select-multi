@@ -6,7 +6,7 @@ const addSet = data => ({
 });
 
 const searchOptions = data => ({
-  type: C.SELECT_SEARCH_VALUES,
+  type: C.SELECT_SEARCH_OPTIONS,
   data,
 });
 
@@ -15,7 +15,7 @@ const toggleOpen = data => ({
   data,
 });
 
-const selectValue = data => ({
+const takeValue = data => ({
   type: C.SELECT_TAKE_VALUE,
   data,
 });
@@ -28,6 +28,6 @@ module.exports = {
   addSet,
   toggleOpen,
   searchOptions,
-  selectValue,
+  takeValue,
   clearAll,
 };
