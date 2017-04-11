@@ -9,21 +9,25 @@ import {
 } from './redux/actions';
 import SelectComponent, { propTypes, defaultProps } from './SelectComponent';
 
+const updateValues = (props, value) => {
+  const { name, selected, isMultipleSelect } = props;
+  if (isMultipleSelect) {
+    if (selected.includes(value)) {
+      this.props.takeValue({
+        name, values: selected.filter(val => val !== value),
+      });
+    } else {
+      this.props.takeValue({ name, values: selected.concat(value) });
+    }
+  } else {
+    this.props.takeValue({ name, values: [value] });
+    this.props.toggleOpen({ name: this.props.name, open: false });
+  }
+};
+
 export class Select extends Component {
   onChange = value => () => {
-    const { name, selected } = this.props;
-    if (this.props.isMultipleSelect) {
-      if (selected.includes(value)) {
-        this.props.selectValue({
-          name, values: selected.filter(val => val !== value),
-        });
-      } else {
-        this.props.selectValue({ name, values: selected.concat(value) });
-      }
-    } else {
-      this.props.selectValue({ name, values: [value] });
-      this.props.toggleOpen({ name: this.props.name, open: false });
-    }
+    updateValues(this.props, value);
   }
 
   onSearch = text => () => {}
