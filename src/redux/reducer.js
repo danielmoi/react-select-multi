@@ -12,12 +12,12 @@ export default (state = fromJS(initialState), action) => {
       });
     }
     case C.SELECT_TOGGLE_OPEN: {
-      const { name, open } = action.data;
+      const { name, isOpen } = action.data;
       return state.merge({
-        [name]: (state.get(name) || fromJS({})).merge({ isOpen: open }),
+        [name]: (state.get(name) || fromJS({})).merge({ isOpen }),
       });
     }
-    case C.SELECT_SEARCH_VALUES: {
+    case C.SELECT_SEARCH_OPTIONS: {
       const { name, searchText } = action.data;
       return state.merge({
         [name]: (state.get(name) || fromJS({})).merge({ searchTerm: searchText }),

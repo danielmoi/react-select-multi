@@ -11,7 +11,7 @@ describe('Reducer', () => {
   });
 
   it('should return the initial state', () => {
-    expect(reducer(initialState, 'FAKEY FAKE'))
+    expect(reducer(initialState, {}))
       .to.deep.equal(initialState);
   });
 
@@ -27,15 +27,15 @@ describe('Reducer', () => {
   it(`should handle ${C.SELECT_TOGGLE_OPEN}`, () => {
     const action = {
       type: C.SELECT_TOGGLE_OPEN,
-      data: { name: 'select', open: true },
+      data: { name: 'select', isOpen: true },
     };
     const reducedState = reducer(initialState, action);
     expect(reducedState.get(action.data.name)).to.eql(fromJS({ isOpen: true }));
   });
 
-  it(`should handle ${C.SELECT_SEARCH_VALUES}`, () => {
+  it(`should handle ${C.SELECT_SEARCH_OPTIONS}`, () => {
     const action = {
-      type: C.SELECT_SEARCH_VALUES,
+      type: C.SELECT_SEARCH_OPTIONS,
       data: { name: 'select', searchText: 'test' },
     };
     const reducedState = reducer(initialState, action);
@@ -53,7 +53,7 @@ describe('Reducer', () => {
 
   it(`should handle ${C.SELECT_CLEAR_ALL}`, () => {
     const action = {
-      type: C.CLEAR_FORM,
+      type: C.SELECT_CLEAR_ALL,
     };
     const reducedState = reducer(initialState, action);
     expect(reducedState).to.equal(fromJS(initialState));
