@@ -10,10 +10,6 @@ import {
 import SelectComponent, { propTypes, defaultProps } from './SelectComponent';
 
 export class Select extends Component {
-  componentWillMount() {
-    this.props.addSet({ name: this.props.name });
-  }
-
   onChange = value => () => {
     const { name, selected } = this.props;
     if (this.props.isMultipleSelect) {
