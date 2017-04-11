@@ -1,7 +1,5 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import CSSModules from 'react-css-modules';
-import defaultStyles from './styles.css';
 
 export const propTypes = {
   options: PropTypes.array.isRequired,
@@ -108,8 +106,7 @@ const Select = ({
   );
 };
 
-
 Select.propTypes = propTypes;
 Select.defaultProps = defaultProps;
 
-export default CSSModules(Select, defaultStyles);
+export default Select;
