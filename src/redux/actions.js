@@ -1,20 +1,33 @@
 import C from './constants';
 
-export const searchOptions = data => ({
+const addSet = data => ({
+  type: C.SELECT_ADD_SET,
+  data,
+});
+
+const searchOptions = data => ({
   type: C.SELECT_SEARCH_VALUES,
   data,
 });
 
-export const toggleOpen = data => ({
+const toggleOpen = data => ({
   type: C.SELECT_TOGGLE_OPEN,
   data,
 });
 
-export const selectValue = data => ({
+const selectValue = data => ({
   type: C.SELECT_TAKE_VALUE,
   data,
 });
 
-export const clearAll = () => ({
+const clearAll = () => ({
   type: C.SELECT_CLEAR_ALL,
 });
+
+module.exports = {
+  addSet,
+  toggleOpen,
+  searchOptions,
+  selectValue,
+  clearAll,
+};

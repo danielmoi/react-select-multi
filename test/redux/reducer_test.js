@@ -15,6 +15,15 @@ describe('Reducer', () => {
       .to.deep.equal(initialState);
   });
 
+  it(`should handle ${C.SELECT_ADD_SET}`, () => {
+    const action = {
+      type: C.SELECT_ADD_SET,
+      data: { name: 'select' },
+    };
+    const reducedState = reducer(initialState, action);
+    expect(reducedState.get(action.data.name)).to.eql(fromJS({ isOpen: false, selected: [] }));
+  });
+
   it(`should handle ${C.SELECT_TOGGLE_OPEN}`, () => {
     const action = {
       type: C.SELECT_TOGGLE_OPEN,
@@ -39,7 +48,7 @@ describe('Reducer', () => {
       data: { name: 'select', values: ['Orders', 'Customers'] },
     };
     const reducedState = reducer(initialState, action);
-    expect(reducedState.get(action.data.name)).to.eql(fromJS({ values: action.data.values }));
+    expect(reducedState.get(action.data.name)).to.eql(fromJS({ selected: action.data.values }));
   });
 
   it(`should handle ${C.SELECT_CLEAR_ALL}`, () => {

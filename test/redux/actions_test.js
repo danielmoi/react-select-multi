@@ -1,8 +1,16 @@
 import { expect } from 'chai';
 import C from '../../src/redux/constants';
-import { toggleOpen, searchOptions, selectValue, clearAll } from '../../src/redux/actions';
+import { addSet, toggleOpen, searchOptions, selectValue, clearAll } from '../../src/redux/actions';
 
 describe('Actions: Form', () => {
+  it(`should create action for ${C.SELECT_ADD_SET}`, () => {
+    const expectedAction = {
+      type: C.SELECT_ADD_SET,
+      data: { name: 'select' },
+    };
+    expect(addSet(expectedAction.data)).to.deep.equal(expectedAction);
+  });
+
   it(`should create action for ${C.SELECT_TOGGLE_OPEN}`, () => {
     const expectedAction = {
       type: C.SELECT_TOGGLE_OPEN,
