@@ -34,9 +34,6 @@ export const defaultProps = {
   styles: {},
 };
 
-const getStyleOrDefault = (styleName, styles) =>
-  styles[styleName] ? { className: styles[styleName] } : { styleName: defaultStyles[styleName] };
-
 const Select = ({
   identifier, label, options, searchTerm,
   isMultipleSelect, isSearchable, isOpen,
@@ -44,18 +41,18 @@ const Select = ({
   styles, // if you pass in styles it will overrwrite the classnames
 }) => {
   const arrowStyles = {
-    [styles.expandOptions || defaultStyles.downArrow]: !isOpen,
-    [styles.closeOptions || defaultStyles.upArrow]: isOpen,
+    [styles.expandOptions]: !isOpen,
+    [styles.closeOptions]: isOpen,
   };
 
   return (
-    <div {...getStyleOrDefault('wrapper', styles)}>
-      <div {...getStyleOrDefault('label', styles)}>
+    <div className={styles.wrapper}>
+      <div className={styles.label}>
         {label}
       </div>
 
       <div
-        {...getStyleOrDefault('control', styles)}
+        className={styles.control}
         onClick={toggleOpen}
       >
         {options.filter(o => o.selected).map(o => o.display).join(', ')}
@@ -67,7 +64,7 @@ const Select = ({
           { isSearchable ?
             <input
               value={searchTerm}
-              {...getStyleOrDefault('search', styles)}
+              className={styles.search}
               placeholder="Search"
               onChange={onSearch}
             />
