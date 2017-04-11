@@ -44,6 +44,7 @@ class Select extends Component {
         identifier={this.props.identifier}
         label={this.props.label}
         options={this.state.options}
+        selected={this.state.selected || []}
         isOpen={this.state.isOpen}
         isMultipleSelect={this.props.isMultipleSelect}
         isSearchable={this.props.isSearchable}
@@ -64,6 +65,7 @@ Select.propTypes = {
   onChange: propTypes.onChange,
   onSearch: propTypes.onSearch,
   options: propTypes.options,
+  selected: propTypes.selected,
   styles: propTypes.styles,
 };
 
