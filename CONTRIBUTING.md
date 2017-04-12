@@ -1,3 +1,5 @@
 # Contribution guide
 
-Do whatever you want because this project doesn't even have a readme, make whatever edits you like.
+Thank you contributing to this project.
+
+Formal contribution guidelines are coming!
