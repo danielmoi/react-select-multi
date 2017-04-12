@@ -7,7 +7,6 @@ _Describe the overall goal(s) of the pull request's commits._
 ----
 #### Changes
 
-This branch
 - (List the main changes in this PR)
 
 
