@@ -24,7 +24,7 @@ export class Select extends Component {
     this.props.takeValue({ name, values: defaultValues });
   }
 
-  onChange = value => () => {
+  onCheck = value => () => {
     updateValues(this.props, value);
   }
 
@@ -51,7 +51,7 @@ export class Select extends Component {
         label={this.props.label}
         name={this.props.name}
         identifier={this.props.identifier}
-        onChange={this.onChange}
+        onCheck={this.onCheck}
         onSearch={this.onSearch}
         toggleOpen={this.onToggleOpen}
         isOpen={this.props.isOpen}
