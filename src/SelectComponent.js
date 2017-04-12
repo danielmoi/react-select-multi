@@ -37,7 +37,7 @@ export const defaultProps = {
 
 const Select = ({
   identifier, label, options, selected, searchTerm,
-  isSearchable, isOpen,
+  isMultipleSelect, isSearchable, isOpen,
   toggleOpen, onChange, onSearch,
   styles, // if you pass in styles it will overrwrite the classnames
 }) => {
@@ -81,7 +81,7 @@ const Select = ({
                 className={styles.checkbox}
                 type="checkbox"
                 checked={selected.includes(o.tag)}
-                onChange={onChange(o.tag)}
+                onChange={onChange(o.tag, isMultipleSelect)}
               />
               <label
                 htmlFor={`${styles.checkbox}-${identifier}--${index}`}
