@@ -1,10 +1,9 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import CSSModules from 'react-css-modules';
-import defaultStyles from './styles.css';
 
 export const propTypes = {
   options: PropTypes.array.isRequired,
+  selected: PropTypes.object.isRequired,
   identifier: PropTypes.string.isRequired,
   label: PropTypes.string,
   searchTerm: PropTypes.string,
@@ -36,31 +35,28 @@ export const defaultProps = {
   styles: {},
 };
 
-const getStyleOrDefault = (styleName, styles) =>
-  styles[styleName] ? { className: styles[styleName] } : { styleName: defaultStyles[styleName] };
-
 const Select = ({
-  identifier, label, options, searchTerm,
+  identifier, label, options, selected, searchTerm,
   isMultipleSelect, isSearchable, isOpen,
   toggleOpen, onChange, onSearch,
   styles, // if you pass in styles it will overrwrite the classnames
 }) => {
   const arrowStyles = {
-    [styles.expandOptions || defaultStyles.downArrow]: !isOpen,
-    [styles.closeOptions || defaultStyles.upArrow]: isOpen,
+    [styles.expandOptions]: !isOpen,
+    [styles.closeOptions]: isOpen,
   };
 
   return (
-    <div {...getStyleOrDefault('wrapper', styles)}>
-      <div {...getStyleOrDefault('label', styles)}>
+    <div className={styles.wrapper}>
+      <div className={styles.label}>
         {label}
       </div>
 
       <div
-        {...getStyleOrDefault('control', styles)}
+        className={styles.control}
         onClick={toggleOpen}
       >
-        {options.filter(o => o.selected).map(o => o.display).join(', ')}
+        {options.filter(o => selected.includes(o.tag)).map(o => o.display).join(', ')}
         <span className={classNames(arrowStyles)} />
       </div>
       {isOpen
@@ -69,7 +65,7 @@ const Select = ({
           { isSearchable ?
             <input
               value={searchTerm}
-              {...getStyleOrDefault('search', styles)}
+              className={styles.search}
               placeholder="Search"
               onChange={onSearch}
             />
@@ -80,16 +76,13 @@ const Select = ({
               key={`${identifier}-${index}`}
               className={styles.optionContainer}
             >
-              {
-                isMultipleSelect ?
-                  <input
-                    id={`${styles.checkbox}-${identifier}--${index}`}
-                    className={styles.checkbox}
-                    type="checkbox"
-                    checked={o.selected}
-                    onChange={onChange(o.tag)}
-                  /> : null
-              }
+              <input
+                id={`${styles.checkbox}-${identifier}--${index}`}
+                className={styles.checkbox}
+                type="checkbox"
+                checked={selected.includes(o.tag)}
+                onChange={onChange(o.tag, isMultipleSelect)}
+              />
               <label
                 htmlFor={`${styles.checkbox}-${identifier}--${index}`}
                 className={styles.option}
@@ -108,8 +101,7 @@ const Select = ({
   );
 };
 
-
 Select.propTypes = propTypes;
 Select.defaultProps = defaultProps;
 
-export default CSSModules(Select, defaultStyles);
+export default Select;

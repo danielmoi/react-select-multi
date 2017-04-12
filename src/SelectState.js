@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import wrapWithClickout from 'react-clickout';
 import SelectComponent, { propTypes, defaultProps } from './SelectComponent';
 
-class Select extends Component {
+class SelectState extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,6 +44,7 @@ class Select extends Component {
         identifier={this.props.identifier}
         label={this.props.label}
         options={this.state.options}
+        selected={this.props.selected || []}
         isOpen={this.state.isOpen}
         isMultipleSelect={this.props.isMultipleSelect}
         isSearchable={this.props.isSearchable}
@@ -56,7 +57,7 @@ class Select extends Component {
   }
 }
 
-Select.propTypes = {
+SelectState.propTypes = {
   identifier: propTypes.identifier,
   label: propTypes.label,
   isMultipleSelect: propTypes.isMultipleSelect,
@@ -64,9 +65,10 @@ Select.propTypes = {
   onChange: propTypes.onChange,
   onSearch: propTypes.onSearch,
   options: propTypes.options,
+  selected: propTypes.selected,
   styles: propTypes.styles,
 };
 
-Select.defaultProps = defaultProps;
+SelectState.defaultProps = defaultProps;
 
-export default wrapWithClickout(Select);
+export default wrapWithClickout(SelectState);
