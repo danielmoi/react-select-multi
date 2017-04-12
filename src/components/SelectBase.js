@@ -1,14 +1,15 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
-export const propTypes = {
+export const basePropTypes = {
   uniqueKey: PropTypes.string.isRequired,
   isMultipleSelect: PropTypes.bool,
   label: PropTypes.string,
   options: PropTypes.array.isRequired,
   selected: PropTypes.oneOfType([
-    PropTypes.object,
     PropTypes.array,
+    // also accept Immutable List (which has .includes method)
+    PropTypes.object,
   ]).isRequired,
   onCheck: PropTypes.func.isRequired,
   searchTerm: PropTypes.string,
@@ -28,7 +29,7 @@ export const propTypes = {
   }),
 };
 
-export const defaultProps = {
+export const baseDefaultProps = {
   isMultipleSelect: false,
   label: '',
   searchTerm: '',
@@ -48,7 +49,7 @@ export const defaultProps = {
   },
 };
 
-const Select = ({
+const SelectBase = ({
   uniqueKey, label, options, selected, searchTerm,
   isMultipleSelect, isSearchable, isOpen,
   toggleOpen, onCheck, onSearch,
@@ -114,7 +115,7 @@ const Select = ({
   );
 };
 
-Select.propTypes = propTypes;
-Select.defaultProps = defaultProps;
+SelectBase.propTypes = basePropTypes;
+SelectBase.defaultProps = baseDefaultProps;
 
-export default Select;
+export default SelectBase;
