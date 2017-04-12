@@ -4,11 +4,11 @@ import { expect } from 'chai';
 import { fromJS } from 'immutable';
 import { stub, spy } from 'sinon';
 
-import options from './fixtures/options';
-import styles from './fixtures/styles';
-import H from './helpers/index';
+import options from '../fixtures/options';
+import styles from '../fixtures/styles';
+import H from '../helpers/index';
 
-import SelectComponent from '../src/SelectComponent';
+import SelectComponent from '../../src/components/SelectComponent';
 
 describe('<SelectComponent />', () => {
   it('renders appropriately', () => {
