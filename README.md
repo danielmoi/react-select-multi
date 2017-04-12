@@ -1,3 +1,3 @@
-# React Select Multi
+# Better React Select
 
-
+A better react select component
