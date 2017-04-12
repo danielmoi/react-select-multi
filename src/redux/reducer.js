@@ -31,7 +31,7 @@ export default (state = fromJS(initialState), action) => {
     }
     case C.SELECT_CLEAR_ALL: {
       return state.merge(
-        fromJS(initialState.form),
+        fromJS(initialState),
       );
     }
     default: {
