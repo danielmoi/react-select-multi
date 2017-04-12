@@ -13,7 +13,7 @@ import { updateValues } from '../utils';
 import SelectBase, { basePropTypes, baseDefaultProps } from './SelectBase';
 
 const additionalPropTypes = {
-  // defaultValues: PropTypes.array.isRequired,
+  defaultValues: PropTypes.array.isRequired,
   toggleOpen: PropTypes.func.isRequired,
   takeValue: PropTypes.func.isRequired,
 };
