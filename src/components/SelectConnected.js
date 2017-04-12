@@ -2,16 +2,23 @@ import { fromJS } from 'immutable';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import wrapWithClickout from 'react-clickout';
+
 import {
   addSet,
   toggleOpen,
   takeValue,
   searchOptions,
-} from './redux/actions';
-import { updateValues } from './utils';
-import SelectComponent, { propTypes, defaultProps } from './SelectComponent';
+} from '../redux/actions';
+import { updateValues } from '../utils';
+import SelectBase, { basePropTypes, baseDefaultProps } from './SelectBase';
 
-export class Select extends Component {
+const additionalPropTypes = {
+  defaultValues: PropTypes.array.isRequired,
+  toggleOpen: PropTypes.func.isRequired,
+  takeValue: PropTypes.func.isRequired,
+};
+
+export class SelectConnectedComponent extends Component {
   componentWillMount() {
     const { name } = this.props;
     this.props.addSet({ name });
@@ -24,7 +31,7 @@ export class Select extends Component {
     this.props.takeValue({ name, values: defaultValues });
   }
 
-  onChange = value => () => {
+  onCheck = value => () => {
     updateValues(this.props, value);
   }
 
@@ -45,18 +52,17 @@ export class Select extends Component {
 
   render() {
     return (
-      <SelectComponent
-        options={this.props.options}
-        selected={this.props.selected || fromJS([])}
-        label={this.props.label}
-        name={this.props.name}
-        identifier={this.props.identifier}
-        onChange={this.onChange}
-        onSearch={this.onSearch}
-        toggleOpen={this.onToggleOpen}
-        isOpen={this.props.isOpen}
+      <SelectBase
+        uniqueKey={this.props.uniqueKey}
         isMultipleSelect={this.props.isMultipleSelect}
         isSearchable={this.props.isSearchable}
+        label={this.props.label}
+        options={this.props.options}
+        selected={this.props.selected || fromJS([])}
+        isOpen={this.props.isOpen}
+        toggleOpen={this.onToggleOpen}
+        onCheck={this.onCheck}
+        onSearch={this.onSearch}
         styles={this.props.styles}
       />);
   }
@@ -74,21 +80,10 @@ const mapDispatchToProps = {
   searchOptions,
 };
 
-Select.proptypes = {
-  options: propTypes.options,
-  selected: propTypes.selected,
-  defaultValues: PropTypes.array.isRequired,
-  label: propTypes.label,
-  name: PropTypes.string.isRequired,
-  identifier: propTypes.identifier,
-  toggleOpen: PropTypes.func.isRequired,
-  searchOptions: PropTypes.func.isRequired,
-  takeValue: PropTypes.func.isRequired,
-  isOpen: propTypes.isOpen,
-  isMultipleSelect: propTypes.isMultipleSelect,
-  isSearchable: propTypes.isSearchable,
-  styles: propTypes.styles,
-};
-Select.defaultProps = defaultProps;
+SelectConnectedComponent.propTypes = Object.assign({}, basePropTypes, additionalPropTypes);
+SelectConnectedComponent.defaultProps = baseDefaultProps;
 
-export default connect(mapStateToProps, mapDispatchToProps)(wrapWithClickout(Select));
+const connected = connect(mapStateToProps, mapDispatchToProps)(
+  wrapWithClickout(SelectConnectedComponent));
+
+export default connected;
