@@ -1,3 +1,4 @@
+import { fromJS } from 'immutable';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import wrapWithClickout from 'react-clickout';
@@ -7,25 +8,22 @@ import {
   takeValue,
   searchOptions,
 } from './redux/actions';
+import { updateValues } from './utils';
 import SelectComponent, { propTypes, defaultProps } from './SelectComponent';
 
-const updateValues = (props, value) => {
-  const { name, selected, isMultipleSelect } = props;
-  if (isMultipleSelect) {
-    if (selected.includes(value)) {
-      this.props.takeValue({
-        name, values: selected.filter(val => val !== value),
-      });
-    } else {
-      this.props.takeValue({ name, values: selected.concat(value) });
-    }
-  } else {
-    this.props.takeValue({ name, values: [value] });
-    this.props.toggleOpen({ name: this.props.name, open: false });
-  }
-};
-
 export class Select extends Component {
+  componentWillMount() {
+    const { name } = this.props;
+    this.props.addSet({ name });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { name, defaultValues, selected } = nextProps;
+    // check if only selected crap is changing
+    if (selected) return;
+    this.props.takeValue({ name, values: defaultValues });
+  }
+
   onChange = value => () => {
     updateValues(this.props, value);
   }
@@ -49,7 +47,7 @@ export class Select extends Component {
     return (
       <SelectComponent
         options={this.props.options}
-        selected={this.props.selected}
+        selected={this.props.selected || fromJS([])}
         label={this.props.label}
         name={this.props.name}
         identifier={this.props.identifier}
@@ -66,7 +64,7 @@ export class Select extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   isOpen: state.select.getIn([ownProps.name, 'isOpen']) || false,
-  selected: state.select.getIn([ownProps.name, 'selected']) || [],
+  selected: state.select.getIn([ownProps.name, 'selected']),
 });
 
 const mapDispatchToProps = {
@@ -79,6 +77,7 @@ const mapDispatchToProps = {
 Select.proptypes = {
   options: propTypes.options,
   selected: propTypes.selected,
+  defaultValues: PropTypes.array.isRequired,
   label: propTypes.label,
   name: PropTypes.string.isRequired,
   identifier: propTypes.identifier,
