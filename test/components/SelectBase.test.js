@@ -8,12 +8,12 @@ import options from '../fixtures/options';
 import styles from '../fixtures/styles';
 import H from '../helpers/index';
 
-import SelectComponent from '../../src/components/SelectComponent';
+import SelectBase from '../../src/components/SelectBase';
 
-describe('<SelectComponent />', () => {
+describe('<SelectBase />', () => {
   it('renders appropriately', () => {
     const wrapper = shallow(
-      <SelectComponent
+      <SelectBase
         uniqueKey="select-multi-1"
         options={options}
         selected={[options[0]]}
@@ -30,7 +30,7 @@ describe('<SelectComponent />', () => {
   it('calls props.toggleOpen when control is clicked', () => {
     const toggleOpenStub = stub();
     const wrapper = shallow(
-      <SelectComponent
+      <SelectBase
         uniqueKey="select-multi-1"
         options={options}
         selected={[options[0]]}
@@ -46,7 +46,7 @@ describe('<SelectComponent />', () => {
 
   it('renders options list when props.isOpen is true', () => {
     const wrapper = shallow(
-      <SelectComponent
+      <SelectBase
         uniqueKey="select-multi-1"
         options={options}
         selected={[options[0]]}
