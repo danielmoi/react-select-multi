@@ -2,48 +2,61 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
 export const propTypes = {
-  options: PropTypes.array.isRequired,
-  selected: PropTypes.object.isRequired,
-  identifier: PropTypes.string.isRequired,
+  uniqueKey: PropTypes.string.isRequired,
+  isMultipleSelect: PropTypes.bool,
   label: PropTypes.string,
+  options: PropTypes.array.isRequired,
+  selected: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array,
+  ]).isRequired,
+  onCheck: PropTypes.func.isRequired,
   searchTerm: PropTypes.string,
   isOpen: PropTypes.bool,
-  isMultipleSelect: PropTypes.bool,
   isSearchable: PropTypes.bool,
   toggleOpen: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
   onSearch: PropTypes.func,
   styles: React.PropTypes.shape({
     wrapper: React.PropTypes.string,
     label: React.PropTypes.string,
     search: React.PropTypes.string,
-    checkbox: React.PropTypes.string,
-    expandOptions: React.PropTypes.string,
-    closeOptions: React.PropTypes.string,
+    expandIcon: React.PropTypes.string,
+    collapseIcon: React.PropTypes.string,
     optionContainer: React.PropTypes.string,
-    option: React.PropTypes.string,
+    optionBar: React.PropTypes.string,
+    optionCheckbox: React.PropTypes.string,
   }),
 };
 
 export const defaultProps = {
+  isMultipleSelect: false,
   label: '',
   searchTerm: '',
   isOpen: false,
-  isMultipleSelect: false,
   isSearchable: false,
   onSearch: () => {},
-  styles: {},
+  styles: {
+    wrapper: 'rsm-wrapper',
+    label: 'rsm-label',
+    control: 'rsm-control',
+    search: 'rsm-search',
+    expandIcon: 'rsm-arrow-down',
+    collapseIcon: 'rsm-arrow-up',
+    optionContainer: 'rsm-option__container',
+    optionBar: 'rsm-option__bar',
+    optionCheckbox: 'rsm-option__checkbox',
+  },
 };
 
 const Select = ({
-  identifier, label, options, selected, searchTerm,
+  uniqueKey, label, options, selected, searchTerm,
   isMultipleSelect, isSearchable, isOpen,
-  toggleOpen, onChange, onSearch,
+  toggleOpen, onCheck, onSearch,
   styles, // if you pass in styles it will overrwrite the classnames
 }) => {
   const arrowStyles = {
-    [styles.expandOptions]: !isOpen,
-    [styles.closeOptions]: isOpen,
+    [styles.expandIcon]: !isOpen,
+    [styles.collapseIcon]: isOpen,
   };
 
   return (
@@ -60,8 +73,8 @@ const Select = ({
         <span className={classNames(arrowStyles)} />
       </div>
       {isOpen
-        ?
-        <div>
+      ?
+        <div className="rsm-open-wrapper">
           { isSearchable ?
             <input
               value={searchTerm}
@@ -71,30 +84,30 @@ const Select = ({
             />
             : null }
           {
-            options.map((o, index) => (
-            <div
-              key={`${identifier}-${index}`}
-              className={styles.optionContainer}
-            >
-              <input
-                id={`${styles.checkbox}-${identifier}--${index}`}
-                className={styles.checkbox}
-                type="checkbox"
-                checked={selected.includes(o.tag)}
-                onChange={onChange(o.tag, isMultipleSelect)}
-              />
-              <label
-                htmlFor={`${styles.checkbox}-${identifier}--${index}`}
-                className={styles.option}
+            options.map(option => (
+              <div
+                key={`${uniqueKey}-${option.tag}`}
+                className={styles.optionContainer}
               >
-                {o.display}
-              </label>
-            </div>
+                <input
+                  id={`${styles.checkbox}-${uniqueKey}--${option.tag}`}
+                  className={styles.optionCheckbox}
+                  type="checkbox"
+                  checked={selected.includes(option.tag)}
+                  onChange={onCheck(option.tag, isMultipleSelect)}
+                />
+                <label
+                  htmlFor={`${styles.checkbox}-${uniqueKey}--${option.tag}`}
+                  className={styles.optionBar}
+                >
+                  {option.display}
+                </label>
+              </div>
             ))
           }
         </div>
-        :
-          null
+      :
+        null
       }
 
     </div>

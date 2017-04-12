@@ -41,15 +41,15 @@ class SelectState extends Component {
   render() {
     return (
       <SelectComponent
-        identifier={this.props.identifier}
+        uniqueKey={this.props.uniqueKey}
+        isMultipleSelect={this.props.isMultipleSelect}
         label={this.props.label}
         options={this.state.options}
         selected={this.props.selected || []}
         isOpen={this.state.isOpen}
-        isMultipleSelect={this.props.isMultipleSelect}
         isSearchable={this.props.isSearchable}
         toggleOpen={this.toggleOpen}
-        onChange={this.props.onChange}
+        onCheck={this.props.onCheck}
         onSearch={this.props.onSearch}
         styles={this.props.styles}
       />
@@ -58,11 +58,11 @@ class SelectState extends Component {
 }
 
 SelectState.propTypes = {
-  identifier: propTypes.identifier,
+  uniqueKey: propTypes.uniqueKey,
   label: propTypes.label,
   isMultipleSelect: propTypes.isMultipleSelect,
   isSearchable: propTypes.isMultipleSelect,
-  onChange: propTypes.onChange,
+  onCheck: propTypes.onCheck,
   onSearch: propTypes.onSearch,
   options: propTypes.options,
   selected: propTypes.selected,
