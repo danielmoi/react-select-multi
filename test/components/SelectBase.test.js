@@ -44,6 +44,22 @@ describe('<SelectBase />', () => {
     expect(toggleOpenStub.callCount).to.equal(1);
   });
 
+  it('renders placeholder when no options are selected', () => {
+    const wrapper = shallow(
+      <SelectBase
+        uniqueKey="select-multi-1"
+        options={options}
+        selected={[]}
+        placeholder="PLACEY PLACE"
+        styles={styles}
+        toggleOpen={H.NOOP}
+        onCheck={H.NOOP}
+      />,
+    );
+
+    expect(wrapper.find(`.${styles.controlPlaceholder}`).text()).equal('PLACEY PLACE');
+  });
+
   it('renders options list when props.isOpen is true', () => {
     const wrapper = shallow(
       <SelectBase
