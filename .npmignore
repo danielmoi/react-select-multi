@@ -1,4 +1,7 @@
 src
 test
-
+node_modules
+npm-debug.log
 .nyc_output
+.github
+CONTRIBUTING.md

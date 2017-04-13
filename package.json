@@ -8,7 +8,7 @@
     "spec": "./node_modules/.bin/_mocha ./test/test_helper.js --recursive test/**/*",
     "build": "./node_modules/.bin/babel src --out-dir lib && cp src/styles.css lib/styles.css",
     "prepublish": "npm run build",
-    "coverage": "nyc yarn spec --check-coverage --lines 95 --functions 95 --branches 95",
+    "coverage": "nyc yarn spec --check-coverage --lines 80 --functions 80 --branches 80",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "author": "Daniel Moi",
