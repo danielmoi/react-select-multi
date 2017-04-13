@@ -21,7 +21,7 @@ describe('Reducer', () => {
       data: { name: 'select' },
     };
     const reducedState = reducer(initialState, action);
-    expect(reducedState.get(action.data.name)).to.eql(fromJS({ isOpen: false, selected: [] }));
+    expect(reducedState.get(action.data.name)).to.eql(fromJS({ isOpen: false, selected: null }));
   });
 
   it(`should handle ${C.SELECT_TOGGLE_OPEN}`, () => {
