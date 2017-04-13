@@ -5,6 +5,7 @@ export const basePropTypes = {
   uniqueKey: PropTypes.string.isRequired,
   isMultipleSelect: PropTypes.bool,
   label: PropTypes.string,
+  placeholder: PropTypes.string,
   options: PropTypes.array.isRequired,
   selected: PropTypes.oneOfType([
     PropTypes.array,
@@ -32,6 +33,7 @@ export const basePropTypes = {
 export const baseDefaultProps = {
   isMultipleSelect: false,
   label: '',
+  placeholder: '',
   searchTerm: '',
   isOpen: false,
   isSearchable: false,
@@ -39,7 +41,8 @@ export const baseDefaultProps = {
   styles: {
     wrapper: 'rsm-wrapper',
     label: 'rsm-label',
-    control: 'rsm-control',
+    controlContainer: 'rsm-control__container',
+    controlPlaceholder: 'rsm-control__placeholder',
     search: 'rsm-search',
     expandIcon: 'rsm-arrow-down',
     collapseIcon: 'rsm-arrow-up',
@@ -52,7 +55,7 @@ export const baseDefaultProps = {
 const SelectBase = ({
   uniqueKey, label, options, selected, searchTerm,
   isMultipleSelect, isSearchable, isOpen,
-  toggleOpen, onCheck, onSearch,
+  toggleOpen, onCheck, onSearch, placeholder,
   styles, // if you pass in styles it will overrwrite the classnames
 }) => {
   const arrowStyles = {
@@ -67,10 +70,13 @@ const SelectBase = ({
       </div>
 
       <div
-        className={styles.control}
+        className={styles.controlContainer}
         onClick={toggleOpen}
       >
-        {options.filter(o => selected.includes(o.tag)).map(o => o.display).join(', ')}
+        {selected.length > 0
+          ? options.filter(o => selected.includes(o.tag)).map(o => o.display).join(', ')
+          : <div className={styles.controlPlaceholder}>{placeholder}</div>
+        }
         <span className={classNames(arrowStyles)} />
       </div>
       {isOpen

@@ -45,6 +45,7 @@ export class SelectStateComponent extends Component {
         isMultipleSelect={this.props.isMultipleSelect}
         isSearchable={this.props.isSearchable}
         label={this.props.label}
+        placeholder={this.props.placeholder}
         options={this.state.options}
         selected={this.props.selected || []}
         isOpen={this.state.isOpen}
