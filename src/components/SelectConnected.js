@@ -27,7 +27,7 @@ export class SelectConnectedComponent extends Component {
   componentWillReceiveProps(nextProps) {
     const { name, defaultValues, selected } = nextProps;
     // check if only selected crap is changing
-    if (selected) return;
+    if (selected || !defaultValues.length) return;
     this.props.takeValue({ name, values: defaultValues });
   }
 

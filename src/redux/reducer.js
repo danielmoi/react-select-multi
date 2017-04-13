@@ -8,7 +8,7 @@ export default (state = fromJS(initialState), action) => {
       const { name } = action.data;
       if (!name) return state;
       return state.merge({
-        [name]: { isOpen: false, selected: [] },
+        [name]: { isOpen: false, selected: null },
       });
     }
     case C.SELECT_TOGGLE_OPEN: {
