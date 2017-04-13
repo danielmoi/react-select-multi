@@ -72,7 +72,7 @@ yarn spec
 ----
 ## Credits
 
-Thanks to [Lyn](https://github.com/lyntco), [JD](https://github.com/johndagostino), [Mike](https://github.com/Scoutski), [Anoop](https://github.com/anupvarghese), [🌳](https://github.com/alexlogs) 🎉🎉🎉🎉
+Thanks to [Lyn](https://github.com/lyntco), [JD](https://github.com/johndagostino), [Mike](https://github.com/Scoutski), [Anoop](https://github.com/anupvarghese), and [🌳](https://github.com/alexlogs)
 
 ----
 ## Licence
