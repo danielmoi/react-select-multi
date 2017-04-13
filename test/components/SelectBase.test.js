@@ -40,7 +40,7 @@ describe('<SelectBase />', () => {
       />,
     );
 
-    wrapper.find(`.${styles.control}`).simulate('click');
+    wrapper.find(`.${styles.controlContainer}`).simulate('click');
     expect(toggleOpenStub.callCount).to.equal(1);
   });
 
