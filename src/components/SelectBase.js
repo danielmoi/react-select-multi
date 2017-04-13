@@ -73,7 +73,7 @@ const SelectBase = ({
         className={styles.controlContainer}
         onClick={toggleOpen}
       >
-        {selected.length > 0
+        {(selected.size > 0 || selected.length > 0)
           ? options.filter(o => selected.includes(o.tag)).map(o => o.display).join(', ')
           : <div className={styles.controlPlaceholder}>{placeholder}</div>
         }
