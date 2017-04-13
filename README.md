@@ -12,12 +12,12 @@ A versatile React Component providing awesome select UI components.
 ## Installation
 With Yarn:
 ```
-yarn add react-clickout
+yarn add react-select-multi
 ```
 
 With NPM:
 ```
-npm install react-clickout
+npm install react-select-multi
 ```
 
 ----
