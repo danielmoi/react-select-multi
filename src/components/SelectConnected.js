@@ -31,6 +31,10 @@ export class SelectConnectedComponent extends Component {
     this.props.takeValue({ name, values: defaultValues });
   }
 
+  componentWillUnmount() {
+    this.props.clearAll();
+  }
+
   onCheck = value => () => {
     updateValues(this.props, value);
   }
@@ -46,9 +50,6 @@ export class SelectConnectedComponent extends Component {
     this.props.toggleOpen({ name: this.props.name, isOpen: false });
   }
 
-  componentWillUnMount() {
-    this.props.clearAll();
-  }
 
   render() {
     return (
