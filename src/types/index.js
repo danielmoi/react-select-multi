@@ -68,10 +68,10 @@ export type SelectStateProps = {
 export type SelectConnectedProps = {
   uniqueKey: string,
   label: string,
-  options: Array < Option > | List < Option >,
-  selected: Array < string > | List < string > | Map < string,
+  options: Array<Option> | List<Option>,
+  selected: Array<string> | List<string> | Map<string,
   ?
-  any >,
+  any>,
   searchTerm ? : string,
   isMultipleSelect : boolean,
   isSearchable: boolean,
@@ -113,5 +113,5 @@ export type SelectStateDefaultProps = {
 
 export type SelectState = {
   isOpen: boolean,
-  options: Array < Option > | List < Option >,
+  options: Array<Option> | List<Option>,
 };
