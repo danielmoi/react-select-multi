@@ -16,7 +16,7 @@ describe('<SelectBase />', () => {
       <SelectBase
         uniqueKey="select-multi-1"
         options={options}
-        selected={[options[0]]}
+        selected={[]}
         styles={styles}
         toggleOpen={H.NOOP}
         onCheck={H.NOOP}
@@ -33,7 +33,7 @@ describe('<SelectBase />', () => {
       <SelectBase
         uniqueKey="select-multi-1"
         options={options}
-        selected={[options[0]]}
+        selected={[]}
         styles={styles}
         toggleOpen={toggleOpenStub}
         onCheck={H.NOOP}
@@ -65,7 +65,7 @@ describe('<SelectBase />', () => {
       <SelectBase
         uniqueKey="select-multi-1"
         options={options}
-        selected={[options[0]]}
+        selected={[]}
         styles={styles}
         toggleOpen={H.NOOP}
         onCheck={H.NOOP}
