@@ -32,8 +32,6 @@ describe('<SelectConnected />', () => {
       />,
     );
 
-    console.log('wrapper.debug():', wrapper.debug());
-
     expect(spyCWM.callCount).to.equal(1);
     expect(addSetStub.callCount).to.equal(1);
     spyCWM.restore();
