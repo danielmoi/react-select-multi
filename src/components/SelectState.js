@@ -1,6 +1,10 @@
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 import wrapWithClickout from 'react-clickout';
-import SelectBase, { propTypes, defaultProps } from './SelectBase';
+import SelectBase, { basePropTypes, defaultProps } from './SelectBase';
+
+const additionalPropTypes = {
+  onCheck: PropTypes.func.isRequired,
+};
 
 export class SelectStateComponent extends Component {
   constructor(props) {
@@ -58,7 +62,7 @@ export class SelectStateComponent extends Component {
   }
 }
 
-SelectStateComponent.propTypes = propTypes;
+SelectStateComponent.propTypes = Object.assign({}, basePropTypes, additionalPropTypes);
 SelectStateComponent.defaultProps = defaultProps;
 
 const wrapped = wrapWithClickout(SelectStateComponent);
