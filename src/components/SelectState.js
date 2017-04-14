@@ -9,7 +9,6 @@ export class SelectStateComponent extends
   Component<SelectStateDefaultProps, SelectBaseProps, SelectState> {
   static defaultProps: SelectStateDefaultProps;
   static props: SelectBaseProps;
-  static state: SelectState;
 
   constructor(props: SelectBaseProps) {
     super(props);
@@ -34,7 +33,6 @@ export class SelectStateComponent extends
       });
     }
   }
-  props: SelectBaseProps;
 
   toggleOpen = () => {
     this.setState({
