@@ -4,35 +4,28 @@ import initialState from './initial_state';
 
 export default (state = fromJS(initialState), action) => {
   switch (action.type) {
-    case C.SELECT_ADD_SET: {
-      const { name } = action.data;
-      if (!name) return state;
+    case C.RSM_ADD_SELECT: {
+      const { id } = action.data;
+      if (!id) return state;
       return state.merge({
-        [name]: { isOpen: false, selected: null },
+        [id]: { isOpen: false, selected: [] },
       });
     }
-    case C.SELECT_TOGGLE_OPEN: {
-      const { name, isOpen } = action.data;
-      return state.merge({
-        [name]: (state.get(name) || fromJS({})).merge({ isOpen }),
-      });
+    case C.RSM_TOGGLE_OPEN: {
+      const { id, isOpen } = action.data;
+      return state.mergeIn([id, 'isOpen'], isOpen);
     }
-    case C.SELECT_SEARCH_OPTIONS: {
-      const { name, searchText } = action.data;
-      return state.merge({
-        [name]: (state.get(name) || fromJS({})).merge({ searchTerm: searchText }),
-      });
+    case C.RSM_SEARCH_OPTIONS: {
+      const { id, searchTerm } = action.data;
+      return state.mergeIn([id, 'searchTerm'], searchTerm);
     }
-    case C.SELECT_TAKE_VALUE: {
-      const { name, values } = action.data;
-      return state.merge({
-        [name]: (state.get(name) || fromJS({})).merge({ selected: values }),
-      });
+    case C.RSM_SAVE_SELECTED: {
+      const { id, selected } = action.data;
+      return state.mergeIn([id, 'selected'], selected);
     }
-    case C.SELECT_CLEAR_ALL: {
-      return state.merge(
-        fromJS(initialState),
-      );
+    case C.RSM_REMOVE_SELECT: {
+      const { id } = action.data;
+      return state.delete(id);
     }
     default: {
       return state;
