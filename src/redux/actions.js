@@ -29,13 +29,8 @@ const removeSelect: FSA = () => ({
   data: {},
 });
 
-<<<<<<< HEAD
-module.exports = {
-  addSelect,
-=======
 exports = {
-  addSet,
->>>>>>> make it work in code
+  addSelect,
   toggleOpen,
   searchOptions,
   saveSelected,

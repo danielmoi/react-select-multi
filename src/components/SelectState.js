@@ -1,19 +1,24 @@
-import React, { PropTypes, Component } from 'react';
+// @flow
+
+import React, { Component } from 'react';
 import wrapWithClickout from 'react-clickout';
-import SelectBase, { basePropTypes, defaultProps } from './SelectBase';
+import SelectBase, { basePropTypes, baseDefaultProps } from './SelectBase';
+import type { SelectState, SelectBaseProps, SelectStateDefaultProps } from '../types';
 
-const additionalPropTypes = {
-  onCheck: PropTypes.func.isRequired,
-};
+export class SelectStateComponent extends
+  Component<SelectStateDefaultProps, SelectBaseProps, SelectState> {
+  static defaultProps: SelectStateDefaultProps;
+  static props: SelectBaseProps;
+  static state: SelectState;
 
-export class SelectStateComponent extends Component {
-  constructor(props) {
+  constructor(props: SelectBaseProps) {
     super(props);
     this.state = {
       isOpen: false,
       options: props.options,
     };
   }
+  state: SelectState;
 
   componentDidMount() {
     this.state = {
@@ -22,13 +27,14 @@ export class SelectStateComponent extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: SelectBaseProps) {
     if (nextProps.options) {
       this.setState({
         options: nextProps.options,
       });
     }
   }
+  props: SelectBaseProps;
 
   toggleOpen = () => {
     this.setState({
@@ -62,8 +68,8 @@ export class SelectStateComponent extends Component {
   }
 }
 
-SelectStateComponent.propTypes = Object.assign({}, basePropTypes, additionalPropTypes);
-SelectStateComponent.defaultProps = defaultProps;
+SelectStateComponent.propTypes = basePropTypes;
+SelectStateComponent.defaultProps = baseDefaultProps;
 
 const wrapped = wrapWithClickout(SelectStateComponent);
 
