@@ -1,4 +1,4 @@
-// @flow
+/* @flow */
 
 import C from './constants';
 import type { FSA } from '../types';
@@ -29,8 +29,13 @@ const removeSelect: FSA = () => ({
   data: {},
 });
 
+<<<<<<< HEAD
 module.exports = {
   addSelect,
+=======
+exports = {
+  addSet,
+>>>>>>> make it work in code
   toggleOpen,
   searchOptions,
   saveSelected,
