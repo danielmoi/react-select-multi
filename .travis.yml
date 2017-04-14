@@ -2,11 +2,9 @@ language: node_js
 node_js:
   - "6"
 script:
-  - npm run test
-script:
   - npm run lint
-script:
   - npm run flow
+  - npm run test
 branches:
   only:
     # - master
