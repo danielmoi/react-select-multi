@@ -4,6 +4,8 @@
 [include]
 
 [libs]
-node_modules/immutable/dist/immutable.js.flow
+<PROJECT_ROOT>/node_modules/immutable/dist/immutable.js.flow
 
 [options]
+esproposal.class_static_fields=enable
+esproposal.class_instance_fields=enable

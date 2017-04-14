@@ -1,3 +1,5 @@
+// @flow
+
 import { fromJS } from 'immutable';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
@@ -13,31 +15,37 @@ import {
 
 import SelectBase, { basePropTypes, baseDefaultProps } from './SelectBase';
 
+import type { SelectConnectedProps, SelectConnectedDefaultProps as DefaultProps } from '../types';
+
 const additionalPropTypes = {
   initialSelected: PropTypes.array.isRequired,
   toggleOpen: PropTypes.func.isRequired,
   saveSelected: PropTypes.func.isRequired,
 };
 
-export class SelectConnectedComponent extends Component {
+export class SelectConnectedComponent extends
+  Component<DefaultProps, SelectConnectedProps, void> {
+  static defaultProps: DefaultProps;
+  static props: SelectConnectedProps;
+
+  componentWillMount() {
+    const { id } = this.props;
+    this.props.removeSelect({ id });
+  }
+
   componentDidMount() {
     const { id } = this.props;
     this.props.addSelect({ id });
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: SelectConnectedProps) {
     const { id, initialSelected } = nextProps;
     if (nextProps.initialSelected[0] !== this.props.initialSelected[0]) {
       this.props.saveSelected({ id, selected: initialSelected });
     }
   }
 
-  componentWillUnmount() {
-    const { id } = this.props;
-    this.props.removeSelect({ id });
-  }
-
-  onCheck = value => () => {
+  onCheck = (value: string) => () => {
     const { id, selected, isMultipleSelect } = this.props;
     let updatedSelected = [];
     if (isMultipleSelect) {
@@ -54,7 +62,7 @@ export class SelectConnectedComponent extends Component {
     }
   }
 
-  onSearch = text => () => {}
+  onSearch = () => () => {}
 
   onToggleOpen = () => {
     this.props.toggleOpen({ id: this.props.id, isOpen: !this.props.isOpen });
