@@ -29,7 +29,7 @@ const removeSelect: FSA = () => ({
   data: {},
 });
 
-exports = {
+export {
   addSelect,
   toggleOpen,
   searchOptions,
