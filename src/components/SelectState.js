@@ -57,7 +57,7 @@ export class SelectStateComponent extends
         label={this.props.label}
         placeholder={this.props.placeholder}
         options={this.state.options}
-        selected={this.props.selected || []}
+        selected={this.props.selected}
         isOpen={this.state.isOpen}
         toggleOpen={this.toggleOpen}
         onCheck={this.props.onCheck}

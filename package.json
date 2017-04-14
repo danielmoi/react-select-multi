@@ -10,7 +10,8 @@
     "prepublish": "npm run build",
     "coverage": "nyc yarn spec --check-coverage --lines 80 --functions 80 --branches 80",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "flow": "./node_modules/.bin/flow check"
+    "flow": "./node_modules/.bin/flow check",
+    "lint": "./node_modules/.bin/eslint --quiet src test"
   },
   "author": "Daniel Moi",
   "license": "Apache-2.0",
