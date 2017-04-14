@@ -1,8 +1,13 @@
+// @flow
+
 import { fromJS } from 'immutable';
+import type { Action, DataState, Reducer } from '../types';
+
 import C from './constants';
 import initialState from './initial_state';
 
-export default (state = fromJS(initialState), action) => {
+
+const reducer: Reducer = (state: DataState = fromJS(initialState), action: Action) => {
   switch (action.type) {
     case C.RSM_ADD_SELECT: {
       const { id } = action.data;
@@ -32,3 +37,5 @@ export default (state = fromJS(initialState), action) => {
     }
   }
 };
+
+export default reducer;
