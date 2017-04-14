@@ -5,6 +5,5 @@
 
 [libs]
 node_modules/immutable/dist/immutable.js.flow
-flow-typed
 
 [options]

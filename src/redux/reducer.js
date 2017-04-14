@@ -1,10 +1,9 @@
 // @flow
-
 import { fromJS } from 'immutable';
-import type { Action, DataState, Reducer } from '../types';
-
 import C from './constants';
 import initialState from './initial_state';
+
+import type { Action, DataState, Reducer } from '../types';
 
 
 const reducer: Reducer = (state: DataState = fromJS(initialState), action: Action) => {
