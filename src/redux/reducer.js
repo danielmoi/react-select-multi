@@ -8,7 +8,7 @@ export default (state = fromJS(initialState), action) => {
       const { id } = action.data;
       if (!id) return state;
       return state.merge({
-        [id]: { isOpen: false, selected: [] },
+        [id]: { isOpen: false, selected: [], searchTerm: '' },
       });
     }
     case C.RSM_TOGGLE_OPEN: {

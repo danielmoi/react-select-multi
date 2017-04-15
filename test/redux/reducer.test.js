@@ -6,56 +6,70 @@ import reducer from '../../src/redux/reducer';
 
 describe('Reducer', () => {
   let initialState;
+  let colorsInitialState;
   beforeEach(() => {
     initialState = fromJS(initialStateFixture);
+    colorsInitialState = fromJS({
+      colors: {
+        isOpen: false,
+        selected: [],
+        searchTerm: '',
+      },
+    });
   });
 
   it('should return the initial state', () => {
-    expect(reducer(initialState, {}))
+    const action = {
+      type: 'HELLO THERE',
+    };
+    expect(reducer(initialState, action))
       .to.deep.equal(initialState);
   });
 
-  it(`should handle ${C.SELECT_ADD_SET}`, () => {
+  it(`should handle ${C.RSM_ADD_SELECT}`, () => {
     const action = {
-      type: C.SELECT_ADD_SET,
-      data: { name: 'select' },
+      type: C.RSM_ADD_SELECT,
+      data: { id: 'select' },
     };
     const reducedState = reducer(initialState, action);
-    expect(reducedState.get(action.data.name)).to.eql(fromJS({ isOpen: false, selected: null }));
+    expect(reducedState.get(action.data.id))
+      .to.equal(fromJS({ isOpen: false, selected: [], searchTerm: '' }));
   });
 
-  it(`should handle ${C.SELECT_TOGGLE_OPEN}`, () => {
+  it(`should handle ${C.RSM_TOGGLE_OPEN}`, () => {
     const action = {
-      type: C.SELECT_TOGGLE_OPEN,
-      data: { name: 'select', isOpen: true },
+      type: C.RSM_TOGGLE_OPEN,
+      data: { id: 'colors', isOpen: true },
     };
-    const reducedState = reducer(initialState, action);
-    expect(reducedState.get(action.data.name)).to.eql(fromJS({ isOpen: true }));
+    const reducedState = reducer(colorsInitialState, action);
+    expect(reducedState.getIn(['colors', 'isOpen'])).to.equal(true);
   });
 
-  it(`should handle ${C.SELECT_SEARCH_OPTIONS}`, () => {
+  it(`should handle ${C.RSM_SEARCH_OPTIONS}`, () => {
     const action = {
-      type: C.SELECT_SEARCH_OPTIONS,
-      data: { name: 'select', searchText: 'test' },
+      type: C.RSM_SEARCH_OPTIONS,
+      data: { id: 'colors', searchTerm: 'pink' },
     };
-    const reducedState = reducer(initialState, action);
-    expect(reducedState.get(action.data.name)).to.eql(fromJS({ searchTerm: 'test' }));
+    const reducedState = reducer(colorsInitialState, action);
+    expect(reducedState.getIn(['colors', 'searchTerm'])).to.equal('pink');
   });
 
-  it(`should handle ${C.SELECT_TAKE_VALUE}`, () => {
+  it(`should handle ${C.RSM_SAVE_SELECTED}`, () => {
     const action = {
-      type: C.SELECT_TAKE_VALUE,
-      data: { name: 'select', values: ['Orders', 'Customers'] },
+      type: C.RSM_SAVE_SELECTED,
+      data: { id: 'colors', selected: ['Hotpink', 'Cyan'] },
     };
-    const reducedState = reducer(initialState, action);
-    expect(reducedState.get(action.data.name)).to.eql(fromJS({ selected: action.data.values }));
+    const reducedState = reducer(colorsInitialState, action);
+    expect(reducedState.getIn(['colors', 'selected']))
+      .to.equal(fromJS(['Hotpink', 'Cyan']));
   });
 
-  it(`should handle ${C.SELECT_CLEAR_ALL}`, () => {
+  it(`should handle ${C.RSM_REMOVE_SELECT}`, () => {
     const action = {
-      type: C.SELECT_CLEAR_ALL,
+      type: C.RSM_REMOVE_SELECT,
+      data: { id: 'colors' },
     };
-    const reducedState = reducer(initialState, action);
+    const reducedState = reducer(colorsInitialState, action);
     expect(reducedState).to.equal(fromJS(initialState));
   });
 });
