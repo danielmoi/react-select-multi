@@ -1,18 +1,23 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
+const additionalPropTypes = {
+  onCheck: PropTypes.func.isRequired,
+};
+
 export const basePropTypes = {
   uniqueKey: PropTypes.string.isRequired,
   isMultipleSelect: PropTypes.bool,
   label: PropTypes.string,
   placeholder: PropTypes.string,
-  options: PropTypes.array.isRequired,
+  options: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.object, // Immutable
+  ]).isRequired,
   selected: PropTypes.oneOfType([
     PropTypes.array,
-    // also accept Immutable List (which has .includes method)
-    PropTypes.object,
-  ]).isRequired,
-  onCheck: PropTypes.func.isRequired,
+    PropTypes.object, // Immutable
+  ]),
   searchTerm: PropTypes.string,
   isOpen: PropTypes.bool,
   isSearchable: PropTypes.bool,
@@ -38,6 +43,7 @@ export const baseDefaultProps = {
   isOpen: false,
   isSearchable: false,
   onSearch: () => {},
+  selected: [],
   styles: {
     wrapper: 'rsm-wrapper',
     label: 'rsm-label',
@@ -121,7 +127,7 @@ const SelectBase = ({
   );
 };
 
-SelectBase.propTypes = basePropTypes;
+SelectBase.propTypes = Object.assign({}, basePropTypes, additionalPropTypes);
 SelectBase.defaultProps = baseDefaultProps;
 
 export default SelectBase;

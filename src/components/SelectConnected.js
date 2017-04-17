@@ -4,50 +4,65 @@ import { connect } from 'react-redux';
 import wrapWithClickout from 'react-clickout';
 
 import {
-  addSet,
+  addSelect,
   toggleOpen,
-  takeValue,
+  saveSelected,
   searchOptions,
+  removeSelect,
 } from '../redux/actions';
-import { updateValues } from '../utils';
+
 import SelectBase, { basePropTypes, baseDefaultProps } from './SelectBase';
 
 const additionalPropTypes = {
-  defaultValues: PropTypes.array.isRequired,
+  initialSelected: PropTypes.array.isRequired,
   toggleOpen: PropTypes.func.isRequired,
-  takeValue: PropTypes.func.isRequired,
+  saveSelected: PropTypes.func.isRequired,
 };
 
 export class SelectConnectedComponent extends Component {
-  componentWillMount() {
-    const { name } = this.props;
-    this.props.addSet({ name });
+  componentDidMount() {
+    const { id } = this.props;
+    this.props.addSelect({ id });
   }
 
   componentWillReceiveProps(nextProps) {
-    const { name, defaultValues, selected } = nextProps;
-    // check if only selected crap is changing
-    if (selected || !defaultValues.length) return;
-    this.props.takeValue({ name, values: defaultValues });
+    const { id, initialSelected } = nextProps;
+    if (nextProps.initialSelected[0] !== this.props.initialSelected[0]) {
+      this.props.saveSelected({ id, selected: initialSelected });
+    }
+  }
+
+  componentWillUnmount() {
+    const { id } = this.props;
+    this.props.removeSelect({ id });
   }
 
   onCheck = value => () => {
-    updateValues(this.props, value);
+    const { id, selected, isMultipleSelect } = this.props;
+    let updatedSelected = [];
+    if (isMultipleSelect) {
+      if (selected.includes(value)) {
+        updatedSelected = selected.filter(s => s !== value);
+      } else {
+        updatedSelected = selected.push(value);
+      }
+      this.props.saveSelected({ id, selected: updatedSelected });
+    } else {
+      // not multipleSelect
+      this.props.saveSelected({ id, selected: [value] });
+      this.props.toggleOpen({ id, open: false });
+    }
   }
 
   onSearch = text => () => {}
 
   onToggleOpen = () => {
-    this.props.toggleOpen({ name: this.props.name, isOpen: !this.props.isOpen });
+    this.props.toggleOpen({ id: this.props.id, isOpen: !this.props.isOpen });
   }
 
   handleClickout = () => {
     if (!this.props.isOpen) return;
-    this.props.toggleOpen({ name: this.props.name, isOpen: false });
-  }
-
-  componentWillUnMount() {
-    this.props.clearAll();
+    this.props.toggleOpen({ id: this.props.id, isOpen: false });
   }
 
   render() {
@@ -70,15 +85,16 @@ export class SelectConnectedComponent extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  isOpen: state.select.getIn([ownProps.name, 'isOpen']) || false,
-  selected: state.select.getIn([ownProps.name, 'selected']),
+  isOpen: state.select.getIn([ownProps.id, 'isOpen']) || false,
+  selected: state.select.getIn([ownProps.id, 'selected']),
 });
 
 const mapDispatchToProps = {
-  addSet,
+  addSelect,
   toggleOpen,
-  takeValue,
+  saveSelected,
   searchOptions,
+  removeSelect,
 };
 
 SelectConnectedComponent.propTypes = Object.assign({}, basePropTypes, additionalPropTypes);

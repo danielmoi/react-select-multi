@@ -1,8 +1,16 @@
-export default {
-  SELECT_ADD_SET: 'SELECT_ADD_SET',
-  SELECT_TOGGLE_OPEN: 'SELECT_TOGGLE_OPEN',
-  SELECT_HANDLE_CLICKOUT: 'SELECT_HANDLE_CLICKOUT',
-  SELECT_SEARCH_OPTIONS: 'SELECT_SEARCH_OPTIONS',
-  SELECT_TAKE_VALUE: 'SELECT_TAKE_VALUE',
-  SELECT_CLEAR_ALL: 'SELECT_CLEAR_ALL',
-};
+const ACTIONS = [
+  'RSM_ADD_SELECT',
+  'RSM_TOGGLE_OPEN',
+  'RSM_HANDLE_CLICKOUT',
+  'RSM_SEARCH_OPTIONS',
+  'RSM_SAVE_SELECTED',
+  'RSM_REMOVE_SELECT',
+];
+
+const populatedActions = {};
+
+for (const action of ACTIONS) {
+  populatedActions[action] = action;
+}
+
+export default populatedActions;
