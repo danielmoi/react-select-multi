@@ -1,44 +1,51 @@
 import { expect } from 'chai';
 import C from '../../src/redux/constants';
-import { addSet, toggleOpen, searchOptions, takeValue, clearAll } from '../../src/redux/actions';
+import {
+  addSelect,
+  toggleOpen,
+  searchOptions,
+  saveSelected,
+  removeSelect,
+} from '../../src/redux/actions';
 
 describe('Actions', () => {
-  it(`should create action for ${C.SELECT_ADD_SET}`, () => {
+  it(`should create action for ${C.RSM_ADD_SELECT}`, () => {
     const expectedAction = {
-      type: C.SELECT_ADD_SET,
-      data: { name: 'select' },
+      type: C.RSM_ADD_SELECT,
+      data: { id: 'select' },
     };
-    expect(addSet(expectedAction.data)).to.deep.equal(expectedAction);
+    expect(addSelect(expectedAction.data)).to.deep.equal(expectedAction);
   });
 
-  it(`should create action for ${C.SELECT_TOGGLE_OPEN}`, () => {
+  it(`should create action for ${C.RSM_TOGGLE_OPEN}`, () => {
     const expectedAction = {
-      type: C.SELECT_TOGGLE_OPEN,
-      data: { name: 'select', open: true },
+      type: C.RSM_TOGGLE_OPEN,
+      data: { id: 'select', open: true },
     };
     expect(toggleOpen(expectedAction.data)).to.deep.equal(expectedAction);
   });
 
-  it(`should create action for ${C.SELECT_SEARCH_OPTIONS}`, () => {
+  it(`should create action for ${C.RSM_SEARCH_OPTIONS}`, () => {
     const expectedAction = {
-      type: C.SELECT_SEARCH_OPTIONS,
-      data: { name: 'select', searchText: 'search' },
+      type: C.RSM_SEARCH_OPTIONS,
+      data: { id: 'select', searchText: 'search' },
     };
     expect(searchOptions(expectedAction.data)).to.deep.equal(expectedAction);
   });
 
-  it(`should create action for ${C.SELECT_TAKE_VALUE}`, () => {
+  it(`should create action for ${C.RSM_SAVE_SELECTED}`, () => {
     const expectedAction = {
-      type: C.SELECT_TAKE_VALUE,
-      data: { name: 'select', values: ['Value', 'Another Value'] },
+      type: C.RSM_SAVE_SELECTED,
+      data: { id: 'select', selected: ['Option 1', 'Option 2'] },
     };
-    expect(takeValue(expectedAction.data)).to.deep.equal(expectedAction);
+    expect(saveSelected(expectedAction.data)).to.deep.equal(expectedAction);
   });
 
-  it(`should create action for ${C.SELECT_CLEAR_ALL}`, () => {
+  it(`should create action for ${C.RSM_REMOVE_SELECT}`, () => {
     const expectedAction = {
-      type: C.SELECT_CLEAR_ALL,
+      type: C.RSM_REMOVE_SELECT,
+      data: { id: 'select' },
     };
-    expect(clearAll()).to.deep.equal(expectedAction);
+    expect(removeSelect(expectedAction.data)).to.deep.equal(expectedAction);
   });
 });

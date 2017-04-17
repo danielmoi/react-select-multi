@@ -8,6 +8,10 @@ A versatile React Component providing awesome select UI components.
 - multiple = multi-select
 - search = select with search input
 
+State management options
+- React Component state
+- [Redux](https://github.com/reactjs/redux/)
+
 ----
 ## Installation
 With Yarn:

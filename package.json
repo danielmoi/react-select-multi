@@ -36,6 +36,7 @@
     "babel-register": "^6.23.0",
     "chai": "^3.5.0",
     "chai-enzyme": "^0.6.1",
+    "chai-immutable": "^1.6.0",
     "coveralls": "^2.13.0",
     "enzyme": "^2.8.0",
     "eslint": "^3.15.0",

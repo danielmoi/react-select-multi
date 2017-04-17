@@ -1,33 +1,34 @@
 import C from './constants';
 
-const addSet = data => ({
-  type: C.SELECT_ADD_SET,
+const addSelect = data => ({
+  type: C.RSM_ADD_SELECT,
   data,
 });
 
 const searchOptions = data => ({
-  type: C.SELECT_SEARCH_OPTIONS,
+  type: C.RSM_SEARCH_OPTIONS,
   data,
 });
 
 const toggleOpen = data => ({
-  type: C.SELECT_TOGGLE_OPEN,
+  type: C.RSM_TOGGLE_OPEN,
   data,
 });
 
-const takeValue = data => ({
-  type: C.SELECT_TAKE_VALUE,
+const saveSelected = data => ({
+  type: C.RSM_SAVE_SELECTED,
   data,
 });
 
-const clearAll = () => ({
-  type: C.SELECT_CLEAR_ALL,
+const removeSelect = data => ({
+  type: C.RSM_REMOVE_SELECT,
+  data,
 });
 
 module.exports = {
-  addSet,
+  addSelect,
   toggleOpen,
   searchOptions,
-  takeValue,
-  clearAll,
+  saveSelected,
+  removeSelect,
 };

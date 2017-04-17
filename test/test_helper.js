@@ -3,7 +3,7 @@
 // var mountWithIntl = require('./helpers/intl-enzyme-test-helper').mountWithIntl;
 require('babel-register')();
 var chai = require('chai');
-// var chaiImmutable = require('chai-immutable');
+var chaiImmutable = require('chai-immutable');
 var jsdom = require('jsdom').jsdom;
 const chaiEnzyme = require('chai-enzyme');
 var exposedProperties = ['window', 'navigator', 'document'];
@@ -30,5 +30,5 @@ global.navigator = {
   userAgent: 'node.js'
 };
 
-// chai.use(chaiImmutable);
+chai.use(chaiImmutable);
 chai.use(chaiEnzyme());
