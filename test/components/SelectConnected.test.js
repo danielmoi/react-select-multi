@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { expect } from 'chai';
-import { fromJS } from 'immutable';
 import { stub, spy } from 'sinon';
 
 import options from '../fixtures/options';
@@ -12,13 +11,30 @@ import { SelectConnectedComponent } from '../../src/components/SelectConnected';
 import SelectBase from '../../src/components/SelectBase';
 
 describe('<SelectConnected />', () => {
+  it('renders a SelectBase', () => {
+    const wrapper = shallow(
+      <SelectConnectedComponent
+        id="category"
+        uniqueKey="select-multi-1"
+        options={options}
+        initialSelected={[]}
+        styles={styles}
+        toggleOpen={H.NOOP}
+        addSelect={H.NOOP}
+        removeSelect={H.NOOP}
+        saveSelected={H.NOOP}
+      />,
+    );
+    expect(wrapper.find(SelectBase).length).to.equal(1);
+  });
+
   it('calls componentDidMount', () => {
     const spyCWM = spy(SelectConnectedComponent.prototype, 'componentDidMount');
     const addSelectStub = stub();
 
     expect(spyCWM.callCount).to.equal(0);
 
-    const wrapper = mount(
+    mount(
       <SelectConnectedComponent
         id="category"
         uniqueKey="select-multi-1"
@@ -75,6 +91,7 @@ describe('<SelectConnected />', () => {
 
     const wrapper = mount(
       <SelectConnectedComponent
+        id="category"
         uniqueKey="select-multi-1"
         options={options}
         initialSelected={[]}
@@ -91,5 +108,47 @@ describe('<SelectConnected />', () => {
     expect(spyUnmount.callCount).to.equal(1);
     expect(removeSelectStub.callCount).to.equal(1);
     spyUnmount.restore();
+  });
+
+  it('calls toggleOpen when the control is clicked', () => {
+    const toggleOpenStub = stub();
+    const wrapper = mount(
+      <SelectConnectedComponent
+        id="category"
+        uniqueKey="select-multi-1"
+        options={options}
+        initialSelected={[]}
+        styles={styles}
+        toggleOpen={toggleOpenStub}
+        addSelect={H.NOOP}
+        removeSelect={H.NOOP}
+        saveSelected={H.NOOP}
+      />,
+    );
+    wrapper.find('.rsm-control__container').simulate('click');
+    expect(toggleOpenStub.callCount).to.equal(1);
+  });
+
+  it.only('handles clicking on an option checkbox', () => {
+    const saveSelectedStub = stub();
+    const wrapper = mount(
+      <SelectConnectedComponent
+        id="category"
+        uniqueKey="select-multi-1"
+        options={options}
+        initialSelected={[]}
+        styles={styles}
+        toggleOpen={H.NOOP}
+        addSelect={H.NOOP}
+        removeSelect={H.NOOP}
+        saveSelected={saveSelectedStub}
+        isMultipleSelect={false}
+      />,
+    );
+    wrapper.setProps({ isOpen: true });
+
+    wrapper.find('input[type="checkbox"]').at(0).simulate('change', { target: { checked: true } });
+    expect(saveSelectedStub.callCount).to.equal(1);
+    console.log('wrapper.debug():', wrapper.debug());
   });
 });

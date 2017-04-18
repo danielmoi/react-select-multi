@@ -48,20 +48,25 @@ export class SelectConnectedComponent extends
     }
   }
 
-  onCheck = (value: string) => () => {
+  componentWillUnmount() {
+    const { id } = this.props;
+    this.props.removeSelect({ id });
+  }
+
+  onCheck = (checkboxValue: string) => () => {
     const { id, selected, isMultipleSelect } = this.props;
     let updatedSelected = [];
     if (isMultipleSelect) {
-      if (selected.includes(value)) {
-        updatedSelected = selected.filter(s => s !== value);
+      if (selected.includes(checkboxValue)) {
+        updatedSelected = selected.filter(s => s !== checkboxValue);
       } else {
-        updatedSelected = selected.push(value);
+        updatedSelected = selected.push(checkboxValue);
       }
       this.props.saveSelected({ id, selected: updatedSelected });
     } else {
       // not multipleSelect
-      this.props.saveSelected({ id, selected: [value] });
-      this.props.toggleOpen({ id, isOpen: false });
+      this.props.saveSelected({ id, selected: [checkboxValue] });
+      this.props.toggleOpen({ id, open: false });
     }
   }
 
