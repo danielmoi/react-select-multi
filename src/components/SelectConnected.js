@@ -18,8 +18,11 @@ import SelectBase, { basePropTypes, baseDefaultProps } from './SelectBase';
 import type { SelectConnectedProps, SelectConnectedDefaultProps as DefaultProps } from '../types';
 
 const additionalPropTypes = {
+  id: PropTypes.string.isRequired,
   initialSelected: PropTypes.array.isRequired,
   toggleOpen: PropTypes.func.isRequired,
+  addSelect: PropTypes.func.isRequired,
+  removeSelect: PropTypes.func.isRequired,
   saveSelected: PropTypes.func.isRequired,
 };
 
