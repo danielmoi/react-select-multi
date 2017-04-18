@@ -123,7 +123,7 @@ const SelectBase = ({
                   className={styles.optionCheckbox}
                   type="checkbox"
                   checked={selected.includes(option.tag)}
-                  onChange={onCheck(option.tag, isMultipleSelect)}
+                  onChange={onCheck(option.tag)}
                 />
                 <label
                   htmlFor={`${styles.checkbox}-${uniqueKey}--${option.tag}`}
