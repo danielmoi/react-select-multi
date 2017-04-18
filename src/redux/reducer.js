@@ -21,7 +21,7 @@ export default (state = fromJS(initialState), action) => {
     }
     case C.RSM_SAVE_SELECTED: {
       const { id, selected } = action.data;
-      return state.mergeIn([id, 'selected'], selected);
+      return state.setIn([id, 'selected'], fromJS(selected));
     }
     case C.RSM_REMOVE_SELECT: {
       const { id } = action.data;
