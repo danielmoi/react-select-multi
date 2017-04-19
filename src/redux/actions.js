@@ -24,9 +24,9 @@ const saveSelected: FSA = (data: Object) => ({
   data,
 });
 
-const removeSelect: FSA = () => ({
+const removeSelect: FSA = (data: Object) => ({
   type: C.RSM_REMOVE_SELECT,
-  data: {},
+  data,
 });
 
 export {
