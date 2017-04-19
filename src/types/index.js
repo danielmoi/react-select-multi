@@ -67,13 +67,15 @@ export type SelectStateProps = {
 
 export type SelectConnectedProps = {
   uniqueKey: string,
+  id: string,
   label: string,
   options: Array<Option> | List<Option>,
   selected: Array<string> | List<string> | Map<string,
   ?
   any>,
-  searchTerm ? : string,
-  isMultipleSelect : boolean,
+  searchTerm?: string,
+  initialSelected: Array<string>,
+  isMultipleSelect: boolean,
   isSearchable: boolean,
   isOpen: boolean,
   toggleOpen: Callback,
@@ -86,6 +88,9 @@ export type SelectConnectedProps = {
   takeValue: Callback,
   addSet: Callback,
   clearAll: Callback,
+  saveSelected: Callback,
+  removeSelect: Callback,
+  addSelect: Callback,
 };
 
 export type SelectConnectedDefaultProps = {
