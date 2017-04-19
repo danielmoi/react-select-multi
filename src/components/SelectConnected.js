@@ -50,7 +50,7 @@ export class SelectConnectedComponent extends Component {
     } else {
       // not multipleSelect
       this.props.saveSelected({ id, selected: [value] });
-      this.props.toggleOpen({ id, open: false });
+      this.props.toggleOpen({ id, isOpen: false });
     }
   }
 
