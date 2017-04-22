@@ -23,56 +23,18 @@ export type Option = {
   display: string,
 };
 
-export type SelectBaseProps = {
-  uniqueKey: string,
-  label: string,
-  options: Array < Option > | List < Option >,
-  selected: Array < string > | List < string > | Map < string,
-  ?
-  any >,
-  searchTerm ? : string,
-  isMultipleSelect : boolean,
-  isSearchable: boolean,
+export type SelectState = {
   isOpen: boolean,
-  toggleOpen: Callback,
-  onCheck: Callback,
-  onSearch: ? Callback,
-  placeholder: string,
-  styles: Object,
-  name ? : string,
-  defaultValues ? : Array < string >,
-  taskeValue ? : Callback,
+  options: Array<Option> | List<Option>,
 };
 
-export type SelectStateProps = {
-  uniqueKey: string,
-  label: string,
-  options: Array < Option > | List < Option >,
-  selected: Array < string > | List < string > | Map < string,
-  ?
-  any >,
-  searchTerm ? : string,
-  isMultipleSelect : boolean,
-  isSearchable: boolean,
-  isOpen: boolean,
-  toggleOpen: Callback,
-  onCheck: Callback,
-  onSearch: ? Callback,
-  placeholder: string,
-  styles: Object,
-  name ? : string,
-  defaultValues ? : Array < string >,
-  taskeValue ? : Callback,
-};
-
+/* ---------------------- CONNECTED ------------------------ */
 export type SelectConnectedProps = {
   uniqueKey: string,
   id: string,
   label: string,
   options: Array<Option> | List<Option>,
-  selected: Array<string> | List<string> | Map<string,
-  ?
-  any>,
+  selected: Array<string> | List<string> | Map<string, any>,
   searchTerm?: string,
   initialSelected: Array<string>,
   isMultipleSelect: boolean,
@@ -80,17 +42,12 @@ export type SelectConnectedProps = {
   isOpen: boolean,
   toggleOpen: Callback,
   onCheck: Callback,
-  onSearch: ? Callback,
   placeholder: string,
   styles: Object,
-  name: string,
-  defaultValues: Array < string >,
-  takeValue: Callback,
-  addSet: Callback,
-  clearAll: Callback,
+
+  addSelect: Callback,
   saveSelected: Callback,
   removeSelect: Callback,
-  addSelect: Callback,
 };
 
 export type SelectConnectedDefaultProps = {
@@ -99,9 +56,27 @@ export type SelectConnectedDefaultProps = {
   isMultipleSelect : boolean,
   isSearchable: boolean,
   isOpen: boolean,
-  onSearch: ? Callback,
   placeholder: string,
   styles: Object,
+};
+
+
+/* ---------------------- STATE ------------------------ */
+export type SelectStateProps = {
+  uniqueKey: string,
+  id: string,
+  label: string,
+  isMultipleSelect : boolean,
+  options: Array < Option > | List < Option >,
+  selected: Array < string > | List < string > | Map < string, any>,
+  searchTerm ? : string,
+  isSearchable: boolean,
+  isOpen: boolean,
+  toggleOpen: Callback,
+  placeholder: string,
+  styles: Object,
+
+  onCheck: Callback,
 };
 
 export type SelectStateDefaultProps = {
@@ -110,13 +85,23 @@ export type SelectStateDefaultProps = {
   isMultipleSelect: boolean,
   isSearchable: boolean,
   isOpen: boolean,
-  onSearch: ? Callback,
   placeholder: string,
   styles: Object,
 };
 
-
-export type SelectState = {
+/* ---------------------- BASE ------------------------ */
+export type SelectBaseProps = {
+  uniqueKey: string,
+  isMultipleSelect : boolean,
+  label: string,
+  placeholder: string,
+  options: Array < Option > | List < Option >,
+  selected: Array < string > | List < string > | Map < string, any >,
+  searchTerm ? : string,
   isOpen: boolean,
-  options: Array<Option> | List<Option>,
+  isSearchable: boolean,
+  toggleOpen: Callback,
+  styles: Object,
+
+  onCheck: Callback,
 };
