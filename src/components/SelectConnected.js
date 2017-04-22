@@ -1,6 +1,5 @@
 // @flow
 
-import { fromJS } from 'immutable';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import wrapWithClickout from 'react-clickout';
@@ -83,7 +82,7 @@ export class SelectConnectedComponent extends
         label={this.props.label}
         placeholder={this.props.placeholder}
         options={this.props.options}
-        selected={this.props.selected || fromJS([])}
+        selected={this.props.selected}
         isOpen={this.props.isOpen}
         toggleOpen={this.onToggleOpen}
         onCheck={this.onCheck}

@@ -27,7 +27,6 @@ export const basePropTypes = {
   isOpen: PropTypes.bool,
   isSearchable: PropTypes.bool,
   toggleOpen: PropTypes.func.isRequired,
-  onSearch: PropTypes.func,
   styles: React.PropTypes.shape({
     wrapper: React.PropTypes.string,
     label: React.PropTypes.string,
@@ -47,7 +46,6 @@ export const baseDefaultProps = {
   searchTerm: '',
   isOpen: false,
   isSearchable: false,
-  onSearch: () => { },
   selected: [],
   styles: {
     wrapper: 'rsm-wrapper',
