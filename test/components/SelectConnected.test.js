@@ -2,12 +2,13 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { expect } from 'chai';
 import { stub, spy } from 'sinon';
+import clickout from 'react-clickout';
 
 import options from '../fixtures/options';
 import styles from '../fixtures/styles';
 import H from '../helpers/index';
 
-import { SelectConnectedComponent } from '../../src/components/SelectConnected';
+import SelectConnected, { Wrapped, SelectConnectedComponent } from '../../src/components/SelectConnected';
 import SelectBase from '../../src/components/SelectBase';
 
 describe('<SelectConnected />', () => {
@@ -129,8 +130,9 @@ describe('<SelectConnected />', () => {
     expect(toggleOpenStub.callCount).to.equal(1);
   });
 
-  it.only('handles clicking on an option checkbox', () => {
+  it('handles clicking on an option checkbox – Single Select', () => {
     const saveSelectedStub = stub();
+    const toggleOpenStub = stub();
     const wrapper = mount(
       <SelectConnectedComponent
         id="category"
@@ -138,7 +140,7 @@ describe('<SelectConnected />', () => {
         options={options}
         initialSelected={[]}
         styles={styles}
-        toggleOpen={H.NOOP}
+        toggleOpen={toggleOpenStub}
         addSelect={H.NOOP}
         removeSelect={H.NOOP}
         saveSelected={saveSelectedStub}
@@ -149,6 +151,83 @@ describe('<SelectConnected />', () => {
 
     wrapper.find('input[type="checkbox"]').at(0).simulate('change', { target: { checked: true } });
     expect(saveSelectedStub.callCount).to.equal(1);
+    expect(toggleOpenStub.callCount).to.equal(1);
     console.log('wrapper.debug():', wrapper.debug());
+  });
+
+  it('handles clicking on an option checkbox – Multiple Select', () => {
+    const saveSelectedStub = stub();
+    const calledWith = saveSelectedStub.args;
+    const toggleOpenStub = stub();
+
+    const wrapper = mount(
+      <SelectConnectedComponent
+        id="category"
+        uniqueKey="select-multi-1"
+        options={options}
+        initialSelected={[]}
+        styles={styles}
+        toggleOpen={toggleOpenStub}
+        addSelect={H.NOOP}
+        removeSelect={H.NOOP}
+        saveSelected={saveSelectedStub}
+        isMultipleSelect
+      />,
+    );
+    wrapper.setProps({ isOpen: true });
+
+    // selected: []
+    // click 'hotdogs'
+    wrapper.find('input[type="checkbox"]').at(0).simulate('change', { target: { checked: true } });
+    expect(saveSelectedStub.callCount).to.equal(1);
+    expect(toggleOpenStub.callCount).to.equal(0);
+    expect(calledWith[0][0].id).to.equal('category');
+    expect(calledWith[0][0].selected).to.deep.equal([options[0].tag]);
+
+
+    // selected: ['hotdogs']
+    wrapper.setProps({ selected: [options[0].tag] });
+    // click 'buns'
+    wrapper.find('input[type="checkbox"]').at(1).simulate('change', { target: { checked: true } });
+    expect(saveSelectedStub.callCount).to.equal(2);
+    expect(calledWith[1][0].id).to.equal('category');
+    expect(calledWith[1][0].selected).to.deep.equal([options[0].tag, options[1].tag]);
+
+    // selected: ['hotdogs']
+    wrapper.setProps({ selected: [options[0].tag] });
+    // click 'hotdogs'
+    wrapper.find('input[type="checkbox"]').at(0).simulate('change', { target: { checked: true } });
+    expect(saveSelectedStub.callCount).to.equal(3);
+    expect(calledWith[2][0].id).to.equal('category');
+    expect(calledWith[2][0].selected).to.deep.equal([]);
+  });
+
+  it('calls toggleOpen when handleClickout is invoked', () => {
+    const toggleOpenStub = stub();
+
+    const wrapper = mount(
+      <SelectConnectedComponent
+        id="category"
+        uniqueKey="select-multi-1"
+        options={options}
+        initialSelected={[]}
+        styles={styles}
+        toggleOpen={toggleOpenStub}
+        addSelect={H.NOOP}
+        removeSelect={H.NOOP}
+        saveSelected={H.NOOP}
+        isMultipleSelect
+      />,
+    );
+
+    const wrapped = wrapper.instance();
+
+    wrapper.setProps({ isOpen: false });
+    wrapped.handleClickout();
+    expect(toggleOpenStub.callCount).to.equal(0);
+
+    wrapper.setProps({ isOpen: true });
+    wrapped.handleClickout();
+    expect(toggleOpenStub.callCount).to.equal(1);
   });
 });
