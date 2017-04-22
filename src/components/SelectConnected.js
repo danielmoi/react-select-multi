@@ -3,6 +3,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import wrapWithClickout from 'react-clickout';
+import type {
+  Map,
+  List,
+} from 'immutable';
 
 import {
   addSelect,
@@ -12,9 +16,11 @@ import {
   removeSelect,
 } from '../redux/actions';
 
-import SelectBase, { basePropTypes, baseDefaultProps } from './SelectBase';
+import SelectBase, { basePropTypes, baseDefaultProps, styles } from './SelectBase';
 
-import type { SelectConnectedProps, SelectConnectedDefaultProps as DefaultProps } from '../types';
+// import type { SelectConnectedProps, SelectConnectedDefaultProps as DefaultProps } from '../types';
+
+import type { Option, Callback } from '../types';
 
 const additionalPropTypes = {
   id: PropTypes.string.isRequired,
@@ -25,9 +31,59 @@ const additionalPropTypes = {
   saveSelected: PropTypes.func.isRequired,
 };
 
-export class SelectConnectedComponent extends
-  Component<DefaultProps, SelectConnectedProps, void> {
-  static defaultProps: DefaultProps;
+type Styles = {
+  wrapper: string,
+  label: string,
+  controlContainer: string,
+  controlPlaceholder: string,
+  search: string,
+  expandIcon: string,
+  collapseIcon: string,
+  optionContainer: string,
+  optionBar: string,
+  optionCheckbox: string,
+};
+
+type SelectConnectedProps = {
+  uniqueKey: string,
+  id: string,
+  label: string,
+  options: Array<Option> | List<Option>,
+  selected: Array<string> | List<string> | Map<string, any>,
+  initialSelected: Array<string>,
+  isMultipleSelect: boolean,
+  isSearchable: boolean,
+  isOpen: boolean,
+  toggleOpen: Callback,
+  placeholder: string,
+  styles: Styles,
+
+  addSelect: Callback,
+  saveSelected: Callback,
+  removeSelect: Callback,
+};
+
+type SelectConnectedDefaultProps = {
+  label: string,
+  // isMultipleSelect : boolean,
+  isSearchable: boolean,
+  isOpen: boolean,
+  placeholder: string,
+  styles: Styles,
+};
+
+export class SelectConnectedComponent extends Component
+<SelectConnectedDefaultProps, SelectConnectedProps, void> {
+
+  static defaultProps = {
+    isMultipleSelect: false,
+    isSearchable: false,
+    isOpen: false,
+    placeholder: '',
+    label: '',
+    styles,
+  };
+
   static props: SelectConnectedProps;
 
   componentDidMount() {
@@ -104,8 +160,8 @@ const mapDispatchToProps = {
   removeSelect,
 };
 
-SelectConnectedComponent.propTypes = Object.assign({}, basePropTypes, additionalPropTypes);
-SelectConnectedComponent.defaultProps = baseDefaultProps;
+// SelectConnectedComponent.propTypes = Object.assign({}, basePropTypes, additionalPropTypes);
+// SelectConnectedComponent.defaultProps = baseDefaultProps;
 
 const Wrapped = wrapWithClickout(SelectConnectedComponent);
 
