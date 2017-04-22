@@ -59,7 +59,6 @@ export class SelectStateComponent extends
         isOpen={this.state.isOpen}
         toggleOpen={this.toggleOpen}
         onCheck={this.props.onCheck}
-        onSearch={this.props.onSearch}
         styles={this.props.styles}
       />
     );

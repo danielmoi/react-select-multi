@@ -42,17 +42,12 @@ export type SelectConnectedProps = {
   isOpen: boolean,
   toggleOpen: Callback,
   onCheck: Callback,
-  onSearch: ? Callback,
   placeholder: string,
   styles: Object,
-  name: string,
-  defaultValues: Array < string >,
-  takeValue: Callback,
-  addSet: Callback,
-  clearAll: Callback,
+
+  addSelect: Callback,
   saveSelected: Callback,
   removeSelect: Callback,
-  addSelect: Callback,
 };
 
 export type SelectConnectedDefaultProps = {
@@ -61,7 +56,6 @@ export type SelectConnectedDefaultProps = {
   isMultipleSelect : boolean,
   isSearchable: boolean,
   isOpen: boolean,
-  onSearch: ? Callback,
   placeholder: string,
   styles: Object,
 };
@@ -70,21 +64,19 @@ export type SelectConnectedDefaultProps = {
 /* ---------------------- STATE ------------------------ */
 export type SelectStateProps = {
   uniqueKey: string,
+  id: string,
   label: string,
+  isMultipleSelect : boolean,
   options: Array < Option > | List < Option >,
   selected: Array < string > | List < string > | Map < string, any>,
   searchTerm ? : string,
-  isMultipleSelect : boolean,
   isSearchable: boolean,
   isOpen: boolean,
   toggleOpen: Callback,
-  onCheck: Callback,
-  onSearch: ? Callback,
   placeholder: string,
   styles: Object,
-  name ? : string,
-  defaultValues ? : Array < string >,
-  taskeValue ? : Callback,
+
+  onCheck: Callback,
 };
 
 export type SelectStateDefaultProps = {
@@ -93,7 +85,6 @@ export type SelectStateDefaultProps = {
   isMultipleSelect: boolean,
   isSearchable: boolean,
   isOpen: boolean,
-  onSearch: ? Callback,
   placeholder: string,
   styles: Object,
 };
@@ -101,18 +92,16 @@ export type SelectStateDefaultProps = {
 /* ---------------------- BASE ------------------------ */
 export type SelectBaseProps = {
   uniqueKey: string,
+  isMultipleSelect : boolean,
   label: string,
+  placeholder: string,
   options: Array < Option > | List < Option >,
   selected: Array < string > | List < string > | Map < string, any >,
   searchTerm ? : string,
-  isMultipleSelect : boolean,
-  isSearchable: boolean,
   isOpen: boolean,
+  isSearchable: boolean,
   toggleOpen: Callback,
-  onCheck: Callback,
-  placeholder: string,
   styles: Object,
-  name ? : string,
-  defaultValues ? : Array < string >,
-  taskeValue ? : Callback,
+
+  onCheck: Callback,
 };
