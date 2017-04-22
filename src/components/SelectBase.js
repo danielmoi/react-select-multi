@@ -1,5 +1,10 @@
+// @flow
+
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
+import { Map, List } from 'immutable';
+
+import type { SelectBaseProps } from '../types';
 
 const additionalPropTypes = {
   onCheck: PropTypes.func.isRequired,
@@ -42,7 +47,7 @@ export const baseDefaultProps = {
   searchTerm: '',
   isOpen: false,
   isSearchable: false,
-  onSearch: () => {},
+  onSearch: () => { },
   selected: [],
   styles: {
     wrapper: 'rsm-wrapper',
@@ -63,11 +68,21 @@ const SelectBase = ({
   isMultipleSelect, isSearchable, isOpen,
   toggleOpen, onCheck, onSearch, placeholder,
   styles, // if you pass in styles it will overrwrite the classnames
-}) => {
+}: SelectBaseProps) => {
   const arrowStyles = {
     [styles.expandIcon]: !isOpen,
     [styles.collapseIcon]: isOpen,
   };
+
+  let selectedLength;
+
+  if ((Map.isMap(selected) || List.isList(selected)) && !Array.isArray(selected)) {
+    selectedLength = selected.size;
+  }
+
+  if (Array.isArray(selected)) {
+    selectedLength = selected.length;
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -75,12 +90,13 @@ const SelectBase = ({
         {label}
       </div>
 
-      <div
+      <div // eslint-disable-line
         className={styles.controlContainer}
         onClick={toggleOpen}
       >
-        {(selected.size > 0 || selected.length > 0)
-          ? options.filter(o => selected.includes(o.tag)).map(o => o.display).join(', ')
+        {
+          selectedLength ?
+          options.filter(o => selected.includes(o.tag)).map(o => o.display).join(', ')
           : <div className={styles.controlPlaceholder}>{placeholder}</div>
         }
         <span className={classNames(arrowStyles)} />

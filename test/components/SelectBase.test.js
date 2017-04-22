@@ -1,8 +1,8 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import { expect } from 'chai';
+import { stub } from 'sinon';
 import { fromJS } from 'immutable';
-import { stub, spy } from 'sinon';
 
 import options from '../fixtures/options';
 import styles from '../fixtures/styles';
@@ -61,6 +61,38 @@ describe('<SelectBase />', () => {
   });
 
   it('renders options list when props.isOpen is true', () => {
+    const wrapper = shallow(
+      <SelectBase
+        uniqueKey="select-multi-1"
+        options={options}
+        selected={fromJS([options[0]])}
+        styles={styles}
+        toggleOpen={H.NOOP}
+        onCheck={H.NOOP}
+      />,
+    );
+
+    wrapper.setProps({ isOpen: true });
+
+    // check that options are open
+    expect(wrapper.find('.rsm-open-wrapper').length).to.equal(1);
+
+    // check that there are checkboxes and options (labels)
+    expect(wrapper.find('input[type="checkbox"]').length).to.equal(options.length);
+    expect(wrapper.find(`.${styles.optionContainer}`).length).to.equal(options.length);
+
+    // check that each option has the correct display text
+    expect(wrapper.find(`.${styles.optionContainer}`).at(0).find('label')
+      .text()).to.equal(options[0].display);
+    expect(wrapper.find(`.${styles.optionContainer}`).at(1).find('label')
+      .text()).to.equal(options[1].display);
+    expect(wrapper.find(`.${styles.optionContainer}`).at(2).find('label')
+      .text()).to.equal(options[2].display);
+    expect(wrapper.find(`.${styles.optionContainer}`).at(3).find('label')
+      .text()).to.equal(options[3].display);
+  });
+
+  it('renders options list as immutable List when props.isOpen is true', () => {
     const wrapper = shallow(
       <SelectBase
         uniqueKey="select-multi-1"
