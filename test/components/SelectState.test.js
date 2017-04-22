@@ -137,4 +137,25 @@ describe('<SelectState />', () => {
 
     expect(wrapper.find('input').get(0).checked).to.equal(true);
   });
+
+  it('sets state.isOpen to false when handleClickout is invoked', () => {
+    const wrapper = mount(
+      <SelectStateComponent
+        uniqueKey="select-multi-1"
+        options={options}
+        selected={[]}
+        styles={styles}
+        toggleOpen={H.NOOP}
+        onCheck={H.NOOP}
+      />,
+    );
+
+    wrapper.find('.rsm-control__container').simulate('click');
+    expect(wrapper.state('isOpen')).to.equal(true);
+
+    const wrapped = wrapper.instance();
+
+    wrapped.handleClickout();
+    expect(wrapper.state('isOpen')).to.equal(false);
+  });
 });
