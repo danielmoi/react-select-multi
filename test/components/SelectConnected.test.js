@@ -2,13 +2,12 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { expect } from 'chai';
 import { stub, spy } from 'sinon';
-import clickout from 'react-clickout';
 
 import options from '../fixtures/options';
 import styles from '../fixtures/styles';
 import H from '../helpers/index';
 
-import SelectConnected, { Wrapped, SelectConnectedComponent } from '../../src/components/SelectConnected';
+import { SelectConnectedComponent } from '../../src/components/SelectConnected';
 import SelectBase from '../../src/components/SelectBase';
 
 describe('<SelectConnected />', () => {
@@ -152,7 +151,6 @@ describe('<SelectConnected />', () => {
     wrapper.find('input[type="checkbox"]').at(0).simulate('change', { target: { checked: true } });
     expect(saveSelectedStub.callCount).to.equal(1);
     expect(toggleOpenStub.callCount).to.equal(1);
-    console.log('wrapper.debug():', wrapper.debug());
   });
 
   it('handles clicking on an option checkbox – Multiple Select', () => {

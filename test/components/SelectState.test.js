@@ -1,7 +1,6 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import { expect } from 'chai';
-import { fromJS } from 'immutable';
 import { stub, spy } from 'sinon';
 
 import options from '../fixtures/options';
