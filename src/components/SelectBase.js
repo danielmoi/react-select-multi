@@ -65,7 +65,7 @@ export const baseDefaultProps = {
 
 const SelectBase = ({
   uniqueKey, label, options, selected, searchTerm,
-  isMultipleSelect, isSearchable, isOpen,
+  isSearchable, isOpen,
   toggleOpen, onCheck, onSearch, placeholder,
   styles, // if you pass in styles it will overrwrite the classnames
 }: SelectBaseProps) => {

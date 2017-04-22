@@ -31,11 +31,6 @@ export class SelectConnectedComponent extends
   static defaultProps: DefaultProps;
   static props: SelectConnectedProps;
 
-  componentWillMount() {
-    const { id } = this.props;
-    this.props.removeSelect({ id });
-  }
-
   componentDidMount() {
     const { id } = this.props;
     this.props.addSelect({ id });
@@ -60,17 +55,15 @@ export class SelectConnectedComponent extends
       if (selected.includes(checkboxValue)) {
         updatedSelected = selected.filter(s => s !== checkboxValue);
       } else {
-        updatedSelected = selected.push(checkboxValue);
+        updatedSelected = [...selected, checkboxValue];
       }
       this.props.saveSelected({ id, selected: updatedSelected });
     } else {
       // not multipleSelect
       this.props.saveSelected({ id, selected: [checkboxValue] });
-      this.props.toggleOpen({ id, open: false });
+      this.props.toggleOpen({ id, isOpen: false });
     }
   }
-
-  onSearch = () => () => {}
 
   onToggleOpen = () => {
     this.props.toggleOpen({ id: this.props.id, isOpen: !this.props.isOpen });
@@ -94,7 +87,6 @@ export class SelectConnectedComponent extends
         isOpen={this.props.isOpen}
         toggleOpen={this.onToggleOpen}
         onCheck={this.onCheck}
-        onSearch={this.onSearch}
         styles={this.props.styles}
       />);
   }
@@ -116,7 +108,8 @@ const mapDispatchToProps = {
 SelectConnectedComponent.propTypes = Object.assign({}, basePropTypes, additionalPropTypes);
 SelectConnectedComponent.defaultProps = baseDefaultProps;
 
-const connected = connect(mapStateToProps, mapDispatchToProps)(
-  wrapWithClickout(SelectConnectedComponent));
+const Wrapped = wrapWithClickout(SelectConnectedComponent);
+
+const connected = connect(mapStateToProps, mapDispatchToProps)(Wrapped);
 
 export default connected;
