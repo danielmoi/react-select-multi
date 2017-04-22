@@ -66,7 +66,7 @@ export const baseDefaultProps = {
 const SelectBase = ({
   uniqueKey, label, options, selected, searchTerm,
   isSearchable, isOpen,
-  toggleOpen, onCheck, onSearch, placeholder,
+  toggleOpen, onCheck, placeholder,
   styles, // if you pass in styles it will overrwrite the classnames
 }: SelectBaseProps) => {
   const arrowStyles = {
@@ -109,7 +109,7 @@ const SelectBase = ({
               value={searchTerm}
               className={styles.search}
               placeholder="Search"
-              onChange={onSearch}
+              onChange={() => {}}
             />
             : null }
           {
