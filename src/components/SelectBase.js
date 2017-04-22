@@ -27,7 +27,6 @@ export const basePropTypes = {
   isOpen: PropTypes.bool,
   isSearchable: PropTypes.bool,
   toggleOpen: PropTypes.func.isRequired,
-  onSearch: PropTypes.func,
   styles: React.PropTypes.shape({
     wrapper: React.PropTypes.string,
     label: React.PropTypes.string,
@@ -47,7 +46,6 @@ export const baseDefaultProps = {
   searchTerm: '',
   isOpen: false,
   isSearchable: false,
-  onSearch: () => { },
   selected: [],
   styles: {
     wrapper: 'rsm-wrapper',
@@ -65,8 +63,8 @@ export const baseDefaultProps = {
 
 const SelectBase = ({
   uniqueKey, label, options, selected, searchTerm,
-  isMultipleSelect, isSearchable, isOpen,
-  toggleOpen, onCheck, onSearch, placeholder,
+  isSearchable, isOpen,
+  toggleOpen, onCheck, placeholder,
   styles, // if you pass in styles it will overrwrite the classnames
 }: SelectBaseProps) => {
   const arrowStyles = {
@@ -109,7 +107,7 @@ const SelectBase = ({
               value={searchTerm}
               className={styles.search}
               placeholder="Search"
-              onChange={onSearch}
+              onChange={() => {}}
             />
             : null }
           {
@@ -123,7 +121,7 @@ const SelectBase = ({
                   className={styles.optionCheckbox}
                   type="checkbox"
                   checked={selected.includes(option.tag)}
-                  onChange={onCheck(option.tag, isMultipleSelect)}
+                  onChange={onCheck(option.tag)}
                 />
                 <label
                   htmlFor={`${styles.checkbox}-${uniqueKey}--${option.tag}`}
