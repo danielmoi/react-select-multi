@@ -45,7 +45,6 @@ type Styles = {
 };
 
 type SelectConnectedProps = {
-  uniqueKey: string,
   id: string,
   label: string,
   options: Array<Option> | List<Option>,
@@ -132,7 +131,7 @@ export class SelectConnectedComponent extends Component
   render() {
     return (
       <SelectBase
-        uniqueKey={this.props.uniqueKey}
+        id={this.props.id}
         isMultipleSelect={this.props.isMultipleSelect}
         isSearchable={this.props.isSearchable}
         label={this.props.label}

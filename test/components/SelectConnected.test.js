@@ -14,10 +14,10 @@ describe('<SelectConnected />', () => {
   it('renders a SelectBase', () => {
     const wrapper = shallow(
       <SelectConnectedComponent
-        id="category"
-        uniqueKey="select-multi-1"
+        id="category-select"
         options={options}
         initialSelected={[]}
+        selected={[]}
         styles={styles}
         toggleOpen={H.NOOP}
         addSelect={H.NOOP}
@@ -36,10 +36,10 @@ describe('<SelectConnected />', () => {
 
     mount(
       <SelectConnectedComponent
-        id="category"
-        uniqueKey="select-multi-1"
+        id="category-select"
         options={options}
         initialSelected={[]}
+        selected={[]}
         styles={styles}
         toggleOpen={H.NOOP}
         addSelect={addSelectStub}
@@ -61,10 +61,10 @@ describe('<SelectConnected />', () => {
 
     const wrapper = mount(
       <SelectConnectedComponent
-        id="category"
-        uniqueKey="select-multi-1"
+        id="category-select"
         options={options}
         initialSelected={[]}
+        selected={[]}
         styles={styles}
         toggleOpen={H.NOOP}
         saveSelected={saveSelectedStub}
@@ -91,10 +91,10 @@ describe('<SelectConnected />', () => {
 
     const wrapper = mount(
       <SelectConnectedComponent
-        id="category"
-        uniqueKey="select-multi-1"
+        id="category-select"
         options={options}
         initialSelected={[]}
+        selected={[]}
         styles={styles}
         toggleOpen={H.NOOP}
         saveSelected={H.NOOP}
@@ -114,8 +114,7 @@ describe('<SelectConnected />', () => {
     const toggleOpenStub = stub();
     const wrapper = mount(
       <SelectConnectedComponent
-        id="category"
-        uniqueKey="select-multi-1"
+        id="category-select"
         options={options}
         initialSelected={[]}
         styles={styles}
@@ -134,10 +133,10 @@ describe('<SelectConnected />', () => {
     const toggleOpenStub = stub();
     const wrapper = mount(
       <SelectConnectedComponent
-        id="category"
-        uniqueKey="select-multi-1"
+        id="category-select"
         options={options}
         initialSelected={[]}
+        selected={[]}
         styles={styles}
         toggleOpen={toggleOpenStub}
         addSelect={H.NOOP}
@@ -160,10 +159,10 @@ describe('<SelectConnected />', () => {
 
     const wrapper = mount(
       <SelectConnectedComponent
-        id="category"
-        uniqueKey="select-multi-1"
+        id="category-select"
         options={options}
         initialSelected={[]}
+        selected={[]}
         styles={styles}
         toggleOpen={toggleOpenStub}
         addSelect={H.NOOP}
@@ -179,7 +178,7 @@ describe('<SelectConnected />', () => {
     wrapper.find('input[type="checkbox"]').at(0).simulate('change', { target: { checked: true } });
     expect(saveSelectedStub.callCount).to.equal(1);
     expect(toggleOpenStub.callCount).to.equal(0);
-    expect(calledWith[0][0].id).to.equal('category');
+    expect(calledWith[0][0].id).to.equal('category-select');
     expect(calledWith[0][0].selected).to.deep.equal([options[0].tag]);
 
 
@@ -188,7 +187,7 @@ describe('<SelectConnected />', () => {
     // click 'buns'
     wrapper.find('input[type="checkbox"]').at(1).simulate('change', { target: { checked: true } });
     expect(saveSelectedStub.callCount).to.equal(2);
-    expect(calledWith[1][0].id).to.equal('category');
+    expect(calledWith[1][0].id).to.equal('category-select');
     expect(calledWith[1][0].selected).to.deep.equal([options[0].tag, options[1].tag]);
 
     // selected: ['hotdogs']
@@ -196,7 +195,7 @@ describe('<SelectConnected />', () => {
     // click 'hotdogs'
     wrapper.find('input[type="checkbox"]').at(0).simulate('change', { target: { checked: true } });
     expect(saveSelectedStub.callCount).to.equal(3);
-    expect(calledWith[2][0].id).to.equal('category');
+    expect(calledWith[2][0].id).to.equal('category-select');
     expect(calledWith[2][0].selected).to.deep.equal([]);
   });
 
@@ -205,10 +204,10 @@ describe('<SelectConnected />', () => {
 
     const wrapper = mount(
       <SelectConnectedComponent
-        id="category"
-        uniqueKey="select-multi-1"
+        id="category-select"
         options={options}
         initialSelected={[]}
+        selected={[]}
         styles={styles}
         toggleOpen={toggleOpenStub}
         addSelect={H.NOOP}

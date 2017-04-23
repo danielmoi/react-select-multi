@@ -49,7 +49,7 @@ export class SelectStateComponent extends
   render() {
     return (
       <SelectBase
-        uniqueKey={this.props.uniqueKey}
+        id={this.props.id}
         isMultipleSelect={this.props.isMultipleSelect}
         isSearchable={this.props.isSearchable}
         label={this.props.label}
