@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { Map, List } from 'immutable';
 
-import type { Options, Selected, Callback } from '../types';
+import type { Options, Selected, Callback, Styles, DefaultStyles } from '../types';
 
 type SelectBaseProps = {
   // config
@@ -15,7 +15,7 @@ type SelectBaseProps = {
   label: string,
   placeholder: string,
   options: Options,
-  styles: Object,
+  styles: Styles,
 
   // methods
   toggleOpen: Callback,
@@ -28,18 +28,7 @@ type SelectBaseProps = {
 };
 
 type SelectBaseDefaultProps = {
-  styles: {
-    wrapper: 'rsm-wrapper',
-    label: 'rsm-label',
-    controlContainer: 'rsm-control__container',
-    controlPlaceholder: 'rsm-control__placeholder',
-    search: 'rsm-search',
-    expandIcon: 'rsm-arrow-down',
-    collapseIcon: 'rsm-arrow-up',
-    optionContainer: 'rsm-option__container',
-    optionBar: 'rsm-option__bar',
-    optionCheckbox: 'rsm-option__checkbox',
-  },
+  styles: DefaultStyles,
 }
 
 class SelectBase extends Component {
@@ -79,9 +68,14 @@ class SelectBase extends Component {
           onClick={toggleOpen}
         >
           {
-            selectedLength ?
-            options.filter(o => selected.includes(o.tag)).map(o => o.display).join(', ')
-            : <div className={styles.controlPlaceholder}>{placeholder}</div>
+            selectedLength
+            ?
+            options.filter(o => selected.includes(o.tag))
+                .map(o => o.display).join(', ')
+            :
+            <div className={styles.controlPlaceholder}>
+              {placeholder}
+            </div>
           }
           <span className={classNames(arrowStyles)} />
         </div>

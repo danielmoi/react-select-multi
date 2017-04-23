@@ -4,7 +4,7 @@ import wrapWithClickout from 'react-clickout';
 
 import SelectBase from './SelectBase';
 
-import type { Options, Selected, Callback } from '../types';
+import type { Options, Selected, Callback, Styles, DefaultStyles } from '../types';
 
 type SelectStateProps = {
   // config
@@ -16,7 +16,7 @@ type SelectStateProps = {
   label: string,
   placeholder: string,
   options: Options,
-  styles: Object,
+  styles: Styles,
 
   // methods
   onCheck: Callback,
@@ -34,18 +34,7 @@ type SelectStateDefaultProps = {
   // data / appearance
   label: '',
   placeholder: '',
-  styles: {
-    wrapper: 'rsm-wrapper',
-    label: 'rsm-label',
-    controlContainer: 'rsm-control__container',
-    controlPlaceholder: 'rsm-control__placeholder',
-    search: 'rsm-search',
-    expandIcon: 'rsm-arrow-down',
-    collapseIcon: 'rsm-arrow-up',
-    optionContainer: 'rsm-option__container',
-    optionBar: 'rsm-option__bar',
-    optionCheckbox: 'rsm-option__checkbox',
-  },
+  styles: DefaultStyles,
 
   // dynamic
   searchTerm: '',
