@@ -1,149 +1,131 @@
 // @flow
 
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
 import classNames from 'classnames';
 import { Map, List } from 'immutable';
 
-import type { SelectBaseProps } from '../types';
+import type { Options, Selected, Callback } from '../types';
 
-const additionalPropTypes = {
-  onCheck: PropTypes.func.isRequired,
+type SelectBaseProps = {
+  // config
+  uniqueKey: string,
+  isMultipleSelect: boolean,
+  isSearchable: boolean,
+
+  // data / appearance
+  label: string,
+  placeholder: string,
+  options: Options,
+  styles: Object,
+
+
+  // methods
+  toggleOpen: Callback,
+  onCheck: Callback,
+
+  // dynamic
+  selected: Selected,
+  searchTerm: string,
+  isOpen: boolean,
 };
 
-export const basePropTypes = {
-  uniqueKey: PropTypes.string.isRequired,
-  isMultipleSelect: PropTypes.bool,
-  label: PropTypes.string,
-  placeholder: PropTypes.string,
-  options: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.object, // Immutable
-  ]).isRequired,
-  selected: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.object, // Immutable
-  ]),
-  searchTerm: PropTypes.string,
-  isOpen: PropTypes.bool,
-  isSearchable: PropTypes.bool,
-  toggleOpen: PropTypes.func.isRequired,
-  styles: React.PropTypes.shape({
-    wrapper: React.PropTypes.string,
-    label: React.PropTypes.string,
-    search: React.PropTypes.string,
-    expandIcon: React.PropTypes.string,
-    collapseIcon: React.PropTypes.string,
-    optionContainer: React.PropTypes.string,
-    optionBar: React.PropTypes.string,
-    optionCheckbox: React.PropTypes.string,
-  }),
-};
-
-export const styles = {
-  wrapper: 'rsm-wrapper',
-  label: 'rsm-label',
-  controlContainer: 'rsm-control__container',
-  controlPlaceholder: 'rsm-control__placeholder',
-  search: 'rsm-search',
-  expandIcon: 'rsm-arrow-down',
-  collapseIcon: 'rsm-arrow-up',
-  optionContainer: 'rsm-option__container',
-  optionBar: 'rsm-option__bar',
-  optionCheckbox: 'rsm-option__checkbox',
-};
-
-export const baseDefaultProps = {
-  isMultipleSelect: false,
-  label: '',
-  placeholder: '',
-  searchTerm: '',
-  isOpen: false,
-  isSearchable: false,
-  selected: [],
-  styles,
-};
-
-const SelectBase = ({
-  uniqueKey, label, options, selected, searchTerm,
-  isSearchable, isOpen,
-  toggleOpen, onCheck, placeholder,
-  styles, // if you pass in styles it will overrwrite the classnames
-}: SelectBaseProps) => {
-  const arrowStyles = {
-    [styles.expandIcon]: !isOpen,
-    [styles.collapseIcon]: isOpen,
+class SelectBase extends Component {
+  static defaultProps: {
+    styles: {
+      wrapper: 'rsm-wrapper',
+      label: 'rsm-label',
+      controlContainer: 'rsm-control__container',
+      controlPlaceholder: 'rsm-control__placeholder',
+      search: 'rsm-search',
+      expandIcon: 'rsm-arrow-down',
+      collapseIcon: 'rsm-arrow-up',
+      optionContainer: 'rsm-option__container',
+      optionBar: 'rsm-option__bar',
+      optionCheckbox: 'rsm-option__checkbox',
+    },
+    searchTerm: '',
   };
+  props: SelectBaseProps;
 
-  let selectedLength;
+  render() {
+    const { uniqueKey, label, options, selected,
+      isMultipleSelect, isSearchable, isOpen,
+      toggleOpen, onCheck, searchTerm, placeholder,
+      styles, // if you pass in styles it will overrwrite the classnames
+    } = this.props;
 
-  if ((Map.isMap(selected) || List.isList(selected)) && !Array.isArray(selected)) {
-    selectedLength = selected.size;
-  }
+    const arrowStyles = {
+      [styles.expandIcon]: !isOpen,
+      [styles.collapseIcon]: isOpen,
+    };
 
-  if (Array.isArray(selected)) {
-    selectedLength = selected.length;
-  }
+    let selectedLength;
 
-  return (
-    <div className={styles.wrapper}>
-      <div className={styles.label}>
-        {label}
-      </div>
+    if ((Map.isMap(selected) || List.isList(selected)) && !Array.isArray(selected)) {
+      selectedLength = selected.size;
+    }
 
-      <div // eslint-disable-line
-        className={styles.controlContainer}
-        onClick={toggleOpen}
-      >
-        {
-          selectedLength ?
-          options.filter(o => selected.includes(o.tag)).map(o => o.display).join(', ')
-          : <div className={styles.controlPlaceholder}>{placeholder}</div>
-        }
-        <span className={classNames(arrowStyles)} />
-      </div>
-      {isOpen
-      ?
-        <div className="rsm-open-wrapper">
-          { isSearchable ?
-            <input
-              value={searchTerm}
-              className={styles.search}
-              placeholder="Search"
-              onChange={() => {}}
-            />
-            : null }
-          {
-            options.map(option => (
-              <div
-                key={`${uniqueKey}-${option.tag}`}
-                className={styles.optionContainer}
-              >
-                <input
-                  id={`${styles.checkbox}-${uniqueKey}--${option.tag}`}
-                  className={styles.optionCheckbox}
-                  type="checkbox"
-                  checked={selected.includes(option.tag)}
-                  onChange={onCheck(option.tag)}
-                />
-                <label
-                  htmlFor={`${styles.checkbox}-${uniqueKey}--${option.tag}`}
-                  className={styles.optionBar}
-                >
-                  {option.display}
-                </label>
-              </div>
-            ))
-          }
+    if (Array.isArray(selected)) {
+      selectedLength = selected.length;
+    }
+
+    return (
+      <div className={styles.wrapper}>
+        <div className={styles.label}>
+          {label}
         </div>
-      :
-        null
-      }
 
-    </div>
-  );
-};
+        <div // eslint-disable-line
+          className={styles.controlContainer}
+          onClick={toggleOpen}
+        >
+          {
+            selectedLength ?
+            options.filter(o => selected.includes(o.tag)).map(o => o.display).join(', ')
+            : <div className={styles.controlPlaceholder}>{placeholder}</div>
+          }
+          <span className={classNames(arrowStyles)} />
+        </div>
+        {isOpen
+        ?
+          <div className="rsm-open-wrapper">
+            { isSearchable ?
+              <input
+                defaultValue={searchTerm}
+                className={styles.search}
+                placeholder="Search"
+              />
+              : null }
+            {
+              options.map(option => (
+                <div
+                  key={`${uniqueKey}-${option.tag}`}
+                  className={styles.optionContainer}
+                >
+                  <input
+                    id={`${uniqueKey}--${option.tag}`}
+                    className={styles.optionCheckbox}
+                    type="checkbox"
+                    checked={selected.includes(option.tag)}
+                    onChange={onCheck(option.tag, isMultipleSelect)}
+                  />
+                  <label
+                    htmlFor={`${uniqueKey}--${option.tag}`}
+                    className={styles.optionBar}
+                  >
+                    {option.display}
+                  </label>
+                </div>
+              ))
+            }
+          </div>
+        :
+          null
+        }
 
-SelectBase.propTypes = Object.assign({}, basePropTypes, additionalPropTypes);
-SelectBase.defaultProps = baseDefaultProps;
+      </div>
+    );
+  }
+}
 
 export default SelectBase;
