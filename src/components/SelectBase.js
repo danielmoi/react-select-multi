@@ -1,5 +1,4 @@
 // @flow
-
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { Map, List } from 'immutable';
@@ -8,7 +7,7 @@ import type { Options, Selected, Callback } from '../types';
 
 type SelectBaseProps = {
   // config
-  uniqueKey: string,
+  id: string,
   isMultipleSelect: boolean,
   isSearchable: boolean,
 
@@ -18,37 +17,37 @@ type SelectBaseProps = {
   options: Options,
   styles: Object,
 
-
   // methods
   toggleOpen: Callback,
   onCheck: Callback,
 
   // dynamic
+  isOpen: boolean,
   selected: Selected,
   searchTerm: string,
-  isOpen: boolean,
 };
 
+type SelectBaseDefaultProps = {
+  styles: {
+    wrapper: 'rsm-wrapper',
+    label: 'rsm-label',
+    controlContainer: 'rsm-control__container',
+    controlPlaceholder: 'rsm-control__placeholder',
+    search: 'rsm-search',
+    expandIcon: 'rsm-arrow-down',
+    collapseIcon: 'rsm-arrow-up',
+    optionContainer: 'rsm-option__container',
+    optionBar: 'rsm-option__bar',
+    optionCheckbox: 'rsm-option__checkbox',
+  },
+}
+
 class SelectBase extends Component {
-  static defaultProps: {
-    styles: {
-      wrapper: 'rsm-wrapper',
-      label: 'rsm-label',
-      controlContainer: 'rsm-control__container',
-      controlPlaceholder: 'rsm-control__placeholder',
-      search: 'rsm-search',
-      expandIcon: 'rsm-arrow-down',
-      collapseIcon: 'rsm-arrow-up',
-      optionContainer: 'rsm-option__container',
-      optionBar: 'rsm-option__bar',
-      optionCheckbox: 'rsm-option__checkbox',
-    },
-    searchTerm: '',
-  };
+  defaultProps: SelectBaseDefaultProps;
   props: SelectBaseProps;
 
   render() {
-    const { uniqueKey, label, options, selected,
+    const { id, label, options, selected,
       isMultipleSelect, isSearchable, isOpen,
       toggleOpen, onCheck, searchTerm, placeholder,
       styles, // if you pass in styles it will overrwrite the classnames
@@ -90,27 +89,25 @@ class SelectBase extends Component {
         ?
           <div className="rsm-open-wrapper">
             { isSearchable ?
-              <input
-                defaultValue={searchTerm}
-                className={styles.search}
-                placeholder="Search"
-              />
+              <div className={styles.search}>
+                {searchTerm}
+              </div>
               : null }
             {
               options.map(option => (
                 <div
-                  key={`${uniqueKey}-${option.tag}`}
+                  key={`${id}-${option.tag}`}
                   className={styles.optionContainer}
                 >
                   <input
-                    id={`${uniqueKey}--${option.tag}`}
+                    id={`${id}--${option.tag}`}
                     className={styles.optionCheckbox}
                     type="checkbox"
                     checked={selected.includes(option.tag)}
                     onChange={onCheck(option.tag, isMultipleSelect)}
                   />
                   <label
-                    htmlFor={`${uniqueKey}--${option.tag}`}
+                    htmlFor={`${id}--${option.tag}`}
                     className={styles.optionBar}
                   >
                     {option.display}

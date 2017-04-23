@@ -1,13 +1,11 @@
 // @flow
-
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import wrapWithClickout from 'react-clickout';
-import type {
-  Map,
-  List,
-} from 'immutable';
 
+import type { Options, Selected, Callback } from '../types';
+
+import SelectBase from './SelectBase';
 import {
   addSelect,
   toggleOpen,
@@ -16,74 +14,60 @@ import {
   removeSelect,
 } from '../redux/actions';
 
-import SelectBase, { basePropTypes, baseDefaultProps, styles } from './SelectBase';
-
-// import type { SelectConnectedProps, SelectConnectedDefaultProps as DefaultProps } from '../types';
-
-import type { Option, Callback } from '../types';
-
-const additionalPropTypes = {
-  id: PropTypes.string.isRequired,
-  initialSelected: PropTypes.array.isRequired,
-  toggleOpen: PropTypes.func.isRequired,
-  addSelect: PropTypes.func.isRequired,
-  removeSelect: PropTypes.func.isRequired,
-  saveSelected: PropTypes.func.isRequired,
-};
-
-type Styles = {
-  wrapper: string,
-  label: string,
-  controlContainer: string,
-  controlPlaceholder: string,
-  search: string,
-  expandIcon: string,
-  collapseIcon: string,
-  optionContainer: string,
-  optionBar: string,
-  optionCheckbox: string,
-};
-
 type SelectConnectedProps = {
+  // config
   id: string,
-  label: string,
-  options: Array<Option> | List<Option>,
-  selected: Array<string> | List<string> | Map<string, any>,
-  initialSelected: Array<string>,
   isMultipleSelect: boolean,
   isSearchable: boolean,
-  isOpen: boolean,
-  toggleOpen: Callback,
-  placeholder: string,
-  styles: Styles,
 
+  // data / appearance
+  label: string,
+  placeholder: string,
+  options: Options,
+  initialSelected: Array<string>,
+  styles: Object,
+
+  // methods
+  toggleOpen: Callback,
   addSelect: Callback,
   saveSelected: Callback,
   removeSelect: Callback,
+
+  // dynamic
+  isOpen: boolean,
+  selected: Selected,
+  searchTerm: string,
 };
 
 type SelectConnectedDefaultProps = {
-  label: string,
-  // isMultipleSelect : boolean,
-  isSearchable: boolean,
-  isOpen: boolean,
-  placeholder: string,
-  styles: Styles,
+  // config
+  isMultipleSelect: false,
+  isSearchable: false,
+
+  // data / appearance
+  label: '',
+  placeholder: '',
+  styles: {
+    wrapper: 'rsm-wrapper',
+    label: 'rsm-label',
+    controlContainer: 'rsm-control__container',
+    controlPlaceholder: 'rsm-control__placeholder',
+    search: 'rsm-search',
+    expandIcon: 'rsm-arrow-down',
+    collapseIcon: 'rsm-arrow-up',
+    optionContainer: 'rsm-option__container',
+    optionBar: 'rsm-option__bar',
+    optionCheckbox: 'rsm-option__checkbox',
+  },
+
+  // dynamic
+  isOpen: false,
+  searchTerm: '',
 };
 
-export class SelectConnectedComponent extends Component
-<SelectConnectedDefaultProps, SelectConnectedProps, void> {
-
-  static defaultProps = {
-    isMultipleSelect: false,
-    isSearchable: false,
-    isOpen: false,
-    placeholder: '',
-    label: '',
-    styles,
-  };
-
-  static props: SelectConnectedProps;
+export class SelectConnectedComponent extends Component {
+  static defaultProps: SelectConnectedDefaultProps;
+  props: SelectConnectedProps;
 
   componentDidMount() {
     const { id } = this.props;
@@ -137,11 +121,12 @@ export class SelectConnectedComponent extends Component
         label={this.props.label}
         placeholder={this.props.placeholder}
         options={this.props.options}
-        selected={this.props.selected}
-        isOpen={this.props.isOpen}
+        styles={this.props.styles}
         toggleOpen={this.onToggleOpen}
         onCheck={this.onCheck}
-        styles={this.props.styles}
+        isOpen={this.props.isOpen}
+        selected={this.props.selected}
+        searchTerm={this.props.searchTerm}
       />);
   }
 }
@@ -158,9 +143,6 @@ const mapDispatchToProps = {
   searchOptions,
   removeSelect,
 };
-
-// SelectConnectedComponent.propTypes = Object.assign({}, basePropTypes, additionalPropTypes);
-// SelectConnectedComponent.defaultProps = baseDefaultProps;
 
 const Wrapped = wrapWithClickout(SelectConnectedComponent);
 
