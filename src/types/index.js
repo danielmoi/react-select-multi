@@ -23,7 +23,41 @@ export type Option = {
   display: string,
 };
 
-export type SelectState = {
+export type Options = Array <Option> | List <Option>;
+
+export type Selected = Array <string> | List <string> | Map <string>;
+
+export type SelectBaseProps = {
+  uniqueKey: string,
+  label: string,
+  options: Array < Option > | List < Option >,
+  selected: Array < string > | List < string > | Map < string,
+  ?
+  any >,
+  searchTerm ? : string,
+  isMultipleSelect : boolean,
+  isSearchable: boolean,
+  isOpen: boolean,
+  toggleOpen: Callback,
+  onCheck: Callback,
+  onSearch: ? Callback,
+  placeholder: string,
+  styles: Object,
+  name ? : string,
+  defaultValues ? : Array < string >,
+  taskeValue ? : Callback,
+};
+
+export type SelectStateProps = {
+  uniqueKey: string,
+  label: string,
+  options: Array < Option > | List < Option >,
+  selected: Array < string > | List < string > | Map < string,
+  ?
+  any >,
+  searchTerm ? : string,
+  isMultipleSelect : boolean,
+  isSearchable: boolean,
   isOpen: boolean,
   options: Array<Option> | List<Option>,
 };
