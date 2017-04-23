@@ -11,7 +11,7 @@
     "indent": 2,
     "no-restricted-syntax": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/no-unused-prop-types": "warn",
+    "react/no-unused-prop-types": "off",
     "react/sort-comp": [
       "error", {
         "order": [

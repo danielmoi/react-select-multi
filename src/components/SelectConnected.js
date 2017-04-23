@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import wrapWithClickout from 'react-clickout';
 
-import type { Options, Selected, Callback } from '../types';
-
 import SelectBase from './SelectBase';
 import {
   addSelect,
@@ -13,6 +11,8 @@ import {
   searchOptions,
   removeSelect,
 } from '../redux/actions';
+
+import type { Options, Selected, Callback, Styles, DefaultStyles } from '../types';
 
 type SelectConnectedProps = {
   // config
@@ -25,7 +25,7 @@ type SelectConnectedProps = {
   placeholder: string,
   options: Options,
   initialSelected: Array<string>,
-  styles: Object,
+  styles: Styles,
 
   // methods
   toggleOpen: Callback,
@@ -47,18 +47,7 @@ type SelectConnectedDefaultProps = {
   // data / appearance
   label: '',
   placeholder: '',
-  styles: {
-    wrapper: 'rsm-wrapper',
-    label: 'rsm-label',
-    controlContainer: 'rsm-control__container',
-    controlPlaceholder: 'rsm-control__placeholder',
-    search: 'rsm-search',
-    expandIcon: 'rsm-arrow-down',
-    collapseIcon: 'rsm-arrow-up',
-    optionContainer: 'rsm-option__container',
-    optionBar: 'rsm-option__bar',
-    optionCheckbox: 'rsm-option__checkbox',
-  },
+  styles: DefaultStyles,
 
   // dynamic
   isOpen: false,
