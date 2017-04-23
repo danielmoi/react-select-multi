@@ -1,30 +1,30 @@
 /* @flow */
 
 import C from './constants';
-import type { FSA } from '../types';
+import type { ActionCreator } from '../types';
 
 
-const addSelect: FSA = (data: Object) => ({
+const addSelect: ActionCreator = (data: Object) => ({
   type: C.RSM_ADD_SELECT,
   data,
 });
 
-const searchOptions: FSA = (data: Object) => ({
+const searchOptions: ActionCreator = (data: Object) => ({
   type: C.RSM_SEARCH_OPTIONS,
   data,
 });
 
-const toggleOpen: FSA = (data: Object) => ({
+const toggleOpen: ActionCreator = (data: Object) => ({
   type: C.RSM_TOGGLE_OPEN,
   data,
 });
 
-const saveSelected: FSA = (data: Object) => ({
+const saveSelected: ActionCreator = (data: Object) => ({
   type: C.RSM_SAVE_SELECTED,
   data,
 });
 
-const removeSelect: FSA = (data: Object) => ({
+const removeSelect: ActionCreator = (data: Object) => ({
   type: C.RSM_REMOVE_SELECT,
   data,
 });

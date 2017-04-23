@@ -11,7 +11,7 @@ export type Action = {
   data: Object,
 };
 
-export type FSA = (any) => Action;
+export type ActionCreator = (any) => Action;
 
 export type DataState = Map<string, ? any> ;
 
