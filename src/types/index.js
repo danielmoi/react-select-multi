@@ -12,7 +12,7 @@ export type Action = {
 
 export type FSA = (any) => Action;
 
-export type DataState = Map < string, ? any > ;
+export type DataState = Map<string, ? any> ;
 
 export type Reducer = (state: DataState, action: Action) => DataState;
 
@@ -23,119 +23,6 @@ export type Option = {
   display: string,
 };
 
-export type Options = Array <Option> | List <Option>;
+export type Options = Array<Option> | List<Option>;
 
-export type Selected = Array <string> | List <string> | Map <string>;
-
-export type SelectBaseProps = {
-  uniqueKey: string,
-  label: string,
-  options: Array < Option > | List < Option >,
-  selected: Array < string > | List < string > | Map < string,
-  ?
-  any >,
-  searchTerm ? : string,
-  isMultipleSelect : boolean,
-  isSearchable: boolean,
-  isOpen: boolean,
-  toggleOpen: Callback,
-  onCheck: Callback,
-  onSearch: ? Callback,
-  placeholder: string,
-  styles: Object,
-  name ? : string,
-  defaultValues ? : Array < string >,
-  taskeValue ? : Callback,
-};
-
-export type SelectStateProps = {
-  uniqueKey: string,
-  label: string,
-  options: Array < Option > | List < Option >,
-  selected: Array < string > | List < string > | Map < string,
-  ?
-  any >,
-  searchTerm ? : string,
-  isMultipleSelect : boolean,
-  isSearchable: boolean,
-  isOpen: boolean,
-  options: Array<Option> | List<Option>,
-};
-
-/* ---------------------- CONNECTED ------------------------ */
-export type SelectConnectedProps = {
-  uniqueKey: string,
-  id: string,
-  label: string,
-  options: Array<Option> | List<Option>,
-  selected: Array<string> | List<string> | Map<string, any>,
-  searchTerm?: string,
-  initialSelected: Array<string>,
-  isMultipleSelect: boolean,
-  isSearchable: boolean,
-  isOpen: boolean,
-  toggleOpen: Callback,
-  onCheck: Callback,
-  placeholder: string,
-  styles: Object,
-
-  addSelect: Callback,
-  saveSelected: Callback,
-  removeSelect: Callback,
-};
-
-export type SelectConnectedDefaultProps = {
-  label: string,
-  searchTerm ? : string,
-  isMultipleSelect : boolean,
-  isSearchable: boolean,
-  isOpen: boolean,
-  placeholder: string,
-  styles: Object,
-};
-
-
-/* ---------------------- STATE ------------------------ */
-export type SelectStateProps = {
-  uniqueKey: string,
-  id: string,
-  label: string,
-  isMultipleSelect : boolean,
-  options: Array < Option > | List < Option >,
-  selected: Array < string > | List < string > | Map < string, any>,
-  searchTerm ? : string,
-  isSearchable: boolean,
-  isOpen: boolean,
-  toggleOpen: Callback,
-  placeholder: string,
-  styles: Object,
-
-  onCheck: Callback,
-};
-
-export type SelectStateDefaultProps = {
-  label: string,
-  searchTerm?: string,
-  isMultipleSelect: boolean,
-  isSearchable: boolean,
-  isOpen: boolean,
-  placeholder: string,
-  styles: Object,
-};
-
-/* ---------------------- BASE ------------------------ */
-export type SelectBaseProps = {
-  uniqueKey: string,
-  isMultipleSelect : boolean,
-  label: string,
-  placeholder: string,
-  options: Array < Option > | List < Option >,
-  selected: Array < string > | List < string > | Map < string, any >,
-  searchTerm ? : string,
-  isOpen: boolean,
-  isSearchable: boolean,
-  toggleOpen: Callback,
-  styles: Object,
-
-  onCheck: Callback,
-};
+export type Selected = Array<string> | List<string> | Map<string>;

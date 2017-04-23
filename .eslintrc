@@ -9,9 +9,20 @@
   ],
   "rules": {
     "indent": 2,
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "no-restricted-syntax": "off",
-    "react/no-unused-prop-types": "warn"
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/no-unused-prop-types": "warn",
+    "react/sort-comp": [
+      "error", {
+        "order": [
+          "type-annotations",
+          "static-methods",
+          "life-cycle",
+          "everything-else",
+          "render"
+        ]
+      }
+    ]
   },
   "globals": {
     "describe": true,

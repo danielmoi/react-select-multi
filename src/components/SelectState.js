@@ -1,23 +1,73 @@
 // @flow
-
 import React, { Component } from 'react';
 import wrapWithClickout from 'react-clickout';
-import SelectBase, { basePropTypes, baseDefaultProps } from './SelectBase';
-import type { SelectState, SelectBaseProps, SelectStateDefaultProps } from '../types';
 
-export class SelectStateComponent extends
-  Component<SelectStateDefaultProps, SelectBaseProps, SelectState> {
-  static defaultProps: SelectStateDefaultProps;
-  static props: SelectBaseProps;
+import SelectBase from './SelectBase';
 
-  constructor(props: SelectBaseProps) {
+import type { Options, Selected, Callback } from '../types';
+
+type SelectStateProps = {
+  // config
+  id: string,
+  isMultipleSelect: boolean,
+  isSearchable: boolean,
+
+  // data / appearance
+  label: string,
+  placeholder: string,
+  options: Options,
+  styles: Object,
+
+  // methods
+  onCheck: Callback,
+
+  // dynamic
+  selected: Selected,
+  searchTerm: string,
+};
+
+type SelectStateDefaultProps = {
+  // config
+  isMultipleSelect: false,
+  isSearchable: false,
+
+  // data / appearance
+  label: '',
+  placeholder: '',
+  styles: {
+    wrapper: 'rsm-wrapper',
+    label: 'rsm-label',
+    controlContainer: 'rsm-control__container',
+    controlPlaceholder: 'rsm-control__placeholder',
+    search: 'rsm-search',
+    expandIcon: 'rsm-arrow-down',
+    collapseIcon: 'rsm-arrow-up',
+    optionContainer: 'rsm-option__container',
+    optionBar: 'rsm-option__bar',
+    optionCheckbox: 'rsm-option__checkbox',
+  },
+
+  // dynamic
+  searchTerm: '',
+};
+
+type SelectStateState = {
+  isOpen: boolean,
+  options: Options,
+}
+
+export class SelectStateComponent extends Component {
+  defaultProps: SelectStateDefaultProps;
+  props: SelectStateProps;
+  state: SelectStateState;
+
+  constructor(props: SelectStateProps) {
     super(props);
     this.state = {
       isOpen: false,
       options: props.options,
     };
   }
-  state: SelectState;
 
   componentDidMount() {
     this.state = {
@@ -26,7 +76,7 @@ export class SelectStateComponent extends
     };
   }
 
-  componentWillReceiveProps(nextProps: SelectBaseProps) {
+  componentWillReceiveProps(nextProps: SelectStateProps) {
     if (nextProps.options) {
       this.setState({
         options: nextProps.options,
@@ -55,18 +105,16 @@ export class SelectStateComponent extends
         label={this.props.label}
         placeholder={this.props.placeholder}
         options={this.state.options}
-        selected={this.props.selected}
-        isOpen={this.state.isOpen}
+        styles={this.props.styles}
         toggleOpen={this.toggleOpen}
         onCheck={this.props.onCheck}
-        styles={this.props.styles}
+        isOpen={this.state.isOpen}
+        selected={this.props.selected}
+        searchTerm={this.props.searchTerm}
       />
     );
   }
 }
-
-SelectStateComponent.propTypes = basePropTypes;
-SelectStateComponent.defaultProps = baseDefaultProps;
 
 const wrapped = wrapWithClickout(SelectStateComponent);
 
