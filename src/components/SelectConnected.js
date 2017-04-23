@@ -55,7 +55,7 @@ type SelectConnectedDefaultProps = {
 };
 
 export class SelectConnectedComponent extends Component {
-  static defaultProps: SelectConnectedDefaultProps;
+  defaultProps: SelectConnectedDefaultProps;
   props: SelectConnectedProps;
 
   componentDidMount() {
