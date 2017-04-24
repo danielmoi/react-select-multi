@@ -5,103 +5,54 @@ import type {
   List,
 } from 'immutable';
 
+/* ---------------------- REDUX ------------------------ */
 export type Action = {
   type: string,
   data: Object,
 };
 
-export type FSA = (any) => Action;
+export type ActionCreator = (any) => Action;
 
-export type DataState = Map < string, ? any > ;
+export type DataState = Map<string, ? any> ;
 
 export type Reducer = (state: DataState, action: Action) => DataState;
 
+/* ----------------------- GENERAL ----------------------- */
 export type Callback = (any) => any;
 
+/* ------------------------ SELECT OPTIONS ---------------------- */
 export type Option = {
   tag: string,
   display: string,
 };
 
-export type SelectState = {
-  isOpen: boolean,
-  options: Array<Option> | List<Option>,
+export type Options = Array<Option> | List<Option>;
+
+export type Selected = Array<string> | List<string> | Map<string>;
+
+/* ---------------------- STYLES ------------------------ */
+export type Styles = {
+  wrapper: string,
+  label: string,
+  controlContainer: string,
+  controlPlaceholder: string,
+  search: string,
+  expandIcon: string,
+  collapseIcon: string,
+  optionContainer: string,
+  optionBar: string,
+  optionCheckbox: string,
 };
 
-/* ---------------------- CONNECTED ------------------------ */
-export type SelectConnectedProps = {
-  uniqueKey: string,
-  id: string,
-  label: string,
-  options: Array<Option> | List<Option>,
-  selected: Array<string> | List<string> | Map<string, any>,
-  searchTerm?: string,
-  initialSelected: Array<string>,
-  isMultipleSelect: boolean,
-  isSearchable: boolean,
-  isOpen: boolean,
-  toggleOpen: Callback,
-  onCheck: Callback,
-  placeholder: string,
-  styles: Object,
-
-  addSelect: Callback,
-  saveSelected: Callback,
-  removeSelect: Callback,
-};
-
-export type SelectConnectedDefaultProps = {
-  label: string,
-  searchTerm ? : string,
-  isMultipleSelect : boolean,
-  isSearchable: boolean,
-  isOpen: boolean,
-  placeholder: string,
-  styles: Object,
-};
-
-
-/* ---------------------- STATE ------------------------ */
-export type SelectStateProps = {
-  uniqueKey: string,
-  id: string,
-  label: string,
-  isMultipleSelect : boolean,
-  options: Array < Option > | List < Option >,
-  selected: Array < string > | List < string > | Map < string, any>,
-  searchTerm ? : string,
-  isSearchable: boolean,
-  isOpen: boolean,
-  toggleOpen: Callback,
-  placeholder: string,
-  styles: Object,
-
-  onCheck: Callback,
-};
-
-export type SelectStateDefaultProps = {
-  label: string,
-  searchTerm?: string,
-  isMultipleSelect: boolean,
-  isSearchable: boolean,
-  isOpen: boolean,
-  placeholder: string,
-  styles: Object,
-};
-
-/* ---------------------- BASE ------------------------ */
-export type SelectBaseProps = {
-  uniqueKey: string,
-  isMultipleSelect : boolean,
-  label: string,
-  placeholder: string,
-  options: Array < Option > | List < Option >,
-  selected: Array < string > | List < string > | Map < string, any >,
-  searchTerm ? : string,
-  isOpen: boolean,
-  isSearchable: boolean,
-  toggleOpen: Callback,
-  styles: Object,
-
-  onCheck: Callback,
+export type DefaultStyles = {
+  wrapper: 'rsm-wrapper',
+  label: 'rsm-label',
+  controlContainer: 'rsm-control__container',
+  controlPlaceholder: 'rsm-control__placeholder',
+  search: 'rsm-search',
+  expandIcon: 'rsm-arrow-down',
+  collapseIcon: 'rsm-arrow-up',
+  optionContainer: 'rsm-option__container',
+  optionBar: 'rsm-option__bar',
+  optionCheckbox: 'rsm-option__checkbox',
 };
