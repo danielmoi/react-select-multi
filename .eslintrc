@@ -22,7 +22,8 @@
           "render"
         ]
       }
-    ]
+    ],
+    "react/prop-types": "off" // seeing as we use Flow now
   },
   "globals": {
     "describe": true,

@@ -1,11 +1,26 @@
 // @flow
 import React, { Component } from 'react';
 import classNames from 'classnames';
+
 import { Map, List } from 'immutable';
+// import type { Options, Selected, Callback, Styles, DefaultStyles } from '../types';
+import type { Options, Selected, Callback } from '../types';
 
-import type { Options, Selected, Callback, Styles, DefaultStyles } from '../types';
+export const defaultStyles = {
+  wrapper: 'rsm-wrapper',
+  label: 'rsm-label',
+  controlContainer: 'rsm-control__container',
+  controlPlaceholder: 'rsm-control__placeholder',
+  searchContainer: 'rsm-search__container',
+  searchInput: 'rsm-search__input',
+  expandIcon: 'rsm-arrow-down',
+  collapseIcon: 'rsm-arrow-up',
+  optionContainer: 'rsm-option__container',
+  optionBar: 'rsm-option__bar',
+  optionCheckbox: 'rsm-option__checkbox',
+};
 
-type SelectBaseProps = {
+type Props = {
   // config
   id: string,
   isMultipleSelect: boolean,
@@ -15,7 +30,7 @@ type SelectBaseProps = {
   label: string,
   placeholder: string,
   options: Options,
-  styles: Styles,
+  styles: typeof defaultStyles,
 
   // methods
   toggleOpen: Callback,
@@ -27,18 +42,26 @@ type SelectBaseProps = {
   searchTerm: string,
 };
 
-type SelectBaseDefaultProps = {
-  styles: DefaultStyles,
-}
 
-class SelectBase extends Component {
-  defaultProps: SelectBaseDefaultProps;
-  props: SelectBaseProps;
+type DefaultProps = {
+  styles: typeof defaultStyles,
+};
+
+
+class SelectBase extends Component<DefaultProps, Props, void> {
+  static defaultProps = {
+    styles: defaultStyles,
+  }
+
+  handleSearch = (e) => {
+    this.props.onSearch(e.target.value);
+  }
 
   render() {
+    // console.log('this.props:', this.props);
     const { id, label, options, selected,
       isMultipleSelect, isSearchable, isOpen,
-      toggleOpen, onCheck, searchTerm, placeholder,
+      toggleOpen, onCheck, searchTerm, placeholderControl, placeholderSearch,
       styles, // if you pass in styles it will overrwrite the classnames
     } = this.props;
 
@@ -58,7 +81,7 @@ class SelectBase extends Component {
     }
 
     return (
-      <div className={styles.wrapper}>
+      <div styleName={styles.wrapper}>
         <div className={styles.label}>
           {label}
         </div>
@@ -74,7 +97,7 @@ class SelectBase extends Component {
                 .map(o => o.display).join(', ')
             :
             <div className={styles.controlPlaceholder}>
-              {placeholder}
+              {placeholderControl}
             </div>
           }
           <span className={classNames(arrowStyles)} />
@@ -82,11 +105,19 @@ class SelectBase extends Component {
         {isOpen
         ?
           <div className="rsm-open-wrapper">
-            { isSearchable ?
-              <div className={styles.search}>
-                {searchTerm}
-              </div>
-              : null }
+            {isSearchable
+              ?
+                <div className={styles.searchContainer}>
+                  <input
+                    className={styles.searchInput}
+                    autoFocus
+                    onChange={this.handleSearch}
+                    placeholder={placeholderSearch}
+                  />
+                </div>
+              : null
+            }
+
             {
               options.map(option => (
                 <div

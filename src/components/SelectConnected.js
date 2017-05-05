@@ -108,11 +108,13 @@ export class SelectConnectedComponent extends Component {
         isMultipleSelect={this.props.isMultipleSelect}
         isSearchable={this.props.isSearchable}
         label={this.props.label}
-        placeholder={this.props.placeholder}
+        placeholderControl={this.props.placeholderControl}
+        placeholderSearch={this.props.placeholderSearch}
         options={this.props.options}
         styles={this.props.styles}
         toggleOpen={this.onToggleOpen}
         onCheck={this.onCheck}
+        onSearch={this.props.onSearch}
         isOpen={this.props.isOpen}
         selected={this.props.selected}
         searchTerm={this.props.searchTerm}

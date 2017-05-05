@@ -56,7 +56,6 @@
     "nyc": "^10.2.0",
     "react-addons-test-utils": "^15.4.2",
     "sinon": "^1.17.7",
-    "webpack": "^2.2.1"
   },
   "repository": {
     "type": "git",

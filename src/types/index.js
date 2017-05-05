@@ -31,12 +31,13 @@ export type Options = Array<Option> | List<Option>;
 export type Selected = Array<string> | List<string> | Map<string>;
 
 /* ---------------------- STYLES ------------------------ */
-export type Styles = {
+export type StylesTypes = {
   wrapper: string,
   label: string,
   controlContainer: string,
   controlPlaceholder: string,
-  search: string,
+  searchContainer: string,
+  searchInput: string,
   expandIcon: string,
   collapseIcon: string,
   optionContainer: string,
@@ -44,12 +45,27 @@ export type Styles = {
   optionCheckbox: string,
 };
 
-export type DefaultStyles = {
+export type DefaultStylesTypes = {
+  wrapper: string,
+  label: string,
+  controlContainer: string,
+  controlPlaceholder: string,
+  searchContainer: string,
+  searchInput: string,
+  expandIcon: string,
+  collapseIcon: string,
+  optionContainer: string,
+  optionBar: string,
+  optionCheckbox: string,
+};
+
+export const DefaultProps = {
   wrapper: 'rsm-wrapper',
   label: 'rsm-label',
   controlContainer: 'rsm-control__container',
   controlPlaceholder: 'rsm-control__placeholder',
-  search: 'rsm-search',
+  searchContainer: 'rsm-search__container',
+  searchInput: 'rsm-search__input',
   expandIcon: 'rsm-arrow-down',
   collapseIcon: 'rsm-arrow-up',
   optionContainer: 'rsm-option__container',
