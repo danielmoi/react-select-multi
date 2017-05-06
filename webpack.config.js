@@ -12,7 +12,7 @@ module.exports = {
     publicPath: 'http://localhost:3000/',
     filename: 'react-select-multi.js',
     library: 'reactSelectMulti',
-    libraryTarget: 'commonjs2',
+    libraryTarget: 'umd',
   },
   module: {
     loaders: [
@@ -24,7 +24,8 @@ module.exports = {
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract({
-          use: 'css-loader?importLoaders=1',
+          fallback: 'style-loader',
+          use: 'css-loader?modules&localIdentName=rsm__[local]___[hash:base64:5]',
           // options: {
           //   modules: true,
           // },
@@ -33,6 +34,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new ExtractTextPlugin('styles.css'),
+    new ExtractTextPlugin('style.css'),
   ],
 };

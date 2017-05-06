@@ -1,0 +1,9 @@
+body {
+  color: hotpink;
+}
+
+.wrapper {
+  height: 3rem;
+  width: 100%;
+  background: hotpink;
+}

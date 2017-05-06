@@ -9,7 +9,9 @@ import stylesheet from '../styles/style.css';
 
 console.log('*****************');
 console.log('stylesheet:', stylesheet);
-console.log('stylesheet.toString():', stylesheet.toString());
+console.log('stylesheet.wrapper:', stylesheet.wrapper);
+
+
 
 export const defaultStyles = {
   wrapper: 'rsm-wrapper',
@@ -89,7 +91,7 @@ class SelectBase extends Component<DefaultProps, Props, void> {
     }
 
     return (
-      <div className={stylesheet.wrapper}>
+      <div className={styles.wrapper || stylesheet.wrapper}>
         <div className={styles.label}>
           {label}
         </div>
