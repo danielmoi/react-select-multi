@@ -105,6 +105,6 @@ export class SelectStateComponent extends Component {
   }
 }
 
-const wrapped = wrapWithClickout(SelectStateComponent);
+const Wrapped = wrapWithClickout(SelectStateComponent);
 
-export default wrapped;
+export default Wrapped;

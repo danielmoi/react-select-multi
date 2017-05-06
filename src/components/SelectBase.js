@@ -5,6 +5,11 @@ import classNames from 'classnames';
 import { Map, List } from 'immutable';
 // import type { Options, Selected, Callback, Styles, DefaultStyles } from '../types';
 import type { Options, Selected, Callback } from '../types';
+import stylesheet from '../styles/style.css';
+
+console.log('*****************');
+console.log('stylesheet:', stylesheet);
+console.log('stylesheet.toString():', stylesheet.toString());
 
 export const defaultStyles = {
   wrapper: 'rsm-wrapper',
@@ -61,9 +66,12 @@ class SelectBase extends Component<DefaultProps, Props, void> {
     // console.log('this.props:', this.props);
     const { id, label, options, selected,
       isMultipleSelect, isSearchable, isOpen,
-      toggleOpen, onCheck, searchTerm, placeholderControl, placeholderSearch,
-      styles, // if you pass in styles it will overrwrite the classnames
+      toggleOpen, onCheck, searchTerm, placeholderControl, placeholderSearch, // if you pass in styles it will overrwrite the classnames
     } = this.props;
+
+
+
+    const styles = this.props.styles ? this.props.styles : stylesheet;
 
     const arrowStyles = {
       [styles.expandIcon]: !isOpen,
@@ -81,7 +89,7 @@ class SelectBase extends Component<DefaultProps, Props, void> {
     }
 
     return (
-      <div styleName={styles.wrapper}>
+      <div className={stylesheet.wrapper}>
         <div className={styles.label}>
           {label}
         </div>
