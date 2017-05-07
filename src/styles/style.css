@@ -1,8 +1,71 @@
-/* @import "base"; <<< TODO */
+@import "base";
 
-.wrapper {
-  height: 3rem;
+$weight-medium: 500;
+$gray-regular: gray;
+
+.label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: $weight-medium;
+  margin-bottom: 0.5rem;
+}
+.control {
+  &-container {
+    height: 3rem;
+    width: 100%;
+    border: 1px solid $gray-regular;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    cursor: pointer;
+    justify-content: space-between;
+    .om-icon-ascending::before,
+    .om-icon-descending::before {
+      color: $orange;
+    }
+  }
+  &-placeholder {
+    color: $gray-regular;
+  }
+}
+.option__checkbox {
+  display: none;
+}
+.option__bar {
+  display: flex;
+  align-items: center;
   width: 100%;
-  background: tomato;
+  height: 3rem;
+  padding-left: 3rem;
+  cursor: pointer;
+  position: relative;
+  border: 1px solid $gray-light;
+  border-top: none;
+  &::before {
+    content: '';
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 1px solid $gray-regular;
+    position: absolute;
+    left: 0.75rem;
+    top: 0.75rem;
+  }
+  &::after {
+    content: '';
+    width: 0.5rem;
+    height: 1rem;
+    transform: rotate(40deg);
+    border: 3px solid #7de391;
+    border-top: none;
+    border-left: none;
+    position: absolute;
+    left: 1.25rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+}
+
+.checkbox:checked+.option::after {
+  opacity: 1;
 }
 

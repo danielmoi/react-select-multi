@@ -92,7 +92,7 @@ class SelectBase extends Component<DefaultProps, Props, void> {
 
     return (
       <div className={styles.wrapper || stylesheet.wrapper}>
-        <div className={styles.label}>
+        <div className={styles.label || stylesheet.label}>
           {label}
         </div>
 

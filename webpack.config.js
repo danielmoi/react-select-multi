@@ -1,6 +1,7 @@
-const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const precss = require('precss');
+const autoprefixer = require('autoprefixer');
 
 module.exports = {
   context: path.resolve(__dirname, './'),
@@ -14,6 +15,10 @@ module.exports = {
     library: 'reactSelectMulti',
     libraryTarget: 'umd',
   },
+  externals: {
+    react: 'react',
+    'react-redux': 'react-redux',
+  },
   module: {
     loaders: [
       {
@@ -25,10 +30,25 @@ module.exports = {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: 'css-loader?modules&localIdentName=rsm__[local]___[hash:base64:5]',
-          // options: {
-          //   modules: true,
-          // },
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                importLoaders: 1,
+                localIdentName: 'rsm-[local]',
+              },
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: [
+                  autoprefixer(),
+                  precss(),
+                ],
+              },
+            },
+          ],
         }),
       },
     ],
