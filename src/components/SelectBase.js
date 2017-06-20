@@ -6,11 +6,12 @@ import { Map, List } from 'immutable';
 // import type { Options, Selected, Callback, Styles, DefaultStyles } from '../types';
 import type { Options, Selected, Callback } from '../types';
 import stylesheet from '../styles/style.css';
+// import styles from '~ui-styles-global/style.css';
+
+// console.log('styles:', styles);
 
 console.log('*****************');
 console.log('stylesheet:', stylesheet);
-console.log('stylesheet.wrapper:', stylesheet.wrapper);
-
 
 
 export const defaultStyles = {

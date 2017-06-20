@@ -1,10 +1,20 @@
+# system
 .DS_Store
 node_modules
+
+# logs
 npm-debug.log
+
+# build
 lib
 dist
+
+# test
 .nyc_output
+coverage
+
+# workspace
 .vscode
 
-
+# other
 .ideas

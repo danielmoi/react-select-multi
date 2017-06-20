@@ -1,7 +1,5 @@
-@import "base";
-
-$weight-medium: 500;
-$gray-regular: gray;
+@import "@ordermentum/ui-styles-global/style.css";
+@import "_base";
 
 .label {
   display: block;
@@ -9,8 +7,9 @@ $gray-regular: gray;
   font-weight: $weight-medium;
   margin-bottom: 0.5rem;
 }
+
 .control {
-  &-container {
+  &__container {
     height: 3rem;
     width: 100%;
     border: 1px solid $gray-regular;
@@ -24,7 +23,7 @@ $gray-regular: gray;
       color: $orange;
     }
   }
-  &-placeholder {
+  &__placeholder {
     color: $gray-regular;
   }
 }
@@ -65,7 +64,7 @@ $gray-regular: gray;
   }
 }
 
-.checkbox:checked+.option::after {
+.option__checkbox:checked + .option__bar::after {
   opacity: 1;
 }
 
