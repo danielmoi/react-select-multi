@@ -21,14 +21,14 @@ export type Reducer = (state: DataState, action: Action) => DataState;
 export type Callback = (any) => any;
 
 /* ------------------------ SELECT OPTIONS ---------------------- */
-export type Option = {
-  tag: string,
+export type Option = Map<{
+  id: string,
   display: string,
-};
+}>;
 
-export type Options = Array<Option> | List<Option>;
+export type Options = List<Option> | Array<Option>;
 
-export type Selected = Array<string> | List<string> | Map<string>;
+export type Selected = List<Option> | Array<Option>;
 
 /* ---------------------- STYLES ------------------------ */
 export type Styles = {

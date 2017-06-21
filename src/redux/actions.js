@@ -29,7 +29,7 @@ const removeSelect: ActionCreator = (data: Object) => ({
   data,
 });
 
-export {
+module.exports = {
   addSelect,
   toggleOpen,
   searchOptions,

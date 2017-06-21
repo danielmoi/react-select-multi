@@ -25,7 +25,7 @@ const reducer: Reducer = (state: DataState = fromJS(initialState), action: Actio
     }
     case C.RSM_SAVE_SELECTED: {
       const { id, selected } = action.data;
-      return state.setIn([id, 'selected'], fromJS(selected));
+      return state.mergeIn([id, 'selected'], selected);
     }
     case C.RSM_REMOVE_SELECT: {
       const { id } = action.data;
