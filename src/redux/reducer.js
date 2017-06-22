@@ -33,6 +33,10 @@ const reducer: Reducer = (state: DataState = fromJS(initialState), action: Actio
       // use setIn because we providing the entire new dataset
       return state.setIn([id, 'selected'], selected);
     }
+    case C.RSM_SAVE_OPTIONS_UI: {
+      const { id, optionsUI } = action.data;
+      return state.setIn([id, 'optionsUI'], optionsUI);
+    }
     default: {
       return state;
     }

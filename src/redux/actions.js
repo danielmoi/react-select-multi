@@ -29,10 +29,16 @@ const removeSelect: ActionCreator = (data: Object) => ({
   data,
 });
 
+const saveOptionsUI: ActionCreator = (data: Object) => ({
+  type: C.RSM_SAVE_OPTIONS_UI,
+  data,
+});
+
 module.exports = {
   addSelect,
   toggleOpen,
   saveSearch,
   saveSelected,
   removeSelect,
+  saveOptionsUI,
 };

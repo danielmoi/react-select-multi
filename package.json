@@ -11,7 +11,8 @@
     "coverage": "nyc yarn spec --check-coverage --lines 80 --functions 80 --branches 80",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "flow": "./node_modules/.bin/flow check",
-    "lint": "./node_modules/.bin/eslint --quiet src test"
+    "lint": "./node_modules/.bin/eslint --quiet src test",
+    "go": "watchexec -e js -w src -r yarn build"
   },
   "author": "Daniel Moi",
   "license": "Apache-2.0",

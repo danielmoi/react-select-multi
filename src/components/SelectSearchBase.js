@@ -69,7 +69,10 @@ class SelectSearchBase extends Component {
           {label}
         </div>
 
-        <div className="om-select-multi__display-container">
+        <div
+          className="om-select-multi__display-container"
+          onClick={this.handleSearch}
+        >
           <div className="om-select-multi__display-selected">
             {selected && selected.map(s => {
               return (
@@ -96,7 +99,7 @@ class SelectSearchBase extends Component {
         ?
           <div className="rsm-open-wrapper">
             {
-              options.map(option => {
+              options && options.map(option => {
                 return (
                 <div
                   key={`${option.get('id')}--option`}
