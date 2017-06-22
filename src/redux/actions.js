@@ -9,8 +9,8 @@ const addSelect: ActionCreator = (data: Object) => ({
   data,
 });
 
-const searchOptions: ActionCreator = (data: Object) => ({
-  type: C.RSM_SEARCH_OPTIONS,
+const saveSearch: ActionCreator = (data: Object) => ({
+  type: C.RSM_SAVE_SEARCH,
   data,
 });
 
@@ -32,7 +32,7 @@ const removeSelect: ActionCreator = (data: Object) => ({
 module.exports = {
   addSelect,
   toggleOpen,
-  searchOptions,
+  saveSearch,
   saveSelected,
   removeSelect,
 };

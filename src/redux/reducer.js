@@ -15,21 +15,23 @@ const reducer: Reducer = (state: DataState = fromJS(initialState), action: Actio
         [id]: { isOpen: false, selected: [], searchTerm: '' },
       });
     }
+    case C.RSM_REMOVE_SELECT: {
+      const { id } = action.data;
+      return state.delete(id);
+    }
+
     case C.RSM_TOGGLE_OPEN: {
       const { id, isOpen } = action.data;
       return state.mergeIn([id, 'isOpen'], isOpen);
     }
-    case C.RSM_SEARCH_OPTIONS: {
+    case C.RSM_SAVE_SEARCH: {
       const { id, searchTerm } = action.data;
-      return state.mergeIn([id, 'searchTerm'], searchTerm);
+      return state.setIn([id, 'searchTerm'], searchTerm);
     }
     case C.RSM_SAVE_SELECTED: {
       const { id, selected } = action.data;
-      return state.mergeIn([id, 'selected'], selected);
-    }
-    case C.RSM_REMOVE_SELECT: {
-      const { id } = action.data;
-      return state.delete(id);
+      // use setIn because we providing the entire new dataset
+      return state.setIn([id, 'selected'], selected);
     }
     default: {
       return state;

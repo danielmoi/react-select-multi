@@ -43,9 +43,9 @@ class SelectSearchBase extends Component {
   render() {
     const { id, label, options, selected,
       isMultipleSelect, isSearchable, isOpen,
-      toggleOpen, onCheck, searchTerm, placeholder,
+      toggleOpen, handleAdd, searchTerm, placeholder,
       styles, // if you pass in styles it will overrwrite the classnames
-      handleSearch,
+      handleSearch, handleRemove,
     } = this.props;
 
     const arrowStyles = {
@@ -75,7 +75,9 @@ class SelectSearchBase extends Component {
               return (
                 <div
                   key={`${s.get('id')}--selected`}
-                  className="om-select-multi__display-item">
+                  className="om-select-multi__display-item"
+                  onClick={handleRemove(s)}
+                >
                   {s.get('display')}
                 </div>
               );
@@ -93,11 +95,6 @@ class SelectSearchBase extends Component {
         {isOpen
         ?
           <div className="rsm-open-wrapper">
-            { isSearchable ?
-              <div className={styles.search}>
-                {searchTerm}
-              </div>
-              : null }
             {
               options.map(option => {
                 return (
@@ -110,7 +107,7 @@ class SelectSearchBase extends Component {
                     className={styles.optionCheckbox}
                     type="checkbox"
                     checked={selected.has(option.get('id'))}
-                    onChange={onCheck(option)}
+                    onChange={handleAdd(option)}
                   />
                   <label
                     htmlFor={`${option.get('id')}--option`}
