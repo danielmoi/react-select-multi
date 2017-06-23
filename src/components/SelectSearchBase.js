@@ -53,8 +53,8 @@ class SelectSearchBase extends Component {
     } = this.props;
 
     const arrowStyles = {
-      [`${prefix}__arrow-down`]: !isOpen,
-      [`${prefix}__arrow-up`]: isOpen,
+      [`${prefix}__toggle-arrow-down`]: !isOpen,
+      [`${prefix}__toggle-arrow-up`]: isOpen,
     };
 
     let selectedLength;
@@ -74,7 +74,10 @@ class SelectSearchBase extends Component {
         </div>
 
         <div className={`${prefix}__display-container`}>
-          <div className="om-select-multi__display-selected">
+          <div className={`${prefix}__display-toggle-container`}>
+            <span className={classNames(arrowStyles)} />
+          </div>
+          <div className={`${prefix}__display-selected`}>
             {selectedLength && selected.map(s => (
               <div
                 key={`${s.get('id')}--selected`}
