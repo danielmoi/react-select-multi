@@ -12,21 +12,21 @@ import {
   saveSearch,
   removeSelect,
   saveOptionsUI,
-  removeOptionUI,
 } from '../redux/actions';
 
 import type { Options, Selected, Callback, Styles, DefaultStyles } from '../types';
 
-type SelectConnectedProps = {
+type SelectSearchConnectedProps = {
   // config
   id: string,
   isMultipleSelect: boolean,
   isSearchable: boolean,
 
   // data / appearance
+  prefix: string,
   label: string,
   placeholder: string,
-  options: Options,
+  optionsUI: Options,
   initialSelected: Array<string>,
   styles: Styles,
 
@@ -37,7 +37,7 @@ type SelectConnectedProps = {
   removeSelect: Callback,
   handleSearch: Callback,
   saveOptionsUI: Callback,
-  removeOptionUI: Callback,
+  saveSearch: Callback,
 
   // dynamic
   isOpen: boolean,
@@ -45,7 +45,7 @@ type SelectConnectedProps = {
   searchTerm: string,
 };
 
-type SelectConnectedDefaultProps = {
+type SelectSearchConnectedDefaultProps = {
   // config
   isMultipleSelect: false,
   isSearchable: false,
@@ -61,8 +61,8 @@ type SelectConnectedDefaultProps = {
 };
 
 export class SelectSearchConnectedComponent extends Component {
-  defaultProps: SelectConnectedDefaultProps;
-  props: SelectConnectedProps;
+  defaultProps: SelectSearchConnectedDefaultProps;
+  props: SelectSearchConnectedProps;
 
   componentDidMount() {
     const { id } = this.props;
@@ -74,7 +74,7 @@ export class SelectSearchConnectedComponent extends Component {
     this.props.removeSelect({ id });
   }
 
-  addToSelected = (option) => () => {
+  handleOptionClick = (option: Object) => () => {
     const { id, selected } = this.props;
     let updatedSelected = [];
     const toAdd = fromJS({
@@ -84,10 +84,10 @@ export class SelectSearchConnectedComponent extends Component {
     updatedSelected = selected.push(toAdd);
     this.props.saveSelected({ id, selected: updatedSelected });
 
-    this.props.handleSearch({ search: this.props.searchTerm, uiHide: [option.get('id')] });
+    this.props.handleSearch({ search: this.props.searchTerm });
   }
 
-  removeFromSelected = (option) => () => {
+  handleSelectedClick = (option: Object) => () => {
     const { id, selected } = this.props;
     const updatedSelected = selected.filter(s => s.get('id') !== option.get('id'));
     this.props.saveSelected({ id, selected: updatedSelected });
@@ -103,7 +103,7 @@ export class SelectSearchConnectedComponent extends Component {
     this.props.toggleOpen({ id: this.props.id, isOpen: false });
   }
 
-  handleSearch = (searchTerm) => {
+  handleSearch = (searchTerm: string) => {
     if (!this.props.isOpen) {
       this.props.toggleOpen({ id: this.props.id, isOpen: true });
     }
@@ -122,12 +122,13 @@ export class SelectSearchConnectedComponent extends Component {
         options={this.props.optionsUI}
         styles={this.props.styles}
         toggleOpen={this.onToggleOpen}
-        addToSelected={this.addToSelected}
-        removeFromSelected={this.removeFromSelected}
+        handleOptionClick={this.handleOptionClick}
+        handleSelectedClick={this.handleSelectedClick}
         isOpen={this.props.isOpen}
         selected={this.props.selected}
         searchTerm={this.props.searchTerm}
         handleSearch={this.handleSearch}
+        prefix={this.props.prefix}
       />);
   }
 }
@@ -146,13 +147,10 @@ const mapDispatchToProps = {
   saveSearch,
   removeSelect,
   saveOptionsUI,
-  removeOptionUI,
 };
 
-// const Wrapped = wrapWithClickout(SelectSearchConnectedComponent);
 const Wrapped = wrapWithClickout(SelectSearchConnectedComponent);
 
 const connected = connect(mapStateToProps, mapDispatchToProps)(Wrapped);
-// const connected = connect(mapStateToProps, mapDispatchToProps)(SelectSearchConnectedComponent);
 
 export default connected;

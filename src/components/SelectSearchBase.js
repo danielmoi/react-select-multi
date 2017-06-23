@@ -16,11 +16,14 @@ type SelectSearchBaseProps = {
   placeholder: string,
   options: Options,
   styles: Styles,
+  prefix: string,
 
   // methods
   toggleOpen: Callback,
   onCheck: Callback,
   handleSearch: Callback,
+  handleOptionClick: Callback,
+  handleSelectedClick: Callback,
 
   // dynamic
   isOpen: boolean,
@@ -36,21 +39,22 @@ class SelectSearchBase extends Component {
   defaultProps: SelectSearchBaseDefaultProps;
   props: SelectSearchBaseProps;
 
-  handleSearch = (e) => {
+  handleSearch = (e: Object) => {
     this.props.handleSearch(e.target.value);
   }
 
   render() {
-    const { id, label, options, selected,
-      isMultipleSelect, isSearchable, isOpen,
-      toggleOpen, addToSelected, searchTerm, placeholder,
-      styles, // if you pass in styles it will overrwrite the classnames
-      handleSearch, removeFromSelected,
+    const { label, options, selected,
+      isOpen,
+      toggleOpen,
+      placeholder = 'Type to search',
+      handleOptionClick, handleSelectedClick,
+      prefix = 'rsm',
     } = this.props;
 
     const arrowStyles = {
-      [styles.expandIcon]: !isOpen,
-      [styles.collapseIcon]: isOpen,
+      [`${prefix}__arrow-down`]: !isOpen,
+      [`${prefix}__arrow-up`]: isOpen,
     };
 
     let selectedLength;
@@ -64,63 +68,58 @@ class SelectSearchBase extends Component {
     }
 
     return (
-      <div className={styles.wrapper}>
-        <div className={styles.label}>
+      <div className={`${prefix}__wrapper`}>
+        <div className={`${prefix}__label`}>
           {label}
         </div>
 
-        <div
-          className="om-select-multi__display-container"
-        >
+        <div className={`${prefix}__display-container`}>
           <div className="om-select-multi__display-selected">
-            {selected && selected.map(s => {
-              return (
-                <div
-                  key={`${s.get('id')}--selected`}
-                  className="om-select-multi__display-item"
-                  onClick={removeFromSelected(s)}
-                >
-                  {s.get('display')}
-                </div>
-              );
-            })}
+            {selectedLength && selected.map(s => (
+              <div
+                key={`${s.get('id')}--selected`}
+                className={`${prefix}__display-item`}
+                onClick={handleSelectedClick(s)}
+              >
+                {s.get('display')}
+              </div>
+            ))}
           </div>
+
           <input
             type="text"
-            className="om-select-multi__search-input"
+            className={`${prefix}__search-input`}
             autoFocus
             onChange={this.handleSearch}
             onClick={this.handleSearch}
+            placeholder={placeholder}
           />
         </div>
 
 
-        {isOpen
+        {isOpen && options
         ?
-          <div className="rsm-open-wrapper">
-            {
-              options && options.map(option => {
-                return (
-                <div
-                  key={`${option.get('id')}--option`}
-                  className={styles.optionContainer}
+          <div className={`${prefix}__open-wrapper`}>
+            {options.map(option => (
+              <div
+                key={`${option.get('id')}--option`}
+                className={`${prefix}__option-container`}
+              >
+                <input
+                  id={`${option.get('id')}--option`}
+                  className={`${prefix}__option-checkbox`}
+                  type="checkbox"
+                  checked={selected.has(option.get('id'))}
+                  onChange={handleOptionClick(option)}
+                />
+                <label
+                  htmlFor={`${option.get('id')}--option`}
+                  className={`${prefix}__search-option-bar`}
                 >
-                  <input
-                    id={`${option.get('id')}--option`}
-                    className={styles.optionCheckbox}
-                    type="checkbox"
-                    checked={selected.has(option.get('id'))}
-                    onChange={addToSelected(option)}
-                  />
-                  <label
-                    htmlFor={`${option.get('id')}--option`}
-                    className={styles.optionBar}
-                  >
-                    {option.get('display')}
-                  </label>
-                </div>
-              )})
-            }
+                  {option.get('display')}
+                </label>
+              </div>
+            ))}
           </div>
         :
           null

@@ -28,7 +28,7 @@ export type Option = Map<{
 
 export type Options = List<Option> | Array<Option>;
 
-export type Selected = List<Option> | Array<Option>;
+export type Selected = List<Map> | Array<Option>;
 
 /* ---------------------- STYLES ------------------------ */
 export type Styles = {
@@ -54,5 +54,6 @@ export type DefaultStyles = {
   collapseIcon: 'rsm-arrow-up',
   optionContainer: 'rsm-option__container',
   optionBar: 'rsm-option__bar',
+  searchOptionBar: 'rsm-search-option__bar',
   optionCheckbox: 'rsm-option__checkbox',
 };
