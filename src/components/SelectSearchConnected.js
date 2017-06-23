@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import wrapWithClickout from 'react-clickout';
-import { fromJS } from 'immutable';
 
 import SelectSearchBase from './SelectSearchBase';
 import {
@@ -38,6 +37,8 @@ type SelectSearchConnectedProps = {
   handleSearch: Callback,
   saveOptionsUI: Callback,
   saveSearch: Callback,
+  handleSelectedClick: Callback,
+  handleOptionClick: Callback,
 
   // dynamic
   isOpen: boolean,
@@ -75,23 +76,11 @@ export class SelectSearchConnectedComponent extends Component {
   }
 
   handleOptionClick = (option: Object) => () => {
-    const { id, selected } = this.props;
-    let updatedSelected = [];
-    const toAdd = fromJS({
-      id: option.get('id'),
-      display: option.get('display'),
-    });
-    updatedSelected = selected.push(toAdd);
-    this.props.saveSelected({ id, selected: updatedSelected });
-
-    this.props.handleSearch({ search: this.props.searchTerm });
+    this.props.handleOptionClick({ selectedId: this.props.id, option });
   }
 
   handleSelectedClick = (option: Object) => () => {
-    const { id, selected } = this.props;
-    const updatedSelected = selected.filter(s => s.get('id') !== option.get('id'));
-    this.props.saveSelected({ id, selected: updatedSelected });
-    this.props.handleSearch({ search: this.props.searchTerm });
+    this.props.handleSelectedClick({ selectId: this.props.id, option });
   }
 
   onToggleOpen = () => {

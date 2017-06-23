@@ -20,14 +20,13 @@ type SelectSearchBaseProps = {
 
   // methods
   toggleOpen: Callback,
-  onCheck: Callback,
   handleSearch: Callback,
   handleOptionClick: Callback,
   handleSelectedClick: Callback,
 
   // dynamic
   isOpen: boolean,
-  selected: Selected,
+  selected: List,
   searchTerm: string,
 };
 
@@ -46,16 +45,10 @@ class SelectSearchBase extends Component {
   render() {
     const { label, options, selected,
       isOpen,
-      toggleOpen,
       placeholder = 'Type to search',
       handleOptionClick, handleSelectedClick,
       prefix = 'rsm',
     } = this.props;
-
-    const arrowStyles = {
-      [`${prefix}__toggle-arrow-down`]: !isOpen,
-      [`${prefix}__toggle-arrow-up`]: isOpen,
-    };
 
     let selectedLength;
 
@@ -74,9 +67,6 @@ class SelectSearchBase extends Component {
         </div>
 
         <div className={`${prefix}__display-container`}>
-          <div className={`${prefix}__display-toggle-container`}>
-            <span className={classNames(arrowStyles)} />
-          </div>
           <div className={`${prefix}__display-selected`}>
             {selectedLength && selected.map(s => (
               <div
