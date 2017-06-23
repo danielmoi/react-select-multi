@@ -45,19 +45,10 @@ describe('Reducer', () => {
     expect(reducedState.getIn(['colors', 'isOpen'])).to.equal(true);
   });
 
-  it(`should handle ${C.RSM_SEARCH_OPTIONS}`, () => {
-    const action = {
-      type: C.RSM_SEARCH_OPTIONS,
-      data: { id: 'colors', searchTerm: 'pink' },
-    };
-    const reducedState = reducer(colorsInitialState, action);
-    expect(reducedState.getIn(['colors', 'searchTerm'])).to.equal('pink');
-  });
-
   it(`should handle ${C.RSM_SAVE_SELECTED}`, () => {
     const action = {
       type: C.RSM_SAVE_SELECTED,
-      data: { id: 'colors', selected: ['Hotpink', 'Cyan'] },
+      data: { id: 'colors', selected: fromJS(['Hotpink', 'Cyan']) },
     };
     const reducedState = reducer(colorsInitialState, action);
     expect(reducedState.getIn(['colors', 'selected']))

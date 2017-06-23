@@ -1,6 +1,5 @@
 // @flow
 import React, { Component } from 'react';
-import classNames from 'classnames';
 import { Map, List } from 'immutable';
 
 import type { Options, Selected, Callback, Styles, DefaultStyles } from '../types';
@@ -26,7 +25,7 @@ type SelectSearchBaseProps = {
 
   // dynamic
   isOpen: boolean,
-  selected: List,
+  selected: Selected,
   searchTerm: string,
 };
 

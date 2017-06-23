@@ -28,7 +28,7 @@ export type Option = Map<{
 
 export type Options = List<Option> | Array<Option>;
 
-export type Selected = List<Map> | Array<Option>;
+export type Selected = List;
 
 /* ---------------------- STYLES ------------------------ */
 export type Styles = {

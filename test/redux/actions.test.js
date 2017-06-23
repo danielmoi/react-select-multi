@@ -3,7 +3,6 @@ import C from '../../src/redux/constants';
 import {
   addSelect,
   toggleOpen,
-  searchOptions,
   saveSelected,
   removeSelect,
 } from '../../src/redux/actions';
@@ -23,14 +22,6 @@ describe('Actions', () => {
       data: { id: 'select', open: true },
     };
     expect(toggleOpen(expectedAction.data)).to.deep.equal(expectedAction);
-  });
-
-  it(`should create action for ${C.RSM_SEARCH_OPTIONS}`, () => {
-    const expectedAction = {
-      type: C.RSM_SEARCH_OPTIONS,
-      data: { id: 'select', searchText: 'search' },
-    };
-    expect(searchOptions(expectedAction.data)).to.deep.equal(expectedAction);
   });
 
   it(`should create action for ${C.RSM_SAVE_SELECTED}`, () => {
