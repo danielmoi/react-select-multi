@@ -3,6 +3,7 @@ import { fromJS } from 'immutable';
 import C from '../../src/redux/constants';
 import initialStateFixture from '../../src/redux/initial_state';
 import reducer from '../../src/redux/reducer';
+import { optionsUI } from '../fixtures/options';
 
 describe('Reducer', () => {
   let initialState;
@@ -36,6 +37,15 @@ describe('Reducer', () => {
       .to.equal(fromJS({ isOpen: false, selected: [], searchTerm: '' }));
   });
 
+  it(`should handle ${C.RSM_REMOVE_SELECT}`, () => {
+    const action = {
+      type: C.RSM_REMOVE_SELECT,
+      data: { id: 'colors' },
+    };
+    const reducedState = reducer(colorsInitialState, action);
+    expect(reducedState).to.equal(fromJS(initialState));
+  });
+
   it(`should handle ${C.RSM_TOGGLE_OPEN}`, () => {
     const action = {
       type: C.RSM_TOGGLE_OPEN,
@@ -43,6 +53,16 @@ describe('Reducer', () => {
     };
     const reducedState = reducer(colorsInitialState, action);
     expect(reducedState.getIn(['colors', 'isOpen'])).to.equal(true);
+  });
+
+  it(`should handle ${C.RSM_SEARCH}`, () => {
+    const action = {
+      type: C.RSM_SAVE_SEARCH,
+      data: { id: 'colors', searchTerm: 'Cookie Monster' },
+    };
+    const reducedState = reducer(colorsInitialState, action);
+    expect(reducedState.getIn(['colors', 'searchTerm']))
+      .to.equal('Cookie Monster');
   });
 
   it(`should handle ${C.RSM_SAVE_SELECTED}`, () => {
@@ -55,12 +75,13 @@ describe('Reducer', () => {
       .to.equal(fromJS(['Hotpink', 'Cyan']));
   });
 
-  it(`should handle ${C.RSM_REMOVE_SELECT}`, () => {
+  it(`should handle ${C.RSM_SAVE_OPTIONS_UI}`, () => {
     const action = {
-      type: C.RSM_REMOVE_SELECT,
-      data: { id: 'colors' },
+      type: C.RSM_SAVE_OPTIONS_UI,
+      data: { id: 'colors', optionsUI: fromJS(optionsUI) },
     };
     const reducedState = reducer(colorsInitialState, action);
-    expect(reducedState).to.equal(fromJS(initialState));
+    expect(reducedState.getIn(['colors', 'optionsUI']))
+      .to.equal(fromJS(optionsUI));
   });
 });

@@ -28,6 +28,7 @@ const reducer: Reducer = (state: DataState = fromJS(initialState), action: Actio
       const { id, searchTerm } = action.data;
       return state.setIn([id, 'searchTerm'], searchTerm);
     }
+
     case C.RSM_SAVE_SELECTED: {
       const { id, selected } = action.data;
       // use setIn because we providing the entire new dataset

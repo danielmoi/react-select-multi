@@ -1,11 +1,15 @@
 import { expect } from 'chai';
+import { fromJS } from 'immutable';
 import C from '../../src/redux/constants';
 import {
   addSelect,
-  toggleOpen,
-  saveSelected,
   removeSelect,
+  toggleOpen,
+  saveSearch,
+  saveSelected,
+  saveOptionsUI,
 } from '../../src/redux/actions';
+import { optionsUI } from '../fixtures/options';
 
 describe('Actions', () => {
   it(`should create action for ${C.RSM_ADD_SELECT}`, () => {
@@ -38,5 +42,21 @@ describe('Actions', () => {
       data: { id: 'select' },
     };
     expect(removeSelect(expectedAction.data)).to.deep.equal(expectedAction);
+  });
+
+  it(`should create action for ${C.RSM_SAVE_SEARCH}`, () => {
+    const expectedAction = {
+      type: C.RSM_SAVE_SEARCH,
+      data: { id: 'select', search: 'Cookie Monster' },
+    };
+    expect(saveSearch(expectedAction.data)).to.deep.equal(expectedAction);
+  });
+
+  it(`should create action for ${C.RSM_SAVE_OPTIONS_UI}`, () => {
+    const expectedAction = {
+      type: C.RSM_SAVE_OPTIONS_UI,
+      data: { id: 'select', optionsUI: fromJS(optionsUI) },
+    };
+    expect(saveOptionsUI(expectedAction.data)).to.deep.equal(expectedAction);
   });
 });
