@@ -8,7 +8,6 @@ import {
   addSelect,
   toggleOpen,
   saveSelected,
-  searchOptions,
   removeSelect,
 } from '../redux/actions';
 
@@ -129,7 +128,6 @@ const mapDispatchToProps = {
   addSelect,
   toggleOpen,
   saveSelected,
-  searchOptions,
   removeSelect,
 };
 
