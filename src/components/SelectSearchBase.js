@@ -1,6 +1,5 @@
 // @flow
 import React, { Component } from 'react';
-import { Map, List } from 'immutable';
 
 import type { Options, Selected, Callback } from '../types';
 
@@ -20,7 +19,6 @@ type SelectSearchBaseProps = {
   selected: Selected,
 
   // methods
-  toggleOpen: Callback,
   handleSearch: Callback,
   handleSelectedClick: Callback,
   handleOptionClick: Callback,

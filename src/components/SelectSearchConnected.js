@@ -74,10 +74,6 @@ export class SelectSearchConnectedComponent extends Component {
     this.props.handleSelectedClick({ selectId: this.props.id, option });
   }
 
-  onToggleOpen = () => {
-    this.props.toggleOpen({ id: this.props.id, isOpen: !this.props.isOpen });
-  }
-
   handleClickout = () => {
     if (!this.props.isOpen) return;
     this.props.toggleOpen({ id: this.props.id, isOpen: false });
@@ -102,7 +98,6 @@ export class SelectSearchConnectedComponent extends Component {
         selected={this.props.selected}
         searchTerm={this.props.searchTerm}
         isOpen={this.props.isOpen}
-        toggleOpen={this.onToggleOpen}
         handleOptionClick={this.handleOptionClick}
         handleSelectedClick={this.handleSelectedClick}
         handleSearch={this.handleSearch}

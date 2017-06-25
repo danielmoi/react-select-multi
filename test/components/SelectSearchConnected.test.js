@@ -4,8 +4,7 @@ import { expect } from 'chai';
 import { sandbox, stub, spy } from 'sinon';
 import { fromJS } from 'immutable';
 
-import options from '../fixtures/options';
-import styles from '../fixtures/styles';
+import { optionsUI, selected } from '../fixtures/options';
 import H from '../helpers/index';
 
 import { SelectSearchConnectedComponent } from '../../src/components/SelectSearchConnected';
@@ -134,5 +133,102 @@ describe('<SelectSearchConnected />', () => {
     wrapper.setProps({ isOpen: true });
     wrapped.handleClickout();
     expect(toggleOpenStub.callCount).to.equal(1);
+  });
+
+  it('calls handleSearch upon search input', () => {
+    const toggleOpenStub = stub();
+    const saveSearchStub = stub();
+    const handleSearchStub = stub();
+    const wrapper = mount(
+      <SelectSearchConnectedComponent
+        id="categories"
+        label=""
+        prefix="cookie-search"
+        placeholder=""
+
+        isOpen={false}
+        searchTerm=""
+        optionsUI={fromJS([])}
+        selected={fromJS([])}
+
+        addSelect={H.VOID}
+        removeSelect={H.VOID}
+        saveSelected={H.VOID}
+        toggleOpen={toggleOpenStub}
+        handleSearch={handleSearchStub}
+        saveSearch={saveSearchStub}
+        handleSelectedClick={H.VOID}
+        handleOptionClick={H.VOID}
+      />,
+    );
+
+    const input = wrapper.find('.cookie-search__search-input');
+    input.simulate('change', { target: { value: 'Chocolate' } });
+
+    expect(toggleOpenStub.callCount).to.equal(1);
+    expect(saveSearchStub.callCount).to.equal(1);
+    expect(handleSearchStub.callCount).to.equal(1);
+  });
+
+  it('calls handleOptionClick upon clicking option', () => {
+    const handleOptionClickStub = stub();
+    const wrapper = mount(
+      <SelectSearchConnectedComponent
+        id="categories"
+        label=""
+        prefix="cookie-search"
+        placeholder=""
+
+        isOpen
+        searchTerm=""
+        optionsUI={fromJS(optionsUI)}
+        selected={fromJS([])}
+
+        addSelect={H.VOID}
+        removeSelect={H.VOID}
+        saveSelected={H.VOID}
+        toggleOpen={H.VOID}
+        handleSearch={H.VOID}
+        saveSearch={H.VOID}
+        handleSelectedClick={H.VOID}
+        handleOptionClick={handleOptionClickStub}
+      />,
+    );
+
+    const option = wrapper.find('.cookie-search__option-checkbox').at(0);
+    option.simulate('change');
+
+    expect(handleOptionClickStub.callCount).to.equal(1);
+  });
+
+  it('calls handleSelectedClick upon clicking selected item', () => {
+    const handleSelectedClickStub = stub();
+    const wrapper = mount(
+      <SelectSearchConnectedComponent
+        id="categories"
+        label=""
+        prefix="cookie-search"
+        placeholder=""
+
+        isOpen
+        searchTerm=""
+        optionsUI={fromJS([])}
+        selected={fromJS(selected)}
+
+        addSelect={H.VOID}
+        removeSelect={H.VOID}
+        saveSelected={H.VOID}
+        toggleOpen={H.VOID}
+        handleSearch={H.VOID}
+        saveSearch={H.VOID}
+        handleSelectedClick={handleSelectedClickStub}
+        handleOptionClick={H.VOID}
+      />,
+    );
+
+    const option = wrapper.find('.cookie-search__display-item').at(0);
+    option.simulate('click');
+
+    expect(handleSelectedClickStub.callCount).to.equal(1);
   });
 });

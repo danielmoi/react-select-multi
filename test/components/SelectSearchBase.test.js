@@ -1,14 +1,12 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import { expect } from 'chai';
-import { sandbox, stub, spy } from 'sinon';
+import { sandbox, stub } from 'sinon';
 import { fromJS } from 'immutable';
 
 import { optionsUI, selected } from '../fixtures/options';
-import styles from '../fixtures/styles';
 import H from '../helpers/index';
 
-import { SelectSearchConnectedComponent } from '../../src/components/SelectSearchConnected';
 import SelectSearchBase from '../../src/components/SelectSearchBase';
 
 describe('<SelectSearchBase />', () => {
