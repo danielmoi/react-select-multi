@@ -20,8 +20,8 @@ describe('<SelectState />', () => {
         options={options}
         selected={[]}
         styles={styles}
-        toggleOpen={H.NOOP}
-        onCheck={H.NOOP}
+        toggleOpen={H.VOID}
+        onCheck={H.VOID}
       />,
     );
 
@@ -38,8 +38,8 @@ describe('<SelectState />', () => {
         options={options}
         selected={[]}
         styles={styles}
-        toggleOpen={H.NOOP}
-        onCheck={H.NOOP}
+        toggleOpen={H.VOID}
+        onCheck={H.VOID}
       />,
     );
 
@@ -55,8 +55,8 @@ describe('<SelectState />', () => {
         options={options}
         selected={[]}
         styles={styles}
-        toggleOpen={H.NOOP}
-        onCheck={H.NOOP}
+        toggleOpen={H.VOID}
+        onCheck={H.VOID}
       />,
     );
 
@@ -71,8 +71,8 @@ describe('<SelectState />', () => {
         options={options}
         selected={[]}
         styles={styles}
-        toggleOpen={H.NOOP}
-        onCheck={H.NOOP}
+        toggleOpen={H.VOID}
+        onCheck={H.VOID}
       />,
     );
 
@@ -99,7 +99,7 @@ describe('<SelectState />', () => {
         options={options}
         selected={[]}
         styles={styles}
-        toggleOpen={H.NOOP}
+        toggleOpen={H.VOID}
         onCheck={onCheck}
       />,
     );
@@ -121,8 +121,8 @@ describe('<SelectState />', () => {
         options={options}
         selected={[]}
         styles={styles}
-        toggleOpen={H.NOOP}
-        onCheck={H.NOOP}
+        toggleOpen={H.VOID}
+        onCheck={H.VOID}
       />,
     );
 
@@ -144,8 +144,8 @@ describe('<SelectState />', () => {
         options={options}
         selected={[]}
         styles={styles}
-        toggleOpen={H.NOOP}
-        onCheck={H.NOOP}
+        toggleOpen={H.VOID}
+        onCheck={H.VOID}
       />,
     );
 

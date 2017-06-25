@@ -11,3 +11,8 @@ export const optionsUI = [
   { display: 'Wigs', id: '345' },
   { display: 'Shoelaces', id: '456' },
 ];
+
+export const selected = [
+  { display: 'Hotdogs', id: '123' },
+  { display: 'Buns', id: '234' },
+];

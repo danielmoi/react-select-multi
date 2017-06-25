@@ -19,10 +19,10 @@ describe('<SelectConnected />', () => {
         initialSelected={[]}
         selected={[]}
         styles={styles}
-        toggleOpen={H.NOOP}
-        addSelect={H.NOOP}
-        removeSelect={H.NOOP}
-        saveSelected={H.NOOP}
+        toggleOpen={H.VOID}
+        addSelect={H.VOID}
+        removeSelect={H.VOID}
+        saveSelected={H.VOID}
       />,
     );
     expect(wrapper.find(SelectBase).length).to.equal(1);
@@ -41,10 +41,10 @@ describe('<SelectConnected />', () => {
         initialSelected={[]}
         selected={[]}
         styles={styles}
-        toggleOpen={H.NOOP}
+        toggleOpen={H.VOID}
         addSelect={addSelectStub}
-        removeSelect={H.NOOP}
-        saveSelected={H.NOOP}
+        removeSelect={H.VOID}
+        saveSelected={H.VOID}
       />,
     );
 
@@ -66,10 +66,10 @@ describe('<SelectConnected />', () => {
         initialSelected={[]}
         selected={[]}
         styles={styles}
-        toggleOpen={H.NOOP}
+        toggleOpen={H.VOID}
         saveSelected={saveSelectedStub}
-        addSelect={H.NOOP}
-        removeSelect={H.NOOP}
+        addSelect={H.VOID}
+        removeSelect={H.VOID}
       />,
     );
 
@@ -96,9 +96,9 @@ describe('<SelectConnected />', () => {
         initialSelected={[]}
         selected={[]}
         styles={styles}
-        toggleOpen={H.NOOP}
-        saveSelected={H.NOOP}
-        addSelect={H.NOOP}
+        toggleOpen={H.VOID}
+        saveSelected={H.VOID}
+        addSelect={H.VOID}
         removeSelect={removeSelectStub}
       />,
     );
@@ -119,9 +119,9 @@ describe('<SelectConnected />', () => {
         initialSelected={[]}
         styles={styles}
         toggleOpen={toggleOpenStub}
-        addSelect={H.NOOP}
-        removeSelect={H.NOOP}
-        saveSelected={H.NOOP}
+        addSelect={H.VOID}
+        removeSelect={H.VOID}
+        saveSelected={H.VOID}
       />,
     );
     wrapper.find('.rsm-control__container').simulate('click');
@@ -139,8 +139,8 @@ describe('<SelectConnected />', () => {
         selected={[]}
         styles={styles}
         toggleOpen={toggleOpenStub}
-        addSelect={H.NOOP}
-        removeSelect={H.NOOP}
+        addSelect={H.VOID}
+        removeSelect={H.VOID}
         saveSelected={saveSelectedStub}
         isMultipleSelect={false}
       />,
@@ -165,8 +165,8 @@ describe('<SelectConnected />', () => {
         selected={[]}
         styles={styles}
         toggleOpen={toggleOpenStub}
-        addSelect={H.NOOP}
-        removeSelect={H.NOOP}
+        addSelect={H.VOID}
+        removeSelect={H.VOID}
         saveSelected={saveSelectedStub}
         isMultipleSelect
       />,
@@ -210,9 +210,9 @@ describe('<SelectConnected />', () => {
         selected={[]}
         styles={styles}
         toggleOpen={toggleOpenStub}
-        addSelect={H.NOOP}
-        removeSelect={H.NOOP}
-        saveSelected={H.NOOP}
+        addSelect={H.VOID}
+        removeSelect={H.VOID}
+        saveSelected={H.VOID}
         isMultipleSelect
       />,
     );

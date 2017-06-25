@@ -18,8 +18,8 @@ describe('<SelectBase />', () => {
         options={options}
         selected={[options[0]]}
         styles={styles}
-        toggleOpen={H.NOOP}
-        onCheck={H.NOOP}
+        toggleOpen={H.VOID}
+        onCheck={H.VOID}
       />,
     );
 
@@ -36,7 +36,7 @@ describe('<SelectBase />', () => {
         selected={[options[0]]}
         styles={styles}
         toggleOpen={toggleOpenStub}
-        onCheck={H.NOOP}
+        onCheck={H.VOID}
       />,
     );
 
@@ -52,8 +52,8 @@ describe('<SelectBase />', () => {
         selected={[]}
         placeholder="PLACEY PLACE"
         styles={styles}
-        toggleOpen={H.NOOP}
-        onCheck={H.NOOP}
+        toggleOpen={H.VOID}
+        onCheck={H.VOID}
       />,
     );
 
@@ -67,8 +67,8 @@ describe('<SelectBase />', () => {
         options={options}
         selected={fromJS([options[0]])}
         styles={styles}
-        toggleOpen={H.NOOP}
-        onCheck={H.NOOP}
+        toggleOpen={H.VOID}
+        onCheck={H.VOID}
       />,
     );
 
@@ -99,8 +99,8 @@ describe('<SelectBase />', () => {
         options={options}
         selected={[options[0]]}
         styles={styles}
-        toggleOpen={H.NOOP}
-        onCheck={H.NOOP}
+        toggleOpen={H.VOID}
+        onCheck={H.VOID}
       />,
     );
 

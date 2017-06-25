@@ -2,39 +2,31 @@
 import React, { Component } from 'react';
 import { Map, List } from 'immutable';
 
-import type { Options, Selected, Callback, Styles, DefaultStyles } from '../types';
+import type { Options, Selected, Callback } from '../types';
 
 type SelectSearchBaseProps = {
   // config
   id: string,
-  isMultipleSelect: boolean,
-  isSearchable: boolean,
 
-  // data / appearance
+  // appearance
   label: string,
   placeholder: string,
-  options: Options,
-  styles: Styles,
   prefix: string,
+
+  // data
+  isOpen: boolean,
+  searchTerm: string,
+  options: Options,
+  selected: Selected,
 
   // methods
   toggleOpen: Callback,
   handleSearch: Callback,
-  handleOptionClick: Callback,
   handleSelectedClick: Callback,
-
-  // dynamic
-  isOpen: boolean,
-  selected: Selected,
-  searchTerm: string,
+  handleOptionClick: Callback,
 };
 
-type SelectSearchBaseDefaultProps = {
-  styles: DefaultStyles,
-}
-
 class SelectSearchBase extends Component {
-  defaultProps: SelectSearchBaseDefaultProps;
   props: SelectSearchBaseProps;
 
   handleSearch = (e: Object) => {
@@ -46,18 +38,10 @@ class SelectSearchBase extends Component {
       isOpen,
       placeholder = 'Type to search',
       handleOptionClick, handleSelectedClick,
-      prefix = 'rsm',
+      prefix,
     } = this.props;
 
-    let selectedLength;
-
-    if ((Map.isMap(selected) || List.isList(selected)) && !Array.isArray(selected)) {
-      selectedLength = selected.size;
-    }
-
-    if (Array.isArray(selected)) {
-      selectedLength = selected.length;
-    }
+    const selectedLength = selected.size || selected.length;
 
     return (
       <div className={`${prefix}__wrapper`}>

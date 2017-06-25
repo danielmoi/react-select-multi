@@ -10,53 +10,44 @@ import {
   saveSelected,
   saveSearch,
   removeSelect,
-  saveOptionsUI,
 } from '../redux/actions';
 
-import type { Options, Selected, Callback, Styles, DefaultStyles } from '../types';
+import type { Options, Selected, Callback } from '../types';
 
 type SelectSearchConnectedProps = {
   // config
   id: string,
-  isMultipleSelect: boolean,
-  isSearchable: boolean,
 
-  // data / appearance
-  prefix: string,
+  // appearance
   label: string,
+  prefix: string,
   placeholder: string,
-  optionsUI: Options,
-  initialSelected: Array<string>,
-  styles: Styles,
 
-  // methods
-  toggleOpen: Callback,
+  // data
+  isOpen: boolean,
+  searchTerm: string,
+  optionsUI: Options,
+  selected: Selected,
+
+  // connected methods
   addSelect: Callback,
-  saveSelected: Callback,
   removeSelect: Callback,
+  saveSelected: Callback,
+
+  toggleOpen: Callback,
   handleSearch: Callback,
-  saveOptionsUI: Callback,
   saveSearch: Callback,
   handleSelectedClick: Callback,
   handleOptionClick: Callback,
-
-  // dynamic
-  isOpen: boolean,
-  selected: Selected,
-  searchTerm: string,
 };
 
 type SelectSearchConnectedDefaultProps = {
-  // config
-  isMultipleSelect: false,
-  isSearchable: false,
-
-  // data / appearance
+  // appearance
   label: '',
   placeholder: '',
-  styles: DefaultStyles,
+  prefix: 'rsm',
 
-  // dynamic
+  // data
   isOpen: false,
   searchTerm: '',
 };
@@ -104,20 +95,17 @@ export class SelectSearchConnectedComponent extends Component {
     return (
       <SelectSearchBase
         id={this.props.id}
-        isMultipleSelect={this.props.isMultipleSelect}
-        isSearchable={this.props.isSearchable}
         label={this.props.label}
+        prefix={this.props.prefix}
         placeholder={this.props.placeholder}
         options={this.props.optionsUI}
-        styles={this.props.styles}
+        selected={this.props.selected}
+        searchTerm={this.props.searchTerm}
+        isOpen={this.props.isOpen}
         toggleOpen={this.onToggleOpen}
         handleOptionClick={this.handleOptionClick}
         handleSelectedClick={this.handleSelectedClick}
-        isOpen={this.props.isOpen}
-        selected={this.props.selected}
-        searchTerm={this.props.searchTerm}
         handleSearch={this.handleSearch}
-        prefix={this.props.prefix}
       />);
   }
 }
@@ -135,7 +123,6 @@ const mapDispatchToProps = {
   saveSelected,
   saveSearch,
   removeSelect,
-  saveOptionsUI,
 };
 
 const Wrapped = wrapWithClickout(SelectSearchConnectedComponent);
