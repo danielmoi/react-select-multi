@@ -39,7 +39,7 @@ class SelectSearchBase extends Component {
       prefix,
     } = this.props;
 
-    const selectedLength = selected.size || selected.length;
+    const selectedLength = (selected && selected.size) || (selected && selected.length);
 
     return (
       <div className={`${prefix}__wrapper`}>
