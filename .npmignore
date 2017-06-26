@@ -1,11 +1,18 @@
+# coverage
 .nyc_output
 .github
-
 coverage
+
+# dev
+.vscode
+.ideas
 flow-typed
 node_modules
+
+# logs
 npm-debug.log
 
+# build
 src
 test
 
