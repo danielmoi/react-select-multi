@@ -15,6 +15,7 @@ npm-debug.log
 # build
 src
 test
+dist
 
 .babelrc
 .coveralls.yml
