@@ -28,6 +28,9 @@ type SelectSearchConnectedProps = {
   searchTerm: string,
   optionsUI: Options,
   selected: Selected,
+  totalPages: number,
+  currentPage: number,
+  loading: boolean,
 
   // connected methods
   addSelect: Callback,
@@ -87,6 +90,21 @@ export class SelectSearchConnectedComponent extends Component {
     this.props.handleSearch({ search: searchTerm });
   }
 
+  handleScroll = (e: Object) => {
+    const { scrollTop, offsetHeight, scrollHeight } = e.target;
+    const { currentPage, totalPages, loading } = this.props;
+    const nextPage = Number(currentPage) + 1;
+    const loadHeight = (scrollHeight - offsetHeight) - 50;
+    if (Math.floor(scrollTop) >= (loadHeight)
+      && nextPage <= totalPages && !loading) {
+      console.log('WE NEED TO FETCH!!!!!!!!!!!!!!!');
+      this.props.handleSearch({
+        search: this.props.searchTerm,
+        pageNo: nextPage,
+      });
+    }
+  }
+
   render() {
     return (
       <SelectSearchBase
@@ -101,6 +119,7 @@ export class SelectSearchConnectedComponent extends Component {
         handleOptionClick={this.handleOptionClick}
         handleSelectedClick={this.handleSelectedClick}
         handleSearch={this.handleSearch}
+        handleScroll={this.handleScroll}
       />);
   }
 }

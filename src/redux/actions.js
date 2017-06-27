@@ -34,6 +34,31 @@ const saveOptionsUI: ActionCreator = (data: Object) => ({
   data,
 });
 
+const addSelected: ActionCreator = (data: Object) => ({
+  type: C.RSM_ADD_SELECTED,
+  data,
+});
+
+const addItem: ActionCreator = (data: Object) => ({
+  type: C.RSM_ADD_ITEM,
+  data,
+});
+
+const removeItem: ActionCreator = (data: Object) => ({
+  type: C.RSM_REMOVE_ITEM,
+  data,
+});
+
+const removeOptionUI: ActionCreator = (data: Object) => ({
+  type: C.RSM_REMOVE_OPTION_UI,
+  data,
+});
+
+const mergeOptionsUI: ActionCreator = (data: Object) => ({
+  type: C.RSM_MERGE_OPTIONS_UI,
+  data,
+});
+
 module.exports = {
   addSelect,
   toggleOpen,
@@ -41,4 +66,11 @@ module.exports = {
   saveSelected,
   removeSelect,
   saveOptionsUI,
+
+  addSelected,
+  addItem,
+  removeItem,
+
+  mergeOptionsUI,
+  removeOptionUI,
 };

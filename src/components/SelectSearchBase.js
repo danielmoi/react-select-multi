@@ -73,7 +73,10 @@ class SelectSearchBase extends Component {
 
         {isOpen && options
         ?
-          <div className={`${prefix}__open-wrapper`}>
+          <div
+            className={`${prefix}__open-wrapper`}
+            onScroll={this.props.handleScroll}
+          >
             {options.map(option => (
               <div
                 key={`${option.get('id')}--option`}
