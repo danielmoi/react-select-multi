@@ -27,28 +27,31 @@ const saveSearch: ActionCreator = (data: Object) => ({
   data,
 });
 
-// Multiple Selected
+// Multiple Selected (Set)
 const setSelected: ActionCreator = (data: Object) => ({
   type: C.RSM_SET_SELECTED,
   data,
 });
 
-// Multiple Options
+// Multiple Options (Merge)
 const mergeOptions: ActionCreator = (data: Object) => ({
   type: C.RSM_MERGE_OPTIONS,
   data,
 });
+
+// Multiple Options (Set)
 const setOptions: ActionCreator = (data: Object) => ({
   type: C.RSM_SET_OPTIONS,
   data,
 });
 
-// Single Item (Option / Selected)
+// Single Item (Option / Selected) – Add
 const addItem: ActionCreator = (data: Object) => ({
   type: C.RSM_ADD_ITEM,
   data,
 });
 
+// Single Item (Option / Selected) – Remove
 const removeItem: ActionCreator = (data: Object) => ({
   type: C.RSM_REMOVE_ITEM,
   data,
