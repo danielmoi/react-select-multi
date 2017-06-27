@@ -231,4 +231,54 @@ describe('<SelectSearchConnected />', () => {
 
     expect(handleSelectedClickStub.callCount).to.equal(1);
   });
+
+  it('calls handleSearch when loadHeight is reached', () => {
+    const handleSearchStub = stub();
+    const wrapper = mount(
+      <SelectSearchConnectedComponent
+        id="categories"
+        label=""
+        prefix="cookie-search"
+        placeholder=""
+
+        isOpen
+        searchTerm=""
+        options={fromJS([])}
+        selected={fromJS(selected)}
+
+        addSelect={H.VOID}
+        removeSelect={H.VOID}
+        setSelected={H.VOID}
+        toggleOpen={H.VOID}
+        handleSearch={handleSearchStub}
+        saveSearch={H.VOID}
+        handleSelectedClick={H.VOID}
+        handleOptionClick={H.VOID}
+
+        currentPage={2}
+        totalPages={5}
+        loading={false}
+      />,
+    );
+
+    const scrollWrapper = wrapper.find('.cookie-search__open-wrapper');
+
+    // loadHeight is (200 - 100) - 50 === 50
+    // so when top of items exceeds 50, load more
+    scrollWrapper.simulate('scroll', { target: {
+      offsetHeight: 100, // height of scrollWrapper
+      scrollHeight: 200, // height of all items
+      scrollTop: 40, // height of all items ABOVE top of visible items (top of scrollWrapper)
+    } });
+
+    expect(handleSearchStub.callCount).to.equal(0);
+
+    // scroll more
+    scrollWrapper.simulate('scroll', { target: {
+      offsetHeight: 100, // height of scrollWrapper
+      scrollHeight: 200, // height of all items
+      scrollTop: 60, // height of all items ABOVE top of visible items (top of scrollWrapper)
+    } });
+    expect(handleSearchStub.callCount).to.equal(1);
+  });
 });
