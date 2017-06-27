@@ -61,18 +61,18 @@ const reducer: Reducer = (state: DataState = fromJS(initialState), action: Actio
 
     // Single Item (Option / Selected) – Add
     case C.RSM_ADD_ITEM: {
-      const { id, option, addTo } = action.data;
+      const { id, item, addTo } = action.data;
       const existing = state.getIn([id, addTo]);
-      const updated = existing.toOrderedSet().add(option).toList();
+      const updated = existing.toOrderedSet().add(item).toList();
       const merged = state.setIn([id, addTo], updated);
       return merged;
     }
 
     // Single Item (Option / Selected) – Add
     case C.RSM_REMOVE_ITEM: {
-      const { id, option, removeFrom } = action.data;
+      const { id, item, removeFrom } = action.data;
       const existing = state.getIn([id, removeFrom]);
-      const updated = existing.toOrderedSet().remove(option).toList();
+      const updated = existing.toOrderedSet().remove(item).toList();
       const merged = state.setIn([id, removeFrom], updated);
       return merged;
     }

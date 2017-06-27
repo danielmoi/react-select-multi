@@ -73,8 +73,8 @@ export class SelectSearchConnectedComponent extends Component {
     this.props.handleOptionClick({ selectId: this.props.id, option });
   }
 
-  handleSelectedClick = (option: Object) => () => {
-    this.props.handleSelectedClick({ selectId: this.props.id, option });
+  handleSelectedClick = (selected: Object) => () => {
+    this.props.handleSelectedClick({ selectId: this.props.id, selected });
   }
 
   handleClickout = () => {

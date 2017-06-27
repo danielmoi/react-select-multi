@@ -139,7 +139,7 @@ describe('Reducer', () => {
       type: C.RSM_ADD_ITEM,
       data: {
         id: 'names',
-        option: toAdd,
+        item: toAdd,
         addTo: 'options',
       },
     };
@@ -170,7 +170,7 @@ describe('Reducer', () => {
       type: C.RSM_ADD_ITEM,
       data: {
         id: 'names',
-        option: toAdd,
+        item: toAdd,
         addTo: 'options',
       },
     };
@@ -203,7 +203,7 @@ describe('Reducer', () => {
       type: C.RSM_REMOVE_ITEM,
       data: {
         id: 'names',
-        option: toRemove,
+        item: toRemove,
         removeFrom: 'selected',
       },
     };
