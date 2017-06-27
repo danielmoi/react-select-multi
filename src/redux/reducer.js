@@ -35,20 +35,21 @@ const reducer: Reducer = (state: DataState = fromJS(initialState), action: Actio
       return state.setIn([id, 'searchTerm'], searchTerm);
     }
 
-    // Multiple Selected
+    // Multiple Selected (Set)
     case C.RSM_SET_SELECTED: {
       const { id, selected } = action.data;
       // use setIn because we providing the entire new dataset to replace state
       return state.setIn([id, 'selected'], selected);
     }
 
-    // Multiple Options
+    // Multiple Options (Set)
     case C.RSM_SET_OPTIONS: {
       const { id, options } = action.data;
-      console.log('id, options:', id, options);
       // use setIn because we providing the entire new dataset to replace state
       return state.setIn([id, 'options'], options);
     }
+
+    // Multiple Options (Merge)
     case C.RSM_MERGE_OPTIONS: {
       // this will merge in the new List, checking for duplicates
       const { id, options } = action.data;
@@ -58,7 +59,7 @@ const reducer: Reducer = (state: DataState = fromJS(initialState), action: Actio
       return merged;
     }
 
-    // Single Item (Option / Selected)
+    // Single Item (Option / Selected) – Add
     case C.RSM_ADD_ITEM: {
       const { id, option, addTo } = action.data;
       const existing = state.getIn([id, addTo]);
@@ -66,6 +67,8 @@ const reducer: Reducer = (state: DataState = fromJS(initialState), action: Actio
       const merged = state.setIn([id, addTo], updated);
       return merged;
     }
+
+    // Single Item (Option / Selected) – Add
     case C.RSM_REMOVE_ITEM: {
       const { id, option, removeFrom } = action.data;
       const existing = state.getIn([id, removeFrom]);
