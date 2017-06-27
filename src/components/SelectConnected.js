@@ -7,7 +7,7 @@ import SelectBase from './SelectBase';
 import {
   addSelect,
   toggleOpen,
-  saveSelected,
+  setSelected,
   removeSelect,
 } from '../redux/actions';
 
@@ -29,7 +29,7 @@ type SelectConnectedProps = {
   // methods
   toggleOpen: Callback,
   addSelect: Callback,
-  saveSelected: Callback,
+  setSelected: Callback,
   removeSelect: Callback,
 
   // dynamic
@@ -65,7 +65,7 @@ export class SelectConnectedComponent extends Component {
   componentWillReceiveProps(nextProps: SelectConnectedProps) {
     const { id, initialSelected } = nextProps;
     if (nextProps.initialSelected[0] !== this.props.initialSelected[0]) {
-      this.props.saveSelected({ id, selected: initialSelected });
+      this.props.setSelected({ id, selected: initialSelected });
     }
   }
 
@@ -83,10 +83,10 @@ export class SelectConnectedComponent extends Component {
       } else {
         updatedSelected = [...selected, checkboxValue];
       }
-      this.props.saveSelected({ id, selected: updatedSelected });
+      this.props.setSelected({ id, selected: updatedSelected });
     } else {
       // not multipleSelect
-      this.props.saveSelected({ id, selected: [checkboxValue] });
+      this.props.setSelected({ id, selected: [checkboxValue] });
       this.props.toggleOpen({ id, isOpen: false });
     }
   }
@@ -127,7 +127,7 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = {
   addSelect,
   toggleOpen,
-  saveSelected,
+  setSelected,
   removeSelect,
 };
 

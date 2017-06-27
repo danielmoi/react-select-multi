@@ -6,10 +6,10 @@ import {
   removeSelect,
   toggleOpen,
   saveSearch,
-  saveSelected,
-  saveOptionsUI,
+  setSelected,
+  setOptions,
 } from '../../src/redux/actions';
-import { optionsUI } from '../fixtures/options';
+import { options } from '../fixtures/options';
 
 describe('Actions', () => {
   it(`should create action for ${C.RSM_ADD_SELECT}`, () => {
@@ -28,12 +28,12 @@ describe('Actions', () => {
     expect(toggleOpen(expectedAction.data)).to.deep.equal(expectedAction);
   });
 
-  it(`should create action for ${C.RSM_SAVE_SELECTED}`, () => {
+  it(`should create action for ${C.RSM_SET_SELECTED}`, () => {
     const expectedAction = {
-      type: C.RSM_SAVE_SELECTED,
+      type: C.RSM_SET_SELECTED,
       data: { id: 'select', selected: ['Option 1', 'Option 2'] },
     };
-    expect(saveSelected(expectedAction.data)).to.deep.equal(expectedAction);
+    expect(setSelected(expectedAction.data)).to.deep.equal(expectedAction);
   });
 
   it(`should create action for ${C.RSM_REMOVE_SELECT}`, () => {
@@ -52,11 +52,11 @@ describe('Actions', () => {
     expect(saveSearch(expectedAction.data)).to.deep.equal(expectedAction);
   });
 
-  it(`should create action for ${C.RSM_SAVE_OPTIONS_UI}`, () => {
+  it(`should create action for ${C.RSM_SET_OPTIONS}`, () => {
     const expectedAction = {
-      type: C.RSM_SAVE_OPTIONS_UI,
-      data: { id: 'select', optionsUI: fromJS(optionsUI) },
+      type: C.RSM_SET_OPTIONS,
+      data: { id: 'select', options: fromJS(options) },
     };
-    expect(saveOptionsUI(expectedAction.data)).to.deep.equal(expectedAction);
+    expect(setOptions(expectedAction.data)).to.deep.equal(expectedAction);
   });
 });

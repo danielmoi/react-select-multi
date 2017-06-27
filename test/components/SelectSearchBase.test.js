@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import { sandbox, stub } from 'sinon';
 import { fromJS } from 'immutable';
 
-import { optionsUI, selected } from '../fixtures/options';
+import { options, selected } from '../fixtures/options';
 import H from '../helpers/index';
 
 import SelectSearchBase from '../../src/components/SelectSearchBase';
@@ -83,7 +83,7 @@ describe('<SelectSearchBase />', () => {
         isOpen={false}
         searchTerm=""
         selected={fromJS([])}
-        options={fromJS(optionsUI)}
+        options={fromJS(options)}
 
         toggleOpen={H.VOID}
         handleSearch={handleSearchStub}

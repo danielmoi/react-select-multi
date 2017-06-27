@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import { sandbox, stub, spy } from 'sinon';
 import { fromJS } from 'immutable';
 
-import { optionsUI, selected } from '../fixtures/options';
+import { options, selected } from '../fixtures/options';
 import H from '../helpers/index';
 
 import { SelectSearchConnectedComponent } from '../../src/components/SelectSearchConnected';
@@ -28,12 +28,12 @@ describe('<SelectSearchConnected />', () => {
 
         isOpen={false}
         searchTerm=""
-        optionsUI={fromJS([])}
+        options={fromJS([])}
         selected={fromJS([])}
 
         addSelect={H.VOID}
         removeSelect={H.VOID}
-        saveSelected={H.VOID}
+        setSelected={H.VOID}
         toggleOpen={H.VOID}
         handleSearch={H.VOID}
         saveSearch={H.VOID}
@@ -56,12 +56,12 @@ describe('<SelectSearchConnected />', () => {
 
         isOpen={false}
         searchTerm=""
-        optionsUI={fromJS([])}
+        options={fromJS([])}
         selected={fromJS([])}
 
         addSelect={addSelectStub}
         removeSelect={H.VOID}
-        saveSelected={H.VOID}
+        setSelected={H.VOID}
         toggleOpen={H.VOID}
         handleSearch={H.VOID}
         saveSearch={H.VOID}
@@ -84,12 +84,12 @@ describe('<SelectSearchConnected />', () => {
 
         isOpen={false}
         searchTerm=""
-        optionsUI={fromJS([])}
+        options={fromJS([])}
         selected={fromJS([])}
 
         addSelect={H.VOID}
         removeSelect={removeSelectStub}
-        saveSelected={H.VOID}
+        setSelected={H.VOID}
         toggleOpen={H.VOID}
         handleSearch={H.VOID}
         saveSearch={H.VOID}
@@ -113,12 +113,12 @@ describe('<SelectSearchConnected />', () => {
 
         isOpen={false}
         searchTerm=""
-        optionsUI={fromJS([])}
+        options={fromJS([])}
         selected={fromJS([])}
 
         addSelect={H.VOID}
         removeSelect={H.VOID}
-        saveSelected={H.VOID}
+        setSelected={H.VOID}
         toggleOpen={toggleOpenStub}
         handleSearch={H.VOID}
         saveSearch={H.VOID}
@@ -148,12 +148,12 @@ describe('<SelectSearchConnected />', () => {
 
         isOpen={false}
         searchTerm=""
-        optionsUI={fromJS([])}
+        options={fromJS([])}
         selected={fromJS([])}
 
         addSelect={H.VOID}
         removeSelect={H.VOID}
-        saveSelected={H.VOID}
+        setSelected={H.VOID}
         toggleOpen={toggleOpenStub}
         handleSearch={handleSearchStub}
         saveSearch={saveSearchStub}
@@ -181,12 +181,12 @@ describe('<SelectSearchConnected />', () => {
 
         isOpen
         searchTerm=""
-        optionsUI={fromJS(optionsUI)}
+        options={fromJS(options)}
         selected={fromJS([])}
 
         addSelect={H.VOID}
         removeSelect={H.VOID}
-        saveSelected={H.VOID}
+        setSelected={H.VOID}
         toggleOpen={H.VOID}
         handleSearch={H.VOID}
         saveSearch={H.VOID}
@@ -212,12 +212,12 @@ describe('<SelectSearchConnected />', () => {
 
         isOpen
         searchTerm=""
-        optionsUI={fromJS([])}
+        options={fromJS([])}
         selected={fromJS(selected)}
 
         addSelect={H.VOID}
         removeSelect={H.VOID}
-        saveSelected={H.VOID}
+        setSelected={H.VOID}
         toggleOpen={H.VOID}
         handleSearch={H.VOID}
         saveSearch={H.VOID}

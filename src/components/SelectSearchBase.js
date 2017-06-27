@@ -22,6 +22,7 @@ type SelectSearchBaseProps = {
   handleSearch: Callback,
   handleSelectedClick: Callback,
   handleOptionClick: Callback,
+  handleScroll: Callback,
 };
 
 class SelectSearchBase extends Component {
@@ -37,6 +38,7 @@ class SelectSearchBase extends Component {
       placeholder = 'Type to search',
       handleOptionClick, handleSelectedClick,
       prefix,
+      handleScroll,
     } = this.props;
 
     const selectedLength = (selected && selected.size) || (selected && selected.length);
@@ -75,7 +77,7 @@ class SelectSearchBase extends Component {
         ?
           <div
             className={`${prefix}__open-wrapper`}
-            onScroll={this.props.handleScroll}
+            onScroll={handleScroll}
           >
             {options.map(option => (
               <div

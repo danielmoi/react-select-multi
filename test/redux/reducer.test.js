@@ -3,7 +3,7 @@ import { fromJS } from 'immutable';
 import C from '../../src/redux/constants';
 import initialStateFixture from '../../src/redux/initial_state';
 import reducer from '../../src/redux/reducer';
-import { optionsUI } from '../fixtures/options';
+import { options } from '../fixtures/options';
 
 describe('Reducer', () => {
   let initialState;
@@ -65,9 +65,9 @@ describe('Reducer', () => {
       .to.equal('Cookie Monster');
   });
 
-  it(`should handle ${C.RSM_SAVE_SELECTED}`, () => {
+  it(`should handle ${C.RSM_SET_SELECTED}`, () => {
     const action = {
-      type: C.RSM_SAVE_SELECTED,
+      type: C.RSM_SET_SELECTED,
       data: { id: 'colors', selected: fromJS(['Hotpink', 'Cyan']) },
     };
     const reducedState = reducer(colorsInitialState, action);
@@ -75,13 +75,13 @@ describe('Reducer', () => {
       .to.equal(fromJS(['Hotpink', 'Cyan']));
   });
 
-  it(`should handle ${C.RSM_SAVE_OPTIONS_UI}`, () => {
+  it(`should handle ${C.RSM_SET_OPTIONS}`, () => {
     const action = {
-      type: C.RSM_SAVE_OPTIONS_UI,
-      data: { id: 'colors', optionsUI: fromJS(optionsUI) },
+      type: C.RSM_SET_OPTIONS,
+      data: { id: 'colors', options: fromJS(options) },
     };
     const reducedState = reducer(colorsInitialState, action);
-    expect(reducedState.getIn(['colors', 'optionsUI']))
-      .to.equal(fromJS(optionsUI));
+    expect(reducedState.getIn(['colors', 'options']))
+      .to.equal(fromJS(options));
   });
 });
