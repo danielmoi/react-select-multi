@@ -7,7 +7,7 @@ import SelectSearchBase from './SelectSearchBase';
 import {
   addSelect,
   toggleOpen,
-  saveSelected,
+  setSelected,
   saveSearch,
   removeSelect,
 } from '../redux/actions';
@@ -26,13 +26,16 @@ type SelectSearchConnectedProps = {
   // data
   isOpen: boolean,
   searchTerm: string,
-  optionsUI: Options,
+  options: Options,
   selected: Selected,
+  totalPages: number,
+  currentPage: number,
+  loading: boolean,
 
   // connected methods
   addSelect: Callback,
   removeSelect: Callback,
-  saveSelected: Callback,
+  setSelected: Callback,
 
   toggleOpen: Callback,
   handleSearch: Callback,
@@ -70,8 +73,8 @@ export class SelectSearchConnectedComponent extends Component {
     this.props.handleOptionClick({ selectId: this.props.id, option });
   }
 
-  handleSelectedClick = (option: Object) => () => {
-    this.props.handleSelectedClick({ selectId: this.props.id, option });
+  handleSelectedClick = (selected: Object) => () => {
+    this.props.handleSelectedClick({ selectId: this.props.id, selected });
   }
 
   handleClickout = () => {
@@ -87,6 +90,20 @@ export class SelectSearchConnectedComponent extends Component {
     this.props.handleSearch({ search: searchTerm });
   }
 
+  handleScroll = (e: Object) => {
+    const { scrollTop, offsetHeight, scrollHeight } = e.target;
+    const { currentPage, totalPages, loading } = this.props;
+    const nextPage = Number(currentPage) + 1;
+    const loadHeight = (scrollHeight - offsetHeight) - 50;
+    if (Math.floor(scrollTop) >= (loadHeight)
+      && nextPage <= totalPages && !loading) {
+      this.props.handleSearch({
+        search: this.props.searchTerm,
+        pageNo: nextPage,
+      });
+    }
+  }
+
   render() {
     return (
       <SelectSearchBase
@@ -94,13 +111,14 @@ export class SelectSearchConnectedComponent extends Component {
         label={this.props.label}
         prefix={this.props.prefix}
         placeholder={this.props.placeholder}
-        options={this.props.optionsUI}
+        options={this.props.options}
         selected={this.props.selected}
         searchTerm={this.props.searchTerm}
         isOpen={this.props.isOpen}
         handleOptionClick={this.handleOptionClick}
         handleSelectedClick={this.handleSelectedClick}
         handleSearch={this.handleSearch}
+        handleScroll={this.handleScroll}
       />);
   }
 }
@@ -108,14 +126,14 @@ export class SelectSearchConnectedComponent extends Component {
 const mapStateToProps = (state, ownProps) => ({
   isOpen: state.select.getIn([ownProps.id, 'isOpen']),
   selected: state.select.getIn([ownProps.id, 'selected']),
-  optionsUI: state.select.getIn([ownProps.id, 'optionsUI']),
+  options: state.select.getIn([ownProps.id, 'options']),
   searchTerm: state.select.getIn([ownProps.id, 'searchTerm']),
 });
 
 const mapDispatchToProps = {
   addSelect,
   toggleOpen,
-  saveSelected,
+  setSelected,
   saveSearch,
   removeSelect,
 };

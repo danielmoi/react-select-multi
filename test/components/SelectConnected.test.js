@@ -1,3 +1,5 @@
+/* eslint-disable import/no-named-as-default */
+
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { expect } from 'chai';
@@ -22,7 +24,7 @@ describe('<SelectConnected />', () => {
         toggleOpen={H.VOID}
         addSelect={H.VOID}
         removeSelect={H.VOID}
-        saveSelected={H.VOID}
+        setSelected={H.VOID}
       />,
     );
     expect(wrapper.find(SelectBase).length).to.equal(1);
@@ -44,7 +46,7 @@ describe('<SelectConnected />', () => {
         toggleOpen={H.VOID}
         addSelect={addSelectStub}
         removeSelect={H.VOID}
-        saveSelected={H.VOID}
+        setSelected={H.VOID}
       />,
     );
 
@@ -55,7 +57,7 @@ describe('<SelectConnected />', () => {
 
   it('calls componentWillReceiveProps', () => {
     const spyCWRP = spy(SelectConnectedComponent.prototype, 'componentWillReceiveProps');
-    const saveSelectedStub = stub();
+    const setSelectedStub = stub();
 
     expect(spyCWRP.callCount).to.equal(0);
 
@@ -67,7 +69,7 @@ describe('<SelectConnected />', () => {
         selected={[]}
         styles={styles}
         toggleOpen={H.VOID}
-        saveSelected={saveSelectedStub}
+        setSelected={setSelectedStub}
         addSelect={H.VOID}
         removeSelect={H.VOID}
       />,
@@ -79,7 +81,7 @@ describe('<SelectConnected />', () => {
     });
 
     expect(spyCWRP.callCount).to.equal(1);
-    expect(saveSelectedStub.callCount).to.equal(1);
+    expect(setSelectedStub.callCount).to.equal(1);
     spyCWRP.restore();
   });
 
@@ -97,7 +99,7 @@ describe('<SelectConnected />', () => {
         selected={[]}
         styles={styles}
         toggleOpen={H.VOID}
-        saveSelected={H.VOID}
+        setSelected={H.VOID}
         addSelect={H.VOID}
         removeSelect={removeSelectStub}
       />,
@@ -121,7 +123,7 @@ describe('<SelectConnected />', () => {
         toggleOpen={toggleOpenStub}
         addSelect={H.VOID}
         removeSelect={H.VOID}
-        saveSelected={H.VOID}
+        setSelected={H.VOID}
       />,
     );
     wrapper.find('.rsm-control__container').simulate('click');
@@ -129,7 +131,7 @@ describe('<SelectConnected />', () => {
   });
 
   it('handles clicking on an option checkbox – Single Select', () => {
-    const saveSelectedStub = stub();
+    const setSelectedStub = stub();
     const toggleOpenStub = stub();
     const wrapper = mount(
       <SelectConnectedComponent
@@ -141,20 +143,20 @@ describe('<SelectConnected />', () => {
         toggleOpen={toggleOpenStub}
         addSelect={H.VOID}
         removeSelect={H.VOID}
-        saveSelected={saveSelectedStub}
+        setSelected={setSelectedStub}
         isMultipleSelect={false}
       />,
     );
     wrapper.setProps({ isOpen: true });
 
     wrapper.find('input[type="checkbox"]').at(0).simulate('change', { target: { checked: true } });
-    expect(saveSelectedStub.callCount).to.equal(1);
+    expect(setSelectedStub.callCount).to.equal(1);
     expect(toggleOpenStub.callCount).to.equal(1);
   });
 
   it('handles clicking on an option checkbox – Multiple Select', () => {
-    const saveSelectedStub = stub();
-    const calledWith = saveSelectedStub.args;
+    const setSelectedStub = stub();
+    const calledWith = setSelectedStub.args;
     const toggleOpenStub = stub();
 
     const wrapper = mount(
@@ -167,7 +169,7 @@ describe('<SelectConnected />', () => {
         toggleOpen={toggleOpenStub}
         addSelect={H.VOID}
         removeSelect={H.VOID}
-        saveSelected={saveSelectedStub}
+        setSelected={setSelectedStub}
         isMultipleSelect
       />,
     );
@@ -176,7 +178,7 @@ describe('<SelectConnected />', () => {
     // selected: []
     // click 'hotdogs'
     wrapper.find('input[type="checkbox"]').at(0).simulate('change', { target: { checked: true } });
-    expect(saveSelectedStub.callCount).to.equal(1);
+    expect(setSelectedStub.callCount).to.equal(1);
     expect(toggleOpenStub.callCount).to.equal(0);
     expect(calledWith[0][0].id).to.equal('category-select');
     expect(calledWith[0][0].selected).to.deep.equal([options[0].tag]);
@@ -186,7 +188,7 @@ describe('<SelectConnected />', () => {
     wrapper.setProps({ selected: [options[0].tag] });
     // click 'buns'
     wrapper.find('input[type="checkbox"]').at(1).simulate('change', { target: { checked: true } });
-    expect(saveSelectedStub.callCount).to.equal(2);
+    expect(setSelectedStub.callCount).to.equal(2);
     expect(calledWith[1][0].id).to.equal('category-select');
     expect(calledWith[1][0].selected).to.deep.equal([options[0].tag, options[1].tag]);
 
@@ -194,7 +196,7 @@ describe('<SelectConnected />', () => {
     wrapper.setProps({ selected: [options[0].tag] });
     // click 'hotdogs'
     wrapper.find('input[type="checkbox"]').at(0).simulate('change', { target: { checked: true } });
-    expect(saveSelectedStub.callCount).to.equal(3);
+    expect(setSelectedStub.callCount).to.equal(3);
     expect(calledWith[2][0].id).to.equal('category-select');
     expect(calledWith[2][0].selected).to.deep.equal([]);
   });
@@ -212,7 +214,7 @@ describe('<SelectConnected />', () => {
         toggleOpen={toggleOpenStub}
         addSelect={H.VOID}
         removeSelect={H.VOID}
-        saveSelected={H.VOID}
+        setSelected={H.VOID}
         isMultipleSelect
       />,
     );

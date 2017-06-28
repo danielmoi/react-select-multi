@@ -5,7 +5,7 @@ export default [
   { display: 'Shoelaces', tag: 'shoelaces' },
 ];
 
-export const optionsUI = [
+export const options = [
   { display: 'Hotdogs', id: '123' },
   { display: 'Buns', id: '234' },
   { display: 'Wigs', id: '345' },
