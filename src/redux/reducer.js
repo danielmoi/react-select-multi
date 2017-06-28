@@ -42,6 +42,12 @@ const reducer: Reducer = (state: DataState = fromJS(initialState), action: Actio
       return state.setIn([id, 'selected'], selected);
     }
 
+    // Multiple Selected (Clear)
+    case C.RSM_CLEAR_SELECTED: {
+      const { id } = action.data;
+      return state.setIn([id, 'selected'], fromJS([]));
+    }
+
     // Multiple Options (Set)
     case C.RSM_SET_OPTIONS: {
       const { id, options } = action.data;

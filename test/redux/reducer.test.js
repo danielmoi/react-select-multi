@@ -80,6 +80,27 @@ describe('Reducer', () => {
       .to.equal(fromJS(['Hotpink', 'Cyan']));
   });
 
+  // Multiple Selected (Clear)
+  it(`should handle ${C.RSM_CLEAR_SELECTED}`, () => {
+    const initialSelected = fromJS([
+      { id: 1, name: 'Hotpink' },
+      { id: 4, name: 'Tomato' },
+    ]);
+    const clearInitialState = fromJS({
+      colors: {
+        selected: initialSelected,
+      },
+    });
+
+    const action = {
+      type: C.RSM_CLEAR_SELECTED,
+      data: { id: 'colors' },
+    };
+    const reducedState = reducer(clearInitialState, action);
+    expect(reducedState.getIn(['colors', 'selected']))
+      .to.equal(fromJS([]));
+  });
+
   // Multiple Options (Set)
   it(`should handle ${C.RSM_SET_OPTIONS}`, () => {
     const action = {

@@ -33,6 +33,12 @@ const setSelected: ActionCreator = (data: Object) => ({
   data,
 });
 
+// Multiple Selected (Clear)
+const clearSelected: ActionCreator = (data: Object) => ({
+  type: C.RSM_CLEAR_SELECTED,
+  data,
+});
+
 // Multiple Options (Merge)
 const mergeOptions: ActionCreator = (data: Object) => ({
   type: C.RSM_MERGE_OPTIONS,
@@ -65,6 +71,8 @@ module.exports = {
   saveSearch,
 
   setSelected,
+  clearSelected,
+
   setOptions,
   mergeOptions,
 

@@ -9,6 +9,7 @@ import {
   saveSearch,
 
   setSelected,
+  clearSelected,
   setOptions,
   mergeOptions,
 
@@ -61,6 +62,15 @@ describe('Actions', () => {
       data: { id: 'select', selected: ['Option 1', 'Option 2'] },
     };
     expect(setSelected(expectedAction.data)).to.deep.equal(expectedAction);
+  });
+
+  // Multiple Selected (Clear)
+  it(`should create action for ${C.RSM_CLEAR_SELECTED}`, () => {
+    const expectedAction = {
+      type: C.RSM_CLEAR_SELECTED,
+      data: { id: 'select' },
+    };
+    expect(clearSelected(expectedAction.data)).to.deep.equal(expectedAction);
   });
 
   // Multiple Options (Set)
