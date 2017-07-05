@@ -51,6 +51,12 @@ const setOptions: ActionCreator = (data: Object) => ({
   data,
 });
 
+// Multiple Options (Clear)
+const clearOptions: ActionCreator = (data: Object) => ({
+  type: C.RSM_CLEAR_OPTIONS,
+  data,
+});
+
 // Single Item (Option / Selected) – Add
 const addItem: ActionCreator = (data: Object) => ({
   type: C.RSM_ADD_ITEM,
@@ -74,6 +80,7 @@ module.exports = {
   clearSelected,
 
   setOptions,
+  clearOptions,
   mergeOptions,
 
   addItem,

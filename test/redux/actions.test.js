@@ -10,7 +10,9 @@ import {
 
   setSelected,
   clearSelected,
+
   setOptions,
+  clearOptions,
   mergeOptions,
 
   addItem,
@@ -80,6 +82,15 @@ describe('Actions', () => {
       data: { id: 'select', options: fromJS(options) },
     };
     expect(setOptions(expectedAction.data)).to.deep.equal(expectedAction);
+  });
+
+  // Multiple Options (Clear)
+  it(`should create action for ${C.RSM_CLEAR_OPTIONS}`, () => {
+    const expectedAction = {
+      type: C.RSM_CLEAR_OPTIONS,
+      data: { id: 'select' },
+    };
+    expect(clearOptions(expectedAction.data)).to.deep.equal(expectedAction);
   });
 
   // Multiple Options (Merge)

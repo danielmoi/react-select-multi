@@ -112,6 +112,17 @@ describe('Reducer', () => {
       .to.equal(fromJS(options));
   });
 
+  // Multiple Options (Clear)
+  it(`should handle ${C.RSM_CLEAR_OPTIONS}`, () => {
+    const action = {
+      type: C.RSM_CLEAR_OPTIONS,
+      data: { id: 'colors', options: fromJS(options) },
+    };
+    const reducedState = reducer(colorsInitialState, action);
+    expect(reducedState.getIn(['colors', 'options']))
+      .to.equal(fromJS([]));
+  });
+
   // Multiple Options (Merge)
   it(`should handle ${C.RSM_MERGE_OPTIONS}`, () => {
     const initialOptions = fromJS([
