@@ -22,6 +22,7 @@ type SelectSearchConnectedProps = {
   label: string,
   prefix: string,
   placeholder: string,
+  useImages: boolean,
 
   // data
   isOpen: boolean,
@@ -111,6 +112,7 @@ export class SelectSearchConnectedComponent extends Component {
         label={this.props.label}
         prefix={this.props.prefix}
         placeholder={this.props.placeholder}
+        useImages={this.props.useImages}
         options={this.props.options}
         selected={this.props.selected}
         searchTerm={this.props.searchTerm}

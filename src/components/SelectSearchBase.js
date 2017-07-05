@@ -11,6 +11,7 @@ type SelectSearchBaseProps = {
   label: string,
   placeholder: string,
   prefix: string,
+  useImages: boolean,
 
   // data
   isOpen: boolean,
@@ -39,6 +40,8 @@ class SelectSearchBase extends Component {
       handleOptionClick, handleSelectedClick,
       prefix,
       handleScroll,
+      useImages,
+      searchTerm,
     } = this.props;
 
     const selectedLength = (selected && selected.size) || (selected && selected.length);
@@ -69,6 +72,7 @@ class SelectSearchBase extends Component {
             onChange={this.handleSearch}
             onClick={this.handleSearch}
             placeholder={placeholder}
+            value={searchTerm}
           />
         </div>
 
@@ -91,12 +95,31 @@ class SelectSearchBase extends Component {
                   checked={selected.has(option.get('id'))}
                   onChange={handleOptionClick(option)}
                 />
-                <label
-                  htmlFor={`${option.get('id')}--option`}
-                  className={`${prefix}__search-option-bar`}
-                >
-                  {option.get('display')}
-                </label>
+
+                {useImages
+                ?
+                  <label
+                    htmlFor={`${option.get('id')}--option`}
+                    className={`${prefix}__search-option-bar`}
+                  >
+                    <img
+                      src={option.get('src')} alt={option.get('display')}
+                      className={`${prefix}__search-option-bar-image`}
+                    />
+                    <div>
+                      {option.get('display')}
+                    </div>
+                  </label>
+                :
+                  <label
+                    htmlFor={`${option.get('id')}--option`}
+                    className={`${prefix}__search-option-bar`}
+                  >
+                    {option.get('display')}
+                  </label>
+                }
+
+
               </div>
             ))}
           </div>
