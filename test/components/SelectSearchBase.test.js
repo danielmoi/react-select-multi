@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import { sandbox, stub } from 'sinon';
 import { fromJS } from 'immutable';
 
-import { options, selected } from '../fixtures/options';
+import { options, optionsWithImages, selected } from '../fixtures/options';
 import H from '../helpers/index';
 
 import SelectSearchBase from '../../src/components/SelectSearchBase';
@@ -71,8 +71,7 @@ describe('<SelectSearchBase />', () => {
     expect(handleSearchStub.callCount).to.equal(2);
   });
 
-  it('renders option items', () => {
-    const handleSearchStub = stub();
+  it('renders option items – as default', () => {
     const wrapper = shallow(
       <SelectSearchBase
         id="categories"
@@ -86,7 +85,7 @@ describe('<SelectSearchBase />', () => {
         options={fromJS(options)}
 
         toggleOpen={H.VOID}
-        handleSearch={handleSearchStub}
+        handleSearch={H.VOID}
         saveSearch={H.VOID}
         handleSelectedClick={H.VOID}
         handleOptionClick={H.VOID}
@@ -98,10 +97,43 @@ describe('<SelectSearchBase />', () => {
 
     expect(wrapper.find('.cookie-search__open-wrapper').length).to.equal(1);
     expect(wrapper.find('.cookie-search__option-container').length).to.equal(4);
+    expect(wrapper.find('.cookie-search__option-checkbox').length).to.equal(4);
+    expect(wrapper.find('.cookie-search__search-option-bar').length).to.equal(4);
+  });
+
+  it('renders option items with images – when useImages is specified', () => {
+    const wrapper = shallow(
+      <SelectSearchBase
+        id="categories"
+        prefix="cookie-search"
+        label="Cookie Search"
+        placeholder=""
+        useImages
+
+        isOpen={false}
+        searchTerm=""
+        selected={fromJS([])}
+        options={fromJS(optionsWithImages)}
+
+        toggleOpen={H.VOID}
+        handleSearch={H.VOID}
+        saveSearch={H.VOID}
+        handleSelectedClick={H.VOID}
+        handleOptionClick={H.VOID}
+      />,
+    );
+    expect(wrapper.find('.cookie-search__open-wrapper').length).to.equal(0);
+    wrapper.setProps({ isOpen: true });
+
+    expect(wrapper.find('.cookie-search__open-wrapper').length).to.equal(1);
+    expect(wrapper.find('.cookie-search__option-container').length).to.equal(4);
+    expect(wrapper.find('.cookie-search__option-checkbox').length).to.equal(4);
+    expect(wrapper.find('.cookie-search__search-option-bar').length).to.equal(4);
+    expect(wrapper.find('img').length).to.equal(4);
+    expect(wrapper.find('img').at(0).props().src).to.equal(optionsWithImages[0].src);
   });
 
   it('renders selected items', () => {
-    const handleSearchStub = stub();
     const wrapper = shallow(
       <SelectSearchBase
         id="categories"
@@ -115,7 +147,7 @@ describe('<SelectSearchBase />', () => {
         options={fromJS([])}
 
         toggleOpen={H.VOID}
-        handleSearch={handleSearchStub}
+        handleSearch={H.VOID}
         saveSearch={H.VOID}
         handleSelectedClick={H.VOID}
         handleOptionClick={H.VOID}
