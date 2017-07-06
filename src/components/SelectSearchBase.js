@@ -41,7 +41,7 @@ class SelectSearchBase extends Component {
       prefix,
       handleScroll,
       useImages,
-      searchTerm,
+      searchTerm = '',
     } = this.props;
 
     const selectedLength = (selected && selected.size) || (selected && selected.length);
