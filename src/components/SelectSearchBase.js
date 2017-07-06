@@ -106,7 +106,7 @@ class SelectSearchBase extends Component {
                       src={option.get('src')} alt={option.get('display')}
                       className={`${prefix}__search-option-bar-image`}
                     />
-                    <div>
+                    <div className={`${prefix}__search-option-bar-text`}>
                       {option.get('display')}
                     </div>
                   </label>
@@ -115,7 +115,9 @@ class SelectSearchBase extends Component {
                     htmlFor={`${option.get('id')}--option`}
                     className={`${prefix}__search-option-bar`}
                   >
-                    {option.get('display')}
+                    <div className={`${prefix}__search-option-bar-text`}>
+                      {option.get('display')}
+                    </div>
                   </label>
                 }
 
