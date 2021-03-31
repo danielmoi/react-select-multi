@@ -17,6 +17,7 @@ import type { Options, Selected, Callback } from '../types';
 type SelectSearchConnectedProps = {
   // config
   id: string,
+  isMultipleSelect: boolean,
 
   // appearance
   label: string,
@@ -109,6 +110,7 @@ export class SelectSearchConnectedComponent extends Component {
     return (
       <SelectSearchBase
         id={this.props.id}
+        isMultipleSelect={this.props.isMultipleSelect}
         label={this.props.label}
         prefix={this.props.prefix}
         placeholder={this.props.placeholder}
